@@ -1,6 +1,6 @@
 import './App.css';
 import SongList from './components/songList';
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route, Link } from "react-router-dom";
 
 
@@ -54,23 +54,6 @@ const test5 = () => {
 
 
 function App() {
-  const [songs, setSongs] = useState([])
-
-  const getSongs = () => {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = (event) => {
-      if (event.currentTarget.readyState === 4 && event.currentTarget.status === 200) {
-        setSongs(() => JSON.parse(request.responseText))
-        console.log(JSON.parse(request.responseText));
-      }
-    };
-    request.open('GET', 'http://localhost:3001/api/song/', true);
-
-    request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    request.setRequestHeader("authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA");
-    request.send();
-
-  }
   return <Routes>
     <Route path="/" element={
       <div className="App">

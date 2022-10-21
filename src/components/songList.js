@@ -1,11 +1,7 @@
 import React from 'react';
-import SongDetail from './songdetail';
+import SongDetail from './songDetail';
 
 class SongList extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         //hook called twice, how to avoid double request?
