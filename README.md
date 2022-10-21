@@ -13,6 +13,5 @@ test project to practice MERN stack
 <li>review button next to each song at songList</li>
 <li>review button at songDetail</li>
 <li>review page</li>
-<li>render structures at songDetail</li>
 <li>popup when clicking structures</li>
 </ul>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Structure from './structure';
 
 class SongDetail extends React.Component {
 
@@ -29,8 +30,19 @@ class SongDetail extends React.Component {
         if (!this.state?.song)
             return <h1>details loading</h1>
 
-        return <h1>{this.state.song.title}</h1>
-
+        return <div>
+            <h1>{this.state.song.title}</h1>
+            {
+                this.state.song.structures.map((structure, index) => {
+                    if (structure.written)
+                        return [
+                            <Structure key={index} structure={structure} />,
+                            <span key={'space' + index} > </span>
+                        ]
+                    else
+                        return <br key={index} />
+                })}
+        </div>
     }
 }
 
