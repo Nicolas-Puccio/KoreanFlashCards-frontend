@@ -1,5 +1,5 @@
 import React from 'react';
-import Song from './song';
+import SongDetail from './songdetail';
 
 class SongList extends React.Component {
 
@@ -39,7 +39,7 @@ class SongList extends React.Component {
             ))
 
         //display song if selected
-        return <Song _id={this.state._id} />
+        return <SongDetail _id={this.state._id} />
     }
 }
 
