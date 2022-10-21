@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import SongList from './components/songList';
-import Song from './components/song';
 import React, { useState } from 'react';
 import { Routes, Route, Link } from "react-router-dom";
 
