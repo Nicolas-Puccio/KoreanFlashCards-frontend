@@ -15,11 +15,6 @@ class SongList extends React.Component {
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.setRequestHeader("authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA");
         request.send();
-
-    }
-
-    selectSong(_id){
-        this.setState({_id})
     }
 
     render() {
@@ -29,12 +24,14 @@ class SongList extends React.Component {
         if (!this.state._id)//display list if no song was selected
             return this.state.songs.map((song) => (
                 <div key={song._id} className="songContainer">
-                    <p onClick={()=>{this.selectSong(song._id)}}>{song.title}</p>
+                    <h1 onClick={() => { this.setState({ _id: song._id }) }}>{song.title}</h1>
                     <p>known {song.known}... review {song.review}... total {song.total}... new {song.new_}</p>
+                    <button>review</button>
                 </div>
             ))
 
         //display song if selected
+        console.log(this.state._id)
         return <SongDetail _id={this.state._id} />
     }
 }
