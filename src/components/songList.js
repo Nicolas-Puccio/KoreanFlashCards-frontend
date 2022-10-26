@@ -1,5 +1,6 @@
 import React from 'react';
 import SongDetail from './songDetail';
+import { Link } from "react-router-dom";
 
 class SongList extends React.Component {
 
@@ -26,7 +27,7 @@ class SongList extends React.Component {
                 <div key={song._id} className="songContainer">
                     <h1 onClick={() => { this.setState({ _id: song._id }) }}>{song.title}</h1>
                     <p>known {song.known}... review {song.review}... total {song.total}... new {song.new_}</p>
-                    <button>review</button>
+                    <Link to="/review">Review</Link>
                 </div>
             ))
 

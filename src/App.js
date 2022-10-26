@@ -1,5 +1,6 @@
 import './App.css';
 import SongList from './components/songList';
+import Review from './components/review';
 import React from 'react';
 import { Routes, Route, Link } from "react-router-dom";
 
@@ -63,11 +64,13 @@ function App() {
         <Link to="/song">Songs</Link>
 
         <button onClick={test5}>Review</button>
+        <Link to="/review">Review</Link>
         <br></br>
         <br></br>
 
       </div>} />
     <Route path="/song" element={<SongList />} />
+    <Route path="/review" element={<Review />} />
 
   </Routes>
 }
