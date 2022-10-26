@@ -6,6 +6,7 @@ test project to practice MERN stack
 # Tasks
 <ul>
 <li>store token at login</li>
+<li>review page accepts song id to only query specific song's words</li>
 <li>home route should prompt you to login if you are not already</li>
 <li>navbar</li>
 <li>make songList a little prettier</li>

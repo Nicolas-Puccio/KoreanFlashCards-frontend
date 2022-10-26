@@ -13,7 +13,7 @@ class SongDetail extends React.Component {
         const request = new XMLHttpRequest();
         request.onreadystatechange = (event) => {
             if (event.currentTarget.readyState === 4 && event.currentTarget.status === 200) {
-                this.setState({ song: JSON.parse(request.responseText).song })
+                this.setState({ song: JSON.parse(request.responseText).song })//fix can a send these both as one object?
                 this.setState({ stats: JSON.parse(request.responseText).stats })
             }
         };
