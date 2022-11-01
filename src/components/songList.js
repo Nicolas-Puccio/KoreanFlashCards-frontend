@@ -35,7 +35,7 @@ class SongList extends React.Component {
         if (!this.state || !this.state.words || !this.state.songs)//component not ready
             return <h1>list loading</h1>
 
-        if (!this.state._id)//display list if no song was selected
+        if (!this.state.song)//display list if no song was selected
         {
             return this.state.songs.map((song) => {
                 song.known = song.review = song.new_ = 0;
@@ -60,7 +60,7 @@ class SongList extends React.Component {
                 })
 
                 return <div key={song._id} className="songContainer">
-                    <h1 onClick={() => { this.setState({ _id: song._id }) }}>{song.title}</h1>
+                    <h1 onClick={() => { this.setState({ song: song }) }}>{song.title}</h1>
                     <p>known {song.known}... review {song.review}... total {song.total}... new {song.new_}</p>
                     <Link to="/review">Review</Link>
                 </div>
@@ -68,8 +68,8 @@ class SongList extends React.Component {
         }
 
         //display song if selected
-        console.log(this.state._id)
-        return <SongDetail _id={this.state._id} />
+        console.log(this.state.song)
+        return <SongDetail song={this.state.song} />
     }
 }
 
