@@ -4,7 +4,7 @@ class SongDetail extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(props.song)
+        console.log(props)
     }
 
     details(structure) {
@@ -28,13 +28,20 @@ class SongDetail extends React.Component {
             }
             {
                 this.state?.structure &&
-                <div className='popup'>
-                    <div className='popup-inner'>
-                        <p>testing the p element</p>
-                        <p>testing the p element</p>
-
-
-                        <button>close</button>
+                <div className='popup' onClick={() => this.setState({ structure: undefined })}>
+                    <div className='popup-inner' onClick={(e) => e.stopPropagation()}>
+                        <h1>{this.state.structure.written}</h1>
+                        <div className='details-container'>
+                            {
+                                this.state.structure.words.map((word, index) =>
+                                    <div key={index} className='details-column'>
+                                        <h2>{word.written}</h2>
+                                        <p>{this.props.words.find(word2 => word2._id === word.word)?.type ?? ''}</p>
+                                        <p>{word.meaning}</p>
+                                    </div>
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
             }

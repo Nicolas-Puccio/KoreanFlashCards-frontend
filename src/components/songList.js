@@ -69,7 +69,7 @@ class SongList extends React.Component {
 
         //display song if selected
         console.log(this.state.song)
-        return <SongDetail song={this.state.song} />
+        return <SongDetail song={this.state.song} words={this.state.words} />
     }
 }
 
