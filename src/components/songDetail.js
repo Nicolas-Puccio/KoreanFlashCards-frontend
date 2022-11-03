@@ -28,21 +28,43 @@ class SongDetail extends React.Component {
             }
             {
                 this.state?.structure &&
-                <div className='popup' onClick={() => this.setState({ structure: undefined })}>
-                    <div className='popup-inner' onClick={(e) => e.stopPropagation()}>
-                        <h1>{this.state.structure.written}</h1>
-                        <div className='details-container'>
-                            {
-                                this.state.structure.words.map((word, index) =>
-                                    <div key={index} className='details-column'>
-                                        <h2>{word.written}</h2>
-                                        <p>{this.props.words.find(word2 => word2._id === word.word)?.type ?? ''}</p>
-                                        <p>{word.meaning}</p>
-                                    </div>
-                                )
-                            }
+                <div className='popup' onClick={() => {
+                    if (this.state.selectedWord) this.setState({ selectedWord: undefined })
+                    else this.setState({ structure: undefined })
+                }}>
+                    {
+                        !this.state.selectedWord &&
+                        <div className='popup-inner' onClick={(e) => e.stopPropagation()}>
+                            <h1>{this.state.structure.written}</h1>
+                            <div className='details-container'>
+                                {
+                                    this.state.structure.words.map((word, index) =>
+                                        <div key={index} className='details-column'>
+                                            <h2 onClick={() => this.setState({ selectedWord: this.props.words.find(word2 => word2._id === word.word) })}>{word.written}</h2>
+                                            <p>{this.props.words.find(word2 => word2._id === word.word)?.type ?? ''}</p>
+                                            <p>{word.meaning}</p>
+                                        </div>
+                                    )
+                                }
+                            </div>
                         </div>
-                    </div>
+                    }
+                    {
+                        this.state.selectedWord &&
+                        <div className='popup-inner-word' onClick={(e) => e.stopPropagation()}>
+                            {console.log(this.state.selectedWord)}
+                            <h1>{this.state.selectedWord.word}</h1>
+                            <p>{this.state.selectedWord.type}</p>
+                            <ul>
+                                {
+                                    this.state.selectedWord.meanings.map((meaning, index) =>
+                                        <li key={index}>{meaning}</li>
+                                    )
+                                }
+                            </ul>
+
+                        </div>
+                    }
                 </div>
             }
         </div>

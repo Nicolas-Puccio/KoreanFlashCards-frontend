@@ -11,7 +11,6 @@ test project to practice MERN stack
 <li>review page accepts song id to only query specific song's words??? what flow do i want for the app? do i want to force a /song request first?</li>
 <li>home route should prompt you to login if you are not already</li>
 <li>navbar</li>
-<li>clicking h1 from popup-inner should show this word's details</li>
 <li>make songList a little prettier</li>
 <li>make songDetail a little prettier</li>
 <li>review button next to each song at songList</li>
