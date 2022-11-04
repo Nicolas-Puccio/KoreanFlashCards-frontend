@@ -1,7 +1,7 @@
 import React from 'react';
 import SongDetail from './songDetail';
 import { Link } from 'react-router-dom';
-import Stats from '../Global';
+import Globals from '../Global';
 
 class SongList extends React.Component {
 
@@ -9,25 +9,31 @@ class SongList extends React.Component {
         //hook called twice, how to avoid double request?
         const request = new XMLHttpRequest();
         request.onreadystatechange = (event) => {
-            if (event.currentTarget.readyState === 4 && event.currentTarget.status === 200)
-                this.setState({ songs: JSON.parse(request.responseText) })
+            if (event.currentTarget.readyState === 4 && event.currentTarget.status === 200) {
+                Globals.$songs = JSON.parse(request.responseText);
+                localStorage.setItem('songs', JSON.stringify(Globals.$songs))
+                this.setState({ songs: Globals.$songs });
+            }
         };
         request.open('GET', 'http://localhost:3001/api/song/', true);
 
-        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        request.setRequestHeader("authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA");
+        request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        request.setRequestHeader('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA');
         request.send();
 
 
         const request2 = new XMLHttpRequest();
         request2.onreadystatechange = (event) => {
-            if (event.currentTarget.readyState === 4 && event.currentTarget.status === 200)
-                this.setState({ words: JSON.parse(request2.responseText) })
+            if (event.currentTarget.readyState === 4 && event.currentTarget.status === 200) {
+                Globals.$words = JSON.parse(request2.responseText);
+                localStorage.setItem('words', JSON.stringify(Globals.$words))
+                this.setState({ words: Globals.$words });
+            }
         };
         request2.open('GET', 'http://localhost:3001/api/song/word', true);
 
-        request2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        request2.setRequestHeader("authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA");
+        request2.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        request2.setRequestHeader('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA');
         request2.send();
     }
 
@@ -48,7 +54,7 @@ class SongList extends React.Component {
 
                         wordsFound.push(word.word);
 
-                        const stat = Stats.find(stat => stat.word.equals(word.word))//fix equals or === ?
+                        const stat = Globals.$stats.find(stat => stat.word.equals(word.word))//fix equals or === ?
 
                         if (!stat)
                             song.new_++;
@@ -59,10 +65,10 @@ class SongList extends React.Component {
                     })
                 })
 
-                return <div key={song._id} className="songContainer">
+                return <div key={song._id} className='songContainer'>
                     <h1 onClick={() => { this.setState({ song: song }) }}>{song.title}</h1>
                     <p>known {song.known}... review {song.review}... total {song.total}... new {song.new_}</p>
-                    <Link to="/review">Review</Link>
+                    <Link to='/review'>Review</Link>
                 </div>
             })
         }
