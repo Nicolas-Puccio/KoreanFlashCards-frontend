@@ -55,8 +55,7 @@ class SongList extends React.Component {
 
                         wordsFound.push(word.word);
                         song.total++;
-                        console.log(Globals.$stats[0])
-                        const stat = Globals.$stats.find(stat => stat._id === word.word)
+                        const stat = Globals.$stats.find(stat => stat.word === word.word)
 
                         if (!stat)
                             song.new_++;
@@ -69,7 +68,7 @@ class SongList extends React.Component {
                     })
                 })
 
-                return <div key={song._id} className='songContainer'>
+                return <div key={song.title} className='songContainer'>
                     <h1 onClick={() => { this.setState({ song: song }) }}>{song.title}</h1>
                     <p>known {song.known}... review {song.review}... total {song.total}... new {song.new_}</p>
                     <Link to='/review'>Review</Link>

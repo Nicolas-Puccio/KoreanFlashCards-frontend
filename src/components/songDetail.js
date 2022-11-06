@@ -3,20 +3,14 @@ import Globals from '../Global';
 
 class SongDetail extends React.Component {
 
-    constructor(props) {
-        super(props);
-        console.log(props)
-    }
-
     details(structure) {
-        console.log(structure)
-        this.setState({ structure })
+        this.setState({ structure });
     }
 
     className(structure) {
         //should get the lowest score from all the words, currently just gets the first
-        const temp = structure.words.find(word => word.word)
-        return temp ? 'score' + Globals.$stats.find(stat => stat._id === temp.word).score : 'score0'
+        const temp = structure.words.find(word => word.word);
+        return temp ? 'score' + Globals.$stats.find(stat => stat.word === temp.word)?.score : 'text';
     }
 
     render() {
@@ -47,9 +41,9 @@ class SongDetail extends React.Component {
                                 {
                                     this.state.structure.words.map((word, index) =>
                                         <div key={index} className='details-column'>
-                                            <h2 onClick={() => this.setState({ selectedWord: this.props.words.find(word2 => word2._id === word.word) })}>{word.written}</h2>
-                                            <p>{this.props.words.find(word2 => word2._id === word.word)?.type ?? ''}</p>
-                                            <p>{word.meaning}</p>
+                                            <h1 className={this.props.words.find(word2 => word2.word === word.word) ? 'details-column-clickable' : null} onClick={() => this.setState({ selectedWord: this.props.words.find(word2 => word2.word === word.word) })}>{word.written}</h1>
+                                            <p>{word.meaning.split('-')[0]}</p>
+                                            <p>{word.meaning.slice(word.meaning.indexOf('-')+1)/** //fix i should be using regex here */}</p>
                                         </div>
                                     )
                                 }
@@ -59,13 +53,13 @@ class SongDetail extends React.Component {
                     {
                         this.state.selectedWord &&
                         <div className='popup-inner-word' onClick={(e) => e.stopPropagation()}>
-                            {console.log(this.state.selectedWord)}
+
                             <h1>{this.state.selectedWord.word}</h1>
-                            <p>{this.state.selectedWord.type}</p>
-                            <ul>
+                            
+                            <ul className='popup-inner-word-ul'>
                                 {
-                                    this.state.selectedWord.meanings.map((meaning, index) =>
-                                        <li key={index}>{meaning}</li>
+                                    Object.keys(this.state.selectedWord.meanings).map((key) =>
+                                        <li className='popup-inner-word-ul' key={key}>{key}: {this.state.selectedWord.meanings[key]}</li>
                                     )
                                 }
                             </ul>
@@ -78,3 +72,4 @@ class SongDetail extends React.Component {
 }
 
 export default SongDetail
+

@@ -8,7 +8,7 @@ class Review extends React.Component {
 
     componentDidMount() {
         this.wordsToReview = Globals.$words.filter(word => {
-            const stat = Globals.$stats.find(stat => stat._id === word._id)
+            const stat = Globals.$stats.find(stat => stat.word === word.word)
             if (stat) {
                 return new Date(stat.next) < new Date();
                 //this data could be used to build a graph or tell the user at what time he has words to review
@@ -23,12 +23,13 @@ class Review extends React.Component {
     shuffle() {
         this.setState({ showAnswer: false })
         this.setState({ word: this.wordsToReview[Math.floor(Math.random() * this.wordsToReview.length)] })
+        console.log(this.wordsToReview[Math.floor(Math.random() * this.wordsToReview.length)])
     }
 
     answer(pass) {
         if (pass) {
             this.wordsToReview = this.wordsToReview.filter(word => word !== this.state.word)
-            const stat = Globals.$stats.find(stat => stat._id === this.state.word._id)
+            const stat = Globals.$stats.find(stat => stat.word === this.state.word.word)
             if (stat) {
                 console.log('has stat')
                 stat.next = new Date();
@@ -41,7 +42,7 @@ class Review extends React.Component {
                 next.setMinutes(next.getMinutes() + this.intervals[0]);
 
                 Globals.$stats.push({
-                    _id: this.state.word._id,
+                    word: this.state.word.word,
                     score: 1,
                     next
                 })
@@ -49,10 +50,10 @@ class Review extends React.Component {
             }
         }
         else {
-            const stat = Globals.$stats.find(stat => stat._id === this.state.word._id)
+            const stat = Globals.$stats.find(stat => stat.word === this.state.word.word)
             if (stat) {
                 console.log('has stat')
-                stat.score = 0;
+                stat.score = 0;//fix should only reduce 1 or 2 numbers
             }
             else {
                 console.log('WOW hold on there buddy')
@@ -75,7 +76,7 @@ class Review extends React.Component {
                     <h1>{this.state?.word?.word}</h1>
                     {
                         //fix maybe i could add references to this word from songs
-                        Globals.$stats.find(stat => stat._id === this.state._id) !== undefined &&
+                        Globals.$stats.find(stat => stat.word === this.state.word) !== undefined &&
                         <>
                             <button onClick={() => this.setState({ showAnswer: true })}>show answer</button>
                             {
@@ -97,15 +98,16 @@ class Review extends React.Component {
                         </>
                     }
                     {
-                        Globals.$stats.find(stat => stat._id === this.state.word) === undefined &&
+                        Globals.$stats.find(stat => stat.word === this.state.word) === undefined &&
                         <>
                             <button onClick={() => this.answer(true)}>ok</button>
 
                             <div>
-                                <p>{this.state.word.type}</p>
                                 <ul>
                                     {
-                                        this.state.word.meanings.map((meaning, index) => <li key={index}>{meaning}</li>)
+                                        Object.keys(this.state.word.meanings).map((key) =>
+                                            <li key={key}>{key}: {this.state.word.meanings[key]}</li>
+                                        )
                                     }
                                 </ul>
                             </div>
