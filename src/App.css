@@ -20,16 +20,24 @@
 .popup-inner {
   position: relative;
   background-color: rgba(70, 70, 70);
-  min-width: 300px;
+  min-width: 400px;
   text-align: center;
 }
 
 .popup-inner-word {
   position: relative;
   background-color: rgba(70, 70, 70);
-  min-width: 300px;
+  min-width: 400px;
+  list-style-type: none;
+  padding-left: 10px;
 }
 
+.popup-inner-word-ul {
+  list-style-type: none;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
 
 
 
@@ -46,6 +54,10 @@
   width: 100%;
 }
 
+.details-column-clickable {
+  text-decoration: underline;
+}
+
 
 
 .navbar {
@@ -60,18 +72,29 @@
 body {
   margin: 0px;
   background-color: rgba(100, 100, 100, 1);
-  color:white
+  color: white
 }
 
+.text {
+  color: white;
+}
 
-.score1 {
+.scoreundefined {
   color: red;
 }
 
+.score0 {
+  color: red;
+}
+
+.score1 {
+  color: orange;
+}
+
 .score2 {
-  color: rgb(255, 128, 0);
+  color: yellow;
 }
 
 .score3 {
-  color: rgb(255, 255, 0);
+  color: lightgreen;
 }
