@@ -44,8 +44,9 @@ class SongList extends React.Component {
         if (!this.state.song)//display list if no song was selected
         {
             return this.state.songs.map((song) => {
-                song.known = song.review = song.new_ = 0;
+                song.known = song.review = song.new_ = song.total = 0;
                 const wordsFound = []
+                const date = new Date()
 
                 song.structures.forEach(structure => {
                     structure.words?.forEach(word => {
@@ -53,15 +54,18 @@ class SongList extends React.Component {
                             return;
 
                         wordsFound.push(word.word);
-
-                        const stat = Globals.$stats.find(stat => stat.word.equals(word.word))//fix equals or === ?
+                        song.total++;
+                        console.log(Globals.$stats[0])
+                        const stat = Globals.$stats.find(stat => stat._id === word.word)
 
                         if (!stat)
                             song.new_++;
-                        if (stat?.score > 0)
-                            song.known++;
-                        if (stat?.next < new Date())
-                            song.review++;
+                        else {
+                            if (stat.score > 2)
+                                song.known++;
+                            if (new Date(stat.next) < date)
+                                song.review++;
+                        }
                     })
                 })
 

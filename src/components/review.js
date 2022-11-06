@@ -75,7 +75,7 @@ class Review extends React.Component {
                     <h1>{this.state?.word?.word}</h1>
                     {
                         //fix maybe i could add references to this word from songs
-                        Globals.$stats.find(stat => stat.word === this.state.word) !== null &&
+                        Globals.$stats.find(stat => stat._id === this.state._id) !== undefined &&
                         <>
                             <button onClick={() => this.setState({ showAnswer: true })}>show answer</button>
                             {
@@ -97,7 +97,7 @@ class Review extends React.Component {
                         </>
                     }
                     {
-                        Globals.$stats.find(stat => stat.word === this.state.word) === null &&
+                        Globals.$stats.find(stat => stat._id === this.state.word) === undefined &&
                         <>
                             <button onClick={() => this.answer(true)}>ok</button>
 
