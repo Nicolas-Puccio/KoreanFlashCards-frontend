@@ -1,95 +1,118 @@
 import React from 'react';
+import Globals from '../Global';
 
 class Review extends React.Component {
 
+    wordsToReview = [];
+    intervals = [10, 60, 24 * 60, 24 * 60 * 7];//in minutes
+
     componentDidMount() {
-        //hook called twice, how to avoid double request?
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = (event) => {
-            if (event.currentTarget.readyState === 4 && event.currentTarget.status === 200) {
-                //later... filter only required words by next property
-                this.data = JSON.parse(request.responseText);
-
-                //fix should i do this on bakc or frontend?
-                this.data.words = this.data.words.filter(word => {
-                    const stat = this.data.stats.find(word2 => word2.word === word._id)
-                    if (stat)
-                        return new Date(stat.next) < new Date()
-                    else
-                        return true
-                })
-
-                console.log(this.data)
-                this.shuffle();
-                //hook function to buttons
-                //function sends request and chooses new random word
-                //if no words left set property as undefined
+        this.wordsToReview = Globals.$words.filter(word => {
+            const stat = Globals.$stats.find(stat => stat._id === word._id)
+            if (stat) {
+                return new Date(stat.next) < new Date();
+                //this data could be used to build a graph or tell the user at what time he has words to review
             }
-        };
-        request.open('GET', 'http://localhost:3001/api/song/word', true);
+            return true;
+        })
 
-        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        request.setRequestHeader("authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA");
-        request.send();
+        console.log(this.wordsToReview);
+        this.shuffle()
     }
 
     shuffle() {
-        this.setState({ word: this.data.words[Math.floor(Math.random() * this.data.words.length)] })
+        this.setState({ showAnswer: false })
+        this.setState({ word: this.wordsToReview[Math.floor(Math.random() * this.wordsToReview.length)] })
     }
-
-    showAnswer = e => {
-        this.setState({ showAnswer: true })
-    }
-
-    pass = e => { this.answer(true) }
-    fail = e => { this.answer(false) }
 
     answer(pass) {
-        console.log(pass)
-        //fix if true remove word from array
+        if (pass) {
+            this.wordsToReview = this.wordsToReview.filter(word => word !== this.state.word)
+            const stat = Globals.$stats.find(stat => stat._id === this.state.word._id)
+            if (stat) {
+                console.log('has stat')
+                stat.next = new Date();
+                stat.next.setMinutes(stat.next.getMinutes() + this.intervals[stat.score]);
+                stat.score++;
+            }
+            else {
+                console.log('does not has stat')
+                const next = new Date();
+                next.setMinutes(next.getMinutes() + this.intervals[0]);
 
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = (event) => {
-            if (event.currentTarget.readyState === 4 && event.currentTarget.status === 200)
-                console.log(JSON.parse(request.responseText));
+                Globals.$stats.push({
+                    _id: this.state.word._id,
+                    score: 1,
+                    next
+                })
+                console.log(Globals.$stats)
+            }
+        }
+        else {
+            const stat = Globals.$stats.find(stat => stat._id === this.state.word._id)
+            if (stat) {
+                console.log('has stat')
+                stat.score = 0;
+            }
+            else {
+                console.log('WOW hold on there buddy')
+            }
+        }
 
-        };
-        request.open('POST', 'http://localhost:3001/api/song/review', true);
-
-        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        request.setRequestHeader("authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA");
-        request.send(JSON.stringify({
-            word: this.state.word._id,
-            next: pass ? new Date().setDate(new Date().getDate() + 1) : new Date(),//fix calculate Date properly
-            score: pass ? 1 : 0//fix calculate score properly
-        }));
-
-
+        localStorage.setItem('stats', JSON.stringify(Globals.$stats))
         this.shuffle()
-        this.setState({ showAnswer: false })
     }
 
-    render() {
-        if (!this.state?.word)
-            return <h1>data loading</h1>
 
-        //if undefined, display no words to review
+    render() {
+        if (Globals.$words.length === 0)
+            return <h1>data must be queried from the db</h1>
 
         return <div>
-            <h1>{this.state.word.word}</h1>
-            <p>{this.state.word.meanings}</p>
+            {
+                this.state?.word !== undefined &&
+                <div>
+                    <h1>{this.state?.word?.word}</h1>
+                    {
+                        //fix maybe i could add references to this word from songs
+                        Globals.$stats.find(stat => stat.word === this.state.word) !== null &&
+                        <>
+                            <button onClick={() => this.setState({ showAnswer: true })}>show answer</button>
+                            {
+                                this.state?.showAnswer &&
+                                <>
+                                    <button onClick={() => this.answer(false)}>fail</button>
+                                    <button onClick={() => this.answer(true)}>pass</button>
 
-            {
-                !this.state.showAnswer &&
-                <button onClick={this.showAnswer}>show answer</button>
-            }
-            {
-                this.state.showAnswer &&
-                <button onClick={this.pass}>pass</button>
-            }
-            {
-                this.state.showAnswer &&
-                <button onClick={this.fail}>fail</button>
+                                    <div>
+                                        <p>{this.state.word.type}</p>
+                                        <ul>
+                                            {
+                                                this.state.word.meanings.map((meaning, index) => <li key={index}>{meaning}</li>)
+                                            }
+                                        </ul>
+                                    </div>
+                                </>
+                            }
+                        </>
+                    }
+                    {
+                        Globals.$stats.find(stat => stat.word === this.state.word) === null &&
+                        <>
+                            <button onClick={() => this.answer(true)}>ok</button>
+
+                            <div>
+                                <p>{this.state.word.type}</p>
+                                <ul>
+                                    {
+                                        this.state.word.meanings.map((meaning, index) => <li key={index}>{meaning}</li>)
+                                    }
+                                </ul>
+                            </div>
+
+                        </>
+                    }
+                </div>
             }
         </div>
     }
