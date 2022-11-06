@@ -2,9 +2,9 @@ import './App.css';
 import SongList from './components/songList';
 import Review from './components/review';
 import NavBar from './components/navbar';
+import TestPage from './components/testPage';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Globals from './Global';
 
 function test() {
   var request = new XMLHttpRequest();
@@ -54,6 +54,12 @@ function App() {
       <div>
         <NavBar />
         <Review />
+      </div>
+    } />
+    <Route path='/test' element={
+      <div>
+        <NavBar />
+        <TestPage />
       </div>
     } />
   </Routes>
