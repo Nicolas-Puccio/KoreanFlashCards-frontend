@@ -1,4 +1,5 @@
 import React from 'react';
+import Globals from '../Global';
 
 class SongDetail extends React.Component {
 
@@ -12,6 +13,12 @@ class SongDetail extends React.Component {
         this.setState({ structure })
     }
 
+    className(structure) {
+        //should get the lowest score from all the words, currently just gets the first
+        const temp = structure.words.find(word => word.word)
+        return temp ? 'score' + Globals.$stats.find(stat => stat._id === temp.word).score : 'score0'
+    }
+
     render() {
         return <div>
             <h1>{this.props.song.title}</h1>
@@ -19,7 +26,7 @@ class SongDetail extends React.Component {
                 this.props.song.structures.map((structure, index) => {
                     if (structure.written)
                         return [
-                            <span key={index} onClick={() => this.details(structure)}>{structure.written}</span>,
+                            <span key={index} className={this.className(structure)} onClick={() => this.details(structure)}>{structure.written}</span>,
                             <span key={'space' + index}> </span>
                         ]
                     else
@@ -62,7 +69,6 @@ class SongDetail extends React.Component {
                                     )
                                 }
                             </ul>
-
                         </div>
                     }
                 </div>

@@ -1,5 +1,5 @@
 .songContainer {
-  background-color: darkgray;
+  background-color: rgb(70, 70, 70);
 }
 
 
@@ -19,14 +19,14 @@
 
 .popup-inner {
   position: relative;
-  background-color: rgba(200, 200, 200, 1);
+  background-color: rgba(70, 70, 70);
   min-width: 300px;
   text-align: center;
 }
 
 .popup-inner-word {
   position: relative;
-  background-color: rgba(200, 200, 200, 1);
+  background-color: rgba(70, 70, 70);
   min-width: 300px;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .details-column {
-  background-color: rgb(214, 214, 214);
+  background-color: rgb(100, 100, 100);
   display: flex;
   flex-direction: column;
   margin: 5px;
@@ -49,8 +49,7 @@
 
 
 .navbar {
-  background-color: aquamarine;
-  height: 30px;
+  background-color: rgb(255, 255, 255);
   display: flex;
   font-size: 25px;
 }
@@ -60,4 +59,19 @@
 
 body {
   margin: 0px;
+  background-color: rgba(100, 100, 100, 1);
+  color:white
+}
+
+
+.score1 {
+  color: red;
+}
+
+.score2 {
+  color: rgb(255, 128, 0);
+}
+
+.score3 {
+  color: rgb(255, 255, 0);
 }
