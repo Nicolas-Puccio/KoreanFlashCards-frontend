@@ -1,11 +1,36 @@
+/*
+//fix i am setting the css as if this was a phone app
+//fix this file is a mess, and there is a lot of css on .js files
+*/
+
 .songContainer {
-  background-color: rgb(70, 70, 70);
+  background-color: white;
+  margin: 5%;
+  padding: 10px;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: rgb(230, 230, 230);
+  border-width: 3px;
+}
+
+.songContainer-h1 {
+  margin: 0px;
+}
+
+.songContainer-link {
+  background: rgb(220, 220, 220);
+  border-radius: 10px;
+  font-size: 24px;
+  color: black;
+  padding: 8px 12px;
+  /*cursor: pointer;*/
+  float: right;
+  text-decoration: none;
 }
 
 
-
 .popup {
-  background-color: rgba(50, 50, 50, 0.2);
+  background-color: rgba(50, 50, 50, 0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -19,15 +44,15 @@
 
 .popup-inner {
   position: relative;
-  background-color: rgba(70, 70, 70);
-  min-width: 400px;
+  background-color: white;
+  min-width: 300px;
   text-align: center;
 }
 
 .popup-inner-word {
   position: relative;
-  background-color: rgba(70, 70, 70);
-  min-width: 400px;
+  background-color: rgb(220, 220, 220);
+  min-width: 300px;
   list-style-type: none;
   padding-left: 10px;
 }
@@ -47,7 +72,7 @@
 }
 
 .details-column {
-  background-color: rgb(100, 100, 100);
+  background-color: rgb(220, 220, 220);
   display: flex;
   flex-direction: column;
   margin: 5px;
@@ -61,7 +86,7 @@
 
 
 .navbar {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(20, 170, 80);
   display: flex;
   font-size: 25px;
 }
@@ -71,9 +96,15 @@
 
 body {
   margin: 0px;
-  background-color: rgba(100, 100, 100, 1);
-  color: white
+  background-color: rgb(250, 250, 250);
 }
+
+
+
+.lyrics-container {
+  font-size: 5vw;
+}
+
 
 .text {
   color: white;
@@ -92,9 +123,19 @@ body {
 }
 
 .score2 {
-  color: yellow;
+  color: rgb(200, 200, 0);
 }
 
 .score3 {
-  color: lightgreen;
+  color: rgb(0, 150, 0);
+}
+
+
+
+
+.progress-bar {
+  height: 30px;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+  border-radius: 15px;
 }

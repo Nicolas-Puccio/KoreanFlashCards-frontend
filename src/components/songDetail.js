@@ -16,17 +16,21 @@ class SongDetail extends React.Component {
     render() {
         return <div>
             <h1>{this.props.song.title}</h1>
-            {
-                this.props.song.structures.map((structure, index) => {
-                    if (structure.written)
-                        return [
-                            <span key={index} className={this.className(structure)} onClick={() => this.details(structure)}>{structure.written}</span>,
-                            <span key={'space' + index}> </span>
-                        ]
-                    else
-                        return <br key={index} />
-                })
-            }
+
+            <div className='lyrics-container'>
+                {
+                    this.props.song.structures.map((structure, index) => {
+                        if (structure.written)
+                            return [
+                                <span key={index} className={this.className(structure)} onClick={() => this.details(structure)}>{structure.written}</span>,
+                                <span key={'space' + index}> </span>
+                            ]
+                        else
+                            return <br key={index} />
+                    })
+                }
+            </div>
+
             {
                 this.state?.structure &&
                 <div className='popup' onClick={() => {
@@ -43,7 +47,7 @@ class SongDetail extends React.Component {
                                         <div key={index} className='details-column'>
                                             <h1 className={this.props.words.find(word2 => word2.word === word.word) ? 'details-column-clickable' : null} onClick={() => this.setState({ selectedWord: this.props.words.find(word2 => word2.word === word.word) })}>{word.written}</h1>
                                             <p>{word.meaning.split('-')[0]}</p>
-                                            <p>{word.meaning.slice(word.meaning.indexOf('-')+1)/** //fix i should be using regex here */}</p>
+                                            <p>{word.meaning.slice(word.meaning.indexOf('-') + 1)/** //fix i should be using regex here */}</p>
                                         </div>
                                     )
                                 }
@@ -55,7 +59,7 @@ class SongDetail extends React.Component {
                         <div className='popup-inner-word' onClick={(e) => e.stopPropagation()}>
 
                             <h1>{this.state.selectedWord.word}</h1>
-                            
+
                             <ul className='popup-inner-word-ul'>
                                 {
                                     Object.keys(this.state.selectedWord.meanings).map((key) =>

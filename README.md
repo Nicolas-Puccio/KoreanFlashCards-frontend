@@ -1,13 +1,16 @@
 # KoreanFlashCards
-test project to practice MERN stack
+Test project to practice MERN stack
+Inspiration taken from Mirinae, Avocards, and jpdb
+
+
+flashcard + dictionary while reading
+... i should explain more but i can't really think of anything now
 
 
 
 # Tasks
 <ul>
-<li>store token at login</li>
-<li>review page accepts song id to only query specific song's words??? what flow do i want for the app? do i want to force a /song request first?</li>
-<li>home route should prompt you to login if you are not already</li>
+<li>store token at login on cookies httponly</li>
 
 <li>review button next to each song at songList</li>
 <li>review button at songDetail</li>

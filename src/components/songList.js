@@ -69,10 +69,20 @@ class SongList extends React.Component {
                 })
 
                 return <div key={song.title} className='songContainer'>
-                    <h1 onClick={() => { this.setState({ song: song }) }}>{song.title}</h1>
-                    <p>known {song.known}... review {song.review}... total {song.total}... new {song.new_}</p>
-                    <Link to='/review'>Review</Link>
-                </div>
+                    <div style={{ width: '100%' }}>
+                        <Link to='/review' className='songContainer-link'>Review</Link>
+                        <h1 className='songContainer-h1' onClick={() => { this.setState({ song: song }) }}>{song.title}</h1>
+
+                    </div>
+                    <p style={{ marginTop: '10px', marginBottom: '5px' }}>{song.total} words</p>
+                    <div className='progress-bar'>
+                        <div style={
+                            { height: '100%', width: `${song.known / song.total * 100}%`, backgroundColor: 'green', borderRadius: '15px' }
+                        } className='progress-bar-progress'></div>
+
+                    </div>
+
+                </div >
             })
         }
 
