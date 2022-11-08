@@ -1,5 +1,5 @@
 import React from 'react';
-import Globals from '../Global';
+import { Globals } from '../Global';
 
 class Review extends React.Component {
 
@@ -22,8 +22,7 @@ class Review extends React.Component {
 
     shuffle() {
         this.setState({ showAnswer: false })
-        this.setState({ word: this.wordsToReview[Math.floor(Math.random() * this.wordsToReview.length)] })
-        console.log(this.wordsToReview[Math.floor(Math.random() * this.wordsToReview.length)])
+        this.setState({ word: this.wordsToReview[Math.floor(Math.random() * this.wordsToReview.length)] },()=>console.log(this.state.word))
     }
 
     answer(pass) {
@@ -69,14 +68,14 @@ class Review extends React.Component {
         if (Globals.$words.length === 0)
             return <h1>data must be queried from the db</h1>
 
-        return <div>
+        return <>
             {
                 this.state?.word !== undefined &&
-                <div>
+                <>
                     <h1>{this.state?.word?.word}</h1>
                     {
                         //fix maybe i could add references to this word from songs
-                        Globals.$stats.find(stat => stat.word === this.state.word) !== undefined &&
+                        Globals.$stats.find(stat => stat.word === this.state.word.word) !== undefined &&
                         <>
                             <button onClick={() => this.setState({ showAnswer: true })}>show answer</button>
                             {
@@ -89,7 +88,9 @@ class Review extends React.Component {
                                         <p>{this.state.word.type}</p>
                                         <ul>
                                             {
-                                                this.state.word.meanings.map((meaning, index) => <li key={index}>{meaning}</li>)
+                                                Object.keys(this.state.word.meanings).map((key) =>
+                                                    <li key={key}>{key}: {this.state.word.meanings[key]}</li>
+                                                )
                                             }
                                         </ul>
                                     </div>
@@ -98,7 +99,7 @@ class Review extends React.Component {
                         </>
                     }
                     {
-                        Globals.$stats.find(stat => stat.word === this.state.word) === undefined &&
+                        Globals.$stats.find(stat => stat.word === this.state.word.word) === undefined &&
                         <>
                             <button onClick={() => this.answer(true)}>ok</button>
 
@@ -114,9 +115,10 @@ class Review extends React.Component {
 
                         </>
                     }
-                </div>
+                </>
             }
-        </div>
+            <h1>no words to review</h1>
+        </>
     }
 }
 
