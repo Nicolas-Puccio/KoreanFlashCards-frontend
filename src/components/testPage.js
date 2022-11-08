@@ -1,5 +1,5 @@
 import React from 'react';
-import Globals from '../Global';
+import {Globals} from '../Global';
 
 class TestPage extends React.Component {
     render() {
@@ -28,6 +28,7 @@ class TestPage extends React.Component {
 
                 const request = new XMLHttpRequest();
                 request.onreadystatechange = (event) => {
+                    console.log(event)
                 };
                 request.open('POST', 'http://localhost:3001/api/song/writetest/', true);
 

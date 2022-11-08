@@ -1,7 +1,7 @@
 import React from 'react';
 import SongDetail from './songDetail';
-import { Link } from 'react-router-dom';
-import {Globals} from '../Global';
+//import { Link } from 'react-router-dom';
+import { Globals } from '../Global';
 
 class SongList extends React.Component {
 
@@ -35,11 +35,13 @@ class SongList extends React.Component {
 
                 return <div key={song.title} className='song-container'>
                     <div style={{ width: '100%' }}>
-                        <Link to='/review' className='song-container-review-button'>Review</Link>
-                        <h1 className='song-container-h1' onClick={() => { this.setState({ song: song }) }}>{song.title}</h1>
+                        {
+                            //<Link to='/review' className='song-container-review-button'>Review</Link>
+                        }
+                        <h2 className='song-container-h2' onClick={() => { this.setState({ song: song }) }}>{song.title}</h2>
 
                     </div>
-                    <p style={{ marginTop: '10px', marginBottom: '5px' }}>{song.total} words</p>
+                    <p className='song-container-p'>{song.known + ' / ' + song.total}</p>
                     <div className='progress-bar'>
                         <div style={
                             { height: '100%', width: `${song.known / song.total * 100}%`, backgroundColor: 'green', borderRadius: '15px' }
