@@ -5,28 +5,37 @@ import NavBar from './components/navbar';
 import TestPage from './components/testPage';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Globals from './Global';
 
 
-
+//fix make sure all routes can handle lack of Globals data
 function App() {
+  Globals.fetchData();
+
   return <Routes>
     <Route path='/' element={
-      <div>
+      <>
         <NavBar />
-        <SongList />
-      </div>
+        <div className='main-div'>
+          <SongList />
+        </div>
+      </>
     } />
     <Route path='/review' element={
-      <div>
+      <>
         <NavBar />
-        <Review />
-      </div>
+        <div className='main-div'>
+          <Review />
+        </div>
+      </>
     } />
     <Route path='/test' element={
-      <div>
+      <>
         <NavBar />
-        <TestPage />
-      </div>
+        <div className='main-div'>
+          <TestPage />
+        </div>
+      </>
     } />
   </Routes>
 }
