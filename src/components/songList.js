@@ -5,6 +5,13 @@ import { Globals } from '../Global';
 
 class SongList extends React.Component {
 
+    deselect() {
+        if (this.state.song)
+            this.setState({ song: undefined })
+    }
+
+
+
     render() {
         if (!this.state?.song)//display list if no song was selected
         {
@@ -38,7 +45,7 @@ class SongList extends React.Component {
                         {
                             //<Link to='/review' className='song-container-review-button'>Review</Link>
                         }
-                        <h2 className='song-container-h2' onClick={() => { this.setState({ song: song }) }}>{song.title}</h2>
+                        <h2 className='song-container-h2' onClick={() => { this.setState({ song: song }); Globals.songList = this }}>{song.title}</h2>
 
                     </div>
                     <p className='song-container-p'>{song.known + ' / ' + song.total}</p>
