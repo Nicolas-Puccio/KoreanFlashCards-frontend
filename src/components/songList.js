@@ -20,23 +20,25 @@ class SongList extends React.Component {
                 const wordsFound = []
                 const date = new Date()
 
-                song.structures.forEach(structure => {
-                    structure.words?.forEach(word => {
-                        if (!word.word || wordsFound.includes(word.word))//word has no ID on db or //already added
-                            return;
+                song.lines.forEach(line => {
+                    line.structures?.forEach(structure => {
+                        structure.words?.forEach(word => {
+                            if (!word.word || wordsFound.includes(word.word))//word has no ID on db or //already added
+                                return;
 
-                        wordsFound.push(word.word);
-                        song.total++;
-                        const stat = Globals.$stats.find(stat => stat.word === word.word)
+                            wordsFound.push(word.word);
+                            song.total++;
+                            const stat = Globals.$stats.find(stat => stat.word === word.word)
 
-                        if (!stat)
-                            song.new_++;
-                        else {
-                            if (stat.score > 3)
-                                song.known++;
-                            if (new Date(stat.next) < date)
-                                song.review++;
-                        }
+                            if (!stat)
+                                song.new_++;
+                            else {
+                                if (stat.score > 4)
+                                    song.known++;
+                                if (new Date(stat.next) < date)
+                                    song.review++;
+                            }
+                        })
                     })
                 })
 

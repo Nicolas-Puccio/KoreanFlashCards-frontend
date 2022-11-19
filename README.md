@@ -11,6 +11,8 @@ flashcard + dictionary while reading
 # Tasks
 <ul>
 <li>store token at login on cookies httponly</li>
+<li>add leaderboard page</li>
+<li>add post request to /user/stats</li>
 
 <li>review button next to each song at songList should send the song as prop? or id as some kind of url param?</li>
 <li>review button at songDetail</li>
@@ -22,4 +24,5 @@ flashcard + dictionary while reading
 <li>set favorite song</li>
 <li>review favorite songs' cards only</li>
 <li>review specific song's cards only</li>
+<li>add another progress bar to songList, maybe to show seen words or words with a 2 or 3 score (basically learning words)</li>
 </ul>

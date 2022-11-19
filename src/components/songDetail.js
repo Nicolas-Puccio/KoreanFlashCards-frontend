@@ -10,52 +10,53 @@ class SongDetail extends React.Component {
         this.setState({ structure });
     }
 
+
+
     className(structure) {
         //should get the lowest score from all the words, currently just gets the first
         const temp = structure.words.find(word => word.word);
         return temp ? 'score' + Globals.$stats.find(stat => stat.word === temp.word)?.score : 'text';
     }
 
+
+
     render() {
         return <>
             <h2 className='lyrics-h2'>{this.props.song.title}</h2>
 
-            <div className='lyrics-container'>
-                {
-                    this.props.song.structures.map((structure, index) => {
-                        if (structure.written)
-                            return [
-                                <span key={index} className={this.className(structure)} onClick={() => this.details(structure)}>{structure.written}</span>,
-                                <span key={'space' + index}> </span>
-                            ]
-                        else
-                            return <br key={index} />
+            <div className='lyrics-container'>{
+
+                this.props.song.lines.map((line, index) => {
+                    if (!line.structures)
+                        return <br key={index} />
+
+                    return line.structures.map((structure, index2) => {
+                        return [
+                            index2 === 0 ? <br key={'space' + index + index2} /> : <span key={'space' + index + index2}> </span>,
+                            <span key={index + index2} className={this.className(structure)} onClick={() => this.details(structure)}>{structure.written}</span>
+                        ]
                     })
-                }
-            </div>
+                })
+
+            }</div>
 
             {
                 this.state?.structure &&
-                <div className='popup' onClick={() => {
-                    if (this.state.selectedWord) this.setState({ selectedWord: undefined })
-                    else this.setState({ structure: undefined })
-                }}>
+                <div className='popup' onClick={() => { if (this.state.selectedWord) this.setState({ selectedWord: undefined }); else this.setState({ structure: undefined }) }}>
                     <div className='popup-inner' onClick={(e) => e.stopPropagation()}>
                         {
                             !this.state.selectedWord &&
                             <>
                                 <h1 className='popup-inner-h1'>{this.state.structure.written}</h1>
-                                <div className='popup-inner-details-container'>
-                                    {
-                                        this.state.structure.words.map((word, index) =>
-                                            <div key={index} className='popup-inner-details'>
-                                                <h1 className={Globals.$words.find(word2 => word2.word === word.word) ? 'popup-inner-details-clickable' : null} onClick={() => this.setState({ selectedWord: Globals.$words.find(word2 => word2.word === word.word) })}>{word.written}</h1>
-                                                <p>{word.meaning.split('-')[0]}</p>
-                                                <p>{word.meaning.slice(word.meaning.indexOf('-') + 1)/** //fix i should be using regex here */}</p>
-                                            </div>
-                                        )
-                                    }
-                                </div>
+                                <div className='popup-inner-details-container'>{
+                                    this.state.structure.words.map((word, index) =>
+                                        <div key={index} className='popup-inner-details'>
+                                            <h2 className={Globals.$words.find(word2 => word2.word === word.word) ? 'popup-inner-details-clickable' : null} onClick={() => this.setState({ selectedWord: Globals.$words.find(word2 => word2.word === word.word) })}>{word.written}</h2>
+                                            <p>{word.meaning.split('-')[0]}</p>
+                                            <p>{word.meaning.slice(word.meaning.indexOf('-') + 1)/** //fix i should be using regex here */}</p>
+                                        </div>
+                                    )
+                                }</div>
                             </>
                         }
                         {
@@ -63,13 +64,11 @@ class SongDetail extends React.Component {
                             <div className='popup-inner-details'>
                                 <h1>{this.state.selectedWord.word}</h1>
 
-                                <ul className='popup-inner-details-ul'>
-                                    {
-                                        Object.keys(this.state.selectedWord.meanings).map((key) =>
-                                            <li className='popup-inner-details-ul' key={key}>{key}: {this.state.selectedWord.meanings[key]}</li>
-                                        )
-                                    }
-                                </ul>
+                                <ul className='popup-inner-details-ul'>{
+                                    Object.keys(this.state.selectedWord.meanings).map((key) =>
+                                        <li className='popup-inner-details-ul' key={key}>{key}: {this.state.selectedWord.meanings[key]}</li>
+                                    )
+                                }</ul>
                             </div>
                         }
                     </div>
