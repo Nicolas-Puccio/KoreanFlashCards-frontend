@@ -3,15 +3,16 @@ import { Globals } from '../Global';
 
 class SongDetail extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { englishTranslation: false, structure: undefined, coloring: true };
+    }
+
+
     details(structure) {
         //consider: give words without meaning an identifier like an dotted underline??? didn't i do this already?
         if (structure.words.length > 1 || structure.words[0].meaning || structure.words[0].word)
             this.setState({ structure });
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = { englishTranslation: false, structure: undefined };
     }
 
 
@@ -22,11 +23,14 @@ class SongDetail extends React.Component {
     }
 
 
-
     render() {
         return <>
             <input type="checkbox" checked={this.state.englishTranslation} onChange={() => { this.setState({ englishTranslation: !this.state.englishTranslation }) }}></input>
             <label>English Translation</label>
+            <br/>
+            <input disabled={this.state.englishTranslation} type="checkbox" checked={this.state.coloring} onChange={() => { this.setState({ coloring: !this.state.coloring }) }}></input>
+            <label>Lyrics Coloring</label>
+
             <h2 className='lyrics-h2'>{this.props.song.title}</h2>
 
             <div className='lyrics-container'>{
@@ -40,7 +44,7 @@ class SongDetail extends React.Component {
 
                     else
                         return line.structures.map((structure, index2) => {
-                            const elements = [<span key={index + index2} className={this.className(structure)} onClick={() => this.details(structure)}>{structure.written}</span>];
+                            const elements = [<span key={index + index2} className={this.state.coloring?this.className(structure):'scorenocoloring'} onClick={() => this.details(structure)}>{structure.written}</span>];
                             if (index !== 0)
                                 elements.unshift(index2 === 0 ? <br key={'space' + index + index2} /> : <span key={'space' + index + index2}> </span>)
                             return elements
