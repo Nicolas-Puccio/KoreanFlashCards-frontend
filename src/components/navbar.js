@@ -8,7 +8,7 @@ class NavBar extends React.Component {
     render() {
         return <>
             <div className='navbar'>
-                <Link className='navbar-logo' to='/' onClick={() => { Globals.SongList?.deselect() }}>Home</Link>
+                <Link className='navbar-logo' to='/' onClick={() => { Globals.SongList?.setState({ song: undefined }) }}>Home</Link>
                 <Link to='/review'>Review</Link>
                 <button onClick={() => this.setState({ showMenu: this.state?.showMenu ? undefined : true })}>MENU</button>
             </div>

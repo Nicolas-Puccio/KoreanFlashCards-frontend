@@ -5,15 +5,13 @@ import { Globals } from '../Global';
 
 class SongList extends React.Component {
 
-    deselect() {
-        if (this.state.song)
-            this.setState({ song: undefined })
+    constructor(props) {
+        super(props);
+        this.state = { song: undefined };
     }
 
-
-
     render() {
-        if (!this.state?.song)//display list if no song was selected
+        if (!this.state.song)//display list if no song was selected
         {
             return Globals.$songs.map((song) => {
                 song.known = song.review = song.new_ = song.total = 0;
