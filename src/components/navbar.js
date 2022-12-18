@@ -3,20 +3,24 @@ import { Link } from 'react-router-dom';
 import { Globals } from '../Global';
 
 class NavBar extends React.Component {
-
-    songListDeselect() {//fix need to come up with a better name
-        if (Globals.songList)
-            Globals.songList.deselect()
-    }
-
-
+    //state.showMenu is either undefined or true
 
     render() {
-        return <div className='navbar'>
-            <Link className='navbar-logo' to='/' onClick={() => { if (Globals.songList) Globals.songList.deselect() }}>Home</Link>
-            <Link to='/review'>Review</Link>
-            <button>MENU</button>
-        </div>
+        return <>
+            <div className='navbar'>
+                <Link className='navbar-logo' to='/' onClick={() => { Globals.SongList?.deselect() }}>Home</Link>
+                <Link to='/review'>Review</Link>
+                <button onClick={() => this.setState({ showMenu: this.state?.showMenu ? undefined : true })}>MENU</button>
+            </div>
+            {
+                this.state?.showMenu &&
+                <div className='navbar-menu'>
+                    <Link to='/stats'>Stats</Link>
+                    <Link to='/admin'>Admin</Link>
+                    <Link to='/'>Logout</Link>
+                </div>
+            }
+        </>
     }
 }
 

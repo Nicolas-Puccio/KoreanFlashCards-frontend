@@ -28,12 +28,12 @@ class SongList extends React.Component {
 
                             wordsFound.push(word.word);
                             song.total++;
-                            const stat = Globals.$stats.find(stat => stat.word === word.word)
+                            const stat = Globals.$stats.score?.find(stat => stat.word === word.word)
 
                             if (!stat)
                                 song.new_++;
                             else {
-                                if (stat.score > 4)
+                                if (stat.score > 3)
                                     song.known++;
                                 if (new Date(stat.next) < date)
                                     song.review++;
@@ -47,16 +47,19 @@ class SongList extends React.Component {
                         {
                             //<Link to='/review' className='song-container-review-button'>Review</Link>
                         }
-                        <h2 className='song-container-h2' onClick={() => { this.setState({ song: song }); Globals.songList = this }}>{song.title}</h2>
+                        <h2 className='song-container-h2' onClick={() => { this.setState({ song: song }); Globals.SongList = this }}>{song.title}</h2>
 
                     </div>
                     <p className='song-container-p'>{song.known + ' / ' + song.total}</p>
-                    <div className='progress-bar'>
-                        <div style={
-                            { height: '100%', width: `${song.known / song.total * 100}%`, backgroundColor: 'green', borderRadius: '15px' }
-                        } className='progress-bar-progress'></div>
+                    {
+                        song.known > 0 &&
+                        <div className='progress-bar'>
+                            <div style={
+                                { height: '100%', width: `${song.known / song.total * 100}%`, backgroundColor: 'green', borderRadius: '15px' }
+                            } className='progress-bar-progress'></div>
 
-                    </div>
+                        </div>
+                    }
 
                 </div >
             })

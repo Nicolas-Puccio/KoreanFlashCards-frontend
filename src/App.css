@@ -1,6 +1,6 @@
 /*
-//fix i am setting the css as if this was a phone app
-//fix this file is a mess, and there is a lot of css on .js files
+//fix: i am setting the css as if this was a phone app
+//fix: this file is a mess, and there is a lot of css on .js files
 */
 
 
@@ -11,12 +11,21 @@
   font-size: 25px;
   height: fit-content;
   padding: 5px 10px 5px 10px;
-  align-items: center;
   justify-content: flex-end;
   gap: 15px;
 }
 
-/*//fix grow makes the button too big, maybe i should wrap the logo with a div and ahve that div grow*/
+.navbar-menu {
+  background-color: rgb(20, 170, 80);
+  display: flex;
+  /*flex-wrap: wrap;*/
+  font-size: 20px;
+  height: fit-content;
+  justify-content: center;
+  gap: 15px;
+}
+
+/*//fix: grow makes the button too big, maybe i should wrap the logo with a div and ahve that div grow*/
 .navbar-logo {
   flex-grow: 1;
 }
@@ -75,8 +84,8 @@
   text-align: center;
   border-radius: 15px;
   max-width: 95%;
-  min-width: 75%;
-  padding: 5px;
+  min-width: 90%;
+  padding: 4px;
 }
 
 .popup-inner-h1 {
@@ -88,7 +97,7 @@
 .popup-inner-details-container {
   display: flex;
   width: 100%;
-  gap: 5px;
+  gap: 4px;
 }
 
 .popup-inner-details {
@@ -97,6 +106,7 @@
   flex-direction: column;
   border-radius: 10px;
   width: 100%;
+  padding: 0.2px;
 }
 
 .popup-inner-details-clickable {
@@ -136,12 +146,12 @@ body {
 .lyrics-h2 {
   text-align: center;
   font-size: 7.7vw;
-  margin: 10px 0px 20px 0px;
+  margin: 0px;
 }
 
 
 .text {
-  color: white;
+  text-decoration: underline rgb(255, 255, 255) dotted;
 }
 
 .scoreundefined {
@@ -165,12 +175,25 @@ body {
 }
 
 .score4 {
-  color: white;
+  color: yellowgreen;
 }
 
 
+.review-options-startbuttons-button {
+  width: 50%;
+  font-size: large;
+  padding: 6px 0px;
+}
 
-/*//fix there is something wrong here,*/
+
+.review-options-typebuttons-button {
+  width: 33%;
+  font-size: 16px;
+  padding: 0px
+}
+
+
+/*//fix: there is something wrong here*/
 .progress-bar {
   height: 30px;
   width: 100%;

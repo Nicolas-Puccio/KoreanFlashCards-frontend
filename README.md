@@ -10,9 +10,18 @@ flashcard + dictionary while reading
 
 # Tasks
 <ul>
+<li>fix all key properties of lists</li>
 <li>store token at login on cookies httponly</li>
+<li>add button to show translated lyrics instead</li>
+<li>add button to remove lyrics color</li>
+<li>allow user to modify color used for displaying lyrics</li>
 <li>add leaderboard page</li>
 <li>add post request to /user/stats</li>
+<li>allow user to set intervals</li>
+<li>add limit to review session, amount of cards or minutes</li>
+<li>reset types and next array after review session finished</li>
+<li>allow user to select what card type to review (verb,noun,etc)</li>
+<li>consider reducing next interval time if card has been due for a while, maybe up to a certain percentage</li>
 
 <li>review button next to each song at songList should send the song as prop? or id as some kind of url param?</li>
 <li>review button at songDetail</li>

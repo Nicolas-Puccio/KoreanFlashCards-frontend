@@ -4,18 +4,17 @@ import { Globals } from '../Global';
 class SongDetail extends React.Component {
 
     details(structure) {
-        //fix maybe i should give words without meaning an identifier like an dotted underline?
-        if (structure.words.length === 1 && !structure.words[0].meaning && !structure.words[0].word)
-            return
-        this.setState({ structure });
+        //consider: give words without meaning an identifier like an dotted underline??? didn't i do this already?
+        if (structure.words.length > 1 || structure.words[0].meaning || structure.words[0].word)
+            this.setState({ structure });
     }
 
 
 
     className(structure) {
-        //should get the lowest score from all the words, currently just gets the first
-        const temp = structure.words.find(word => word.word);
-        return temp ? 'score' + Globals.$stats.find(stat => stat.word === temp.word)?.score : 'text';
+        //check: get the lowest score from all the words, currently just gets the first, will this ever be needed?
+        const temp = structure.words.find(word => word.word);//check: is this line functional?
+        return temp ? 'score' + Globals.$stats.score?.find(stat => stat.word === temp.word)?.score : 'text';
     }
 
 
@@ -53,7 +52,7 @@ class SongDetail extends React.Component {
                                         <div key={index} className='popup-inner-details'>
                                             <h2 className={Globals.$words.find(word2 => word2.word === word.word) ? 'popup-inner-details-clickable' : null} onClick={() => this.setState({ selectedWord: Globals.$words.find(word2 => word2.word === word.word) })}>{word.written}</h2>
                                             <p>{word.meaning.split('-')[0]}</p>
-                                            <p>{word.meaning.slice(word.meaning.indexOf('-') + 1)/** //fix i should be using regex here */}</p>
+                                            <p>{word.meaning.slice(word.meaning.indexOf('-') + 1)/** //check: i should be using regex here */}</p>
                                         </div>
                                     )
                                 }</div>
