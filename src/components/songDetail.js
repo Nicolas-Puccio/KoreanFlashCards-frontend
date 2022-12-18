@@ -9,6 +9,10 @@ class SongDetail extends React.Component {
             this.setState({ structure });
     }
 
+    constructor(props) {
+        super(props);
+        this.state = { englishTranslation: false, structure: undefined };
+    }
 
 
     className(structure) {
@@ -21,6 +25,8 @@ class SongDetail extends React.Component {
 
     render() {
         return <>
+            <input type="checkbox" checked={this.state.englishTranslation} onChange={() => { this.setState({ englishTranslation: !this.state.englishTranslation }) }}></input>
+            <label>English Translation</label>
             <h2 className='lyrics-h2'>{this.props.song.title}</h2>
 
             <div className='lyrics-container'>{
@@ -29,18 +35,22 @@ class SongDetail extends React.Component {
                     if (!line.structures)
                         return <br key={index} />
 
-                    return line.structures.map((structure, index2) => {
-                        return [
-                            index2 === 0 ? <br key={'space' + index + index2} /> : <span key={'space' + index + index2}> </span>,
-                            <span key={index + index2} className={this.className(structure)} onClick={() => this.details(structure)}>{structure.written}</span>
-                        ]
-                    })
+                    if (this.state.englishTranslation)
+                        return <p key={index} className="translation">{line.translation}</p>
+
+                    else
+                        return line.structures.map((structure, index2) => {
+                            const elements = [<span key={index + index2} className={this.className(structure)} onClick={() => this.details(structure)}>{structure.written}</span>];
+                            if (index !== 0)
+                                elements.unshift(index2 === 0 ? <br key={'space' + index + index2} /> : <span key={'space' + index + index2}> </span>)
+                            return elements
+                        })
                 })
 
             }</div>
 
             {
-                this.state?.structure &&
+                this.state.structure &&
                 <div className='popup' onClick={() => { if (this.state.selectedWord) this.setState({ selectedWord: undefined }); else this.setState({ structure: undefined }) }}>
                     <div className='popup-inner' onClick={(e) => e.stopPropagation()}>
                         {
