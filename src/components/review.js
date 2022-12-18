@@ -3,6 +3,8 @@ import { Globals } from '../Global';
 
 class Review extends React.Component {
 
+    reviewCount = 9;//check: 9 for testing, should start from 0
+    wordsReviewing = []//splice of words to review
     wordsToReview = [];//list of words that has been reviewed at least once
     wordsNew = [];//list of words that have never been reviewed
     shuffleNewWordsOnly = false;//determines if the user is reviewing known or new words
@@ -22,6 +24,7 @@ class Review extends React.Component {
 
     constructor(props) {//sets wordsToReview, wordsNew, nexts, types
         super(props);
+        this.state = { reviewCountLimit: 10 };
 
         Globals.$words?.forEach(word => {
             const stat = Globals.$stats.score?.find(stat => stat.word === word.word);
@@ -53,29 +56,26 @@ class Review extends React.Component {
         this.types = [...new Set(this.types)];//removes duplicates from array //consider: could i simply use a set from the start?
         console.log(this.types);
         console.log(this.nexts);
+        //check: sort arrays of words so splice always takes the oldest or most used ones
         //consider: sort this.nexts by date, and this.types alphabetically
     }
 
 
     shuffle() {
         //state WORD defines if the user is reviewing or not
-        //consider: if learning new words should learn most common words first
         this.setState({ showAnswer: false });
-
-        if (this.shuffleNewWordsOnly)
-            this.setState({ word: this.wordsNew[Math.floor(Math.random() * this.wordsNew.length)] });
-        else
-            this.setState({ word: this.wordsToReview[Math.floor(Math.random() * this.wordsToReview.length)] });
+        if (this.wordsReviewing.length)
+            this.setState({ word: this.wordsReviewing[Math.floor(Math.random() * this.wordsNew.length)] });
+        else {
+            this.setState({word:undefined});
+            //fix tomorrow: reset types and nexts
+        }
     }
 
 
     answer(pass) {
         if (pass) {
-            if (this.shuffleNewWordsOnly)
-                this.wordsNew = this.wordsNew.filter(word => word !== this.state.word);
-            else
-                this.wordsToReview = this.wordsToReview.filter(word => word !== this.state.word);
-
+            this.wordsReviewing = this.wordsReviewing.filter(word => word !== this.state.word);
 
             const stat = Globals.$stats.score.find(stat => stat.word === this.state.word.word)
 
@@ -145,14 +145,28 @@ class Review extends React.Component {
     startReview(shuffleNewWordsOnly) {
         this.shuffleNewWordsOnly = shuffleNewWordsOnly;
 
+        if (shuffleNewWordsOnly)
+            this.wordsReviewing = this.wordsNew.slice(0, this.state.reviewCountLimit);
+        else
+            this.wordsReviewing = this.wordsToReview.slice(0, this.state.reviewCountLimit);
+
         this.shuffle();
     }
 
 
     render() {
         return <>
+            <div className=''>
+                <button onClick={() => this.setState({ reviewCountLimit: this.state.reviewCountLimit - 10 })} disabled={this.state.reviewCountLimit === 10}>{'<'}</button>
+                <input disabled={true} value={this.state.reviewCountLimit}></input>
+                <button onClick={() => this.setState({ reviewCountLimit: this.state.reviewCountLimit + 10 })}>{'>'}</button>
+            </div>
             <p>{this.wordsToReview.length} words to review</p>
             <p>{this.wordsNew.length} new words</p>
+            {
+                this.state.word !== undefined &&
+                <p>{this.wordsReviewing.length} words left on this session</p>
+            }
             {
                 this.state?.word === undefined &&
                 <>
