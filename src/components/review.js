@@ -25,7 +25,7 @@ class Review extends React.Component {
     constructor(props) {//sets wordsToReview, wordsNew, nexts, types
         super(props);
         this.state = { reviewCountLimit: 10 };
-        
+
         this.PrepareData();
     }
 
@@ -165,13 +165,18 @@ class Review extends React.Component {
 
     render() {
         return <>
-            <div className=''>
-                <button onClick={() => this.setState({ reviewCountLimit: this.state.reviewCountLimit - 10 })} disabled={this.state.reviewCountLimit === 10}>{'<'}</button>
-                <input disabled={true} value={this.state.reviewCountLimit}></input>
-                <button onClick={() => this.setState({ reviewCountLimit: this.state.reviewCountLimit + 10 })}>{'>'}</button>
-            </div>
-            <p>{this.wordsToReview.length} words to review</p>
-            <p>{this.wordsNew.length} new words</p>
+            {
+                this.state.word === undefined &&
+                <>
+                    <div className=''>
+                        <button onClick={() => this.setState({ reviewCountLimit: this.state.reviewCountLimit - 10 })} disabled={this.state.reviewCountLimit === 10}>{'<'}</button>
+                        <input disabled={true} value={this.state.reviewCountLimit}></input>
+                        <button onClick={() => this.setState({ reviewCountLimit: this.state.reviewCountLimit + 10 })}>{'>'}</button>
+                    </div>
+                    <p>{this.wordsToReview.length} words to review</p>
+                    <p>{this.wordsNew.length} new words</p>
+                </>
+            }
             {
                 this.state.word !== undefined &&
                 <p>{this.wordsReviewing.length} words left on this session</p>
