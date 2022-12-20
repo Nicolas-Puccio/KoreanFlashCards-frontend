@@ -25,6 +25,16 @@ class Review extends React.Component {
     constructor(props) {//sets wordsToReview, wordsNew, nexts, types
         super(props);
         this.state = { reviewCountLimit: 10 };
+        
+        this.PrepareData();
+    }
+
+    PrepareData() {//consider: changing the name of the function, initializing variables
+        this.types = [];
+        this.nexts = [];
+        this.wordsToReview = [];
+        this.wordsNew = [];
+        this.reviewCount = 0;
 
         Globals.$words?.forEach(word => {
             const stat = Globals.$stats.score?.find(stat => stat.word === word.word);
@@ -60,15 +70,14 @@ class Review extends React.Component {
         //consider: sort this.nexts by date, and this.types alphabetically
     }
 
-
     shuffle() {
         //state WORD defines if the user is reviewing or not
         this.setState({ showAnswer: false });
         if (this.wordsReviewing.length)
             this.setState({ word: this.wordsReviewing[Math.floor(Math.random() * this.wordsNew.length)] });
         else {
-            this.setState({word:undefined});
-            //fix tomorrow: reset types and nexts
+            this.setState({ word: undefined });
+            this.PrepareData();
         }
     }
 
