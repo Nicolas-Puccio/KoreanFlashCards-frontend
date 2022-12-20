@@ -30,6 +30,8 @@ class Review extends React.Component {
     }
 
     PrepareData() {//consider: changing the name of the function, initializing variables
+        Globals.Review = this;//reference needed to stop review when clicking the <Link> button
+
         this.types = [];
         this.nexts = [];
         this.wordsToReview = [];

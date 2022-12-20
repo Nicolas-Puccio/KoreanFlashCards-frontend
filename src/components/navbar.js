@@ -9,7 +9,7 @@ class NavBar extends React.Component {
         return <>
             <div className='navbar'>
                 <Link className='navbar-logo' to='/' onClick={() => { Globals.SongList?.setState({ song: undefined }) }}>Home</Link>
-                <Link to='/review'>Review</Link>
+                <Link to='/review' onClick={() => { Globals.Review?.setState({ word: undefined }) }}>Review</Link>
                 <button onClick={() => this.setState({ showMenu: this.state?.showMenu ? undefined : true })}>MENU</button>
             </div>
             {
