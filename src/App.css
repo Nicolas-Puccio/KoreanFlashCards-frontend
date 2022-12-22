@@ -202,9 +202,17 @@ body {
 .review-options-typebuttons-button {
   width: 33%;
   font-size: 16px;
-  padding: 0px
+  padding: 0px;
+  background: lightgreen;
 }
 
+
+.review-options-typebuttons-button-deselected {
+  width: 33%;
+  font-size: 16px;
+  padding: 0px;
+  background: lightcoral;
+}
 
 /*//fix: there is something wrong here*/
 .progress-bar {

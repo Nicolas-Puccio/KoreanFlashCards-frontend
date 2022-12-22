@@ -3,10 +3,14 @@ import { Globals } from '../Global';
 
 class Review extends React.Component {
 
-    reviewCount = 9;//check: 9 for testing, should start from 0
-    wordsReviewing = []//splice of words to review
+    reviewCount = 0;//current session progress
     wordsToReview = [];//list of words that has been reviewed at least once
     wordsNew = [];//list of words that have never been reviewed
+
+    wordsToReviewFiltered = [];//list of words that apply to selected filters, this will be spliced into WordsReviewing
+    wordsNewFiltered = [];//list of words that apply to selected filters, this will be spliced into WordsReviewing
+    wordsReviewing = []//splice of words to review this session
+
     shuffleNewWordsOnly = false;//determines if the user is reviewing known or new words
     intervals = [//cards use the index of their current score, then the score is increased
         10,//10m
@@ -24,8 +28,10 @@ class Review extends React.Component {
 
     constructor(props) {//sets wordsToReview, wordsNew, nexts, types
         super(props);
-        this.state = { reviewCountLimit: 10 };
+        this.state = { reviewCountLimit: 10, typesSelected: [] };
+    }
 
+    componentDidMount() {
         this.PrepareData();
     }
 
@@ -66,17 +72,46 @@ class Review extends React.Component {
 
         })
         this.types = [...new Set(this.types)];//removes duplicates from array //consider: could i simply use a set from the start?
+        this.setState({ typesSelected: this.types.slice(0) })//copy values instead of array reference
+        console.log(this.types.slice(0))
         console.log(this.types);
         console.log(this.nexts);
+        this.setWordsFiltered(this.types);//consider: store filters on localStorage or config
         //check: sort arrays of words so splice always takes the oldest or most used ones
         //consider: sort this.nexts by date, and this.types alphabetically
+    }
+
+    setWordsFiltered(typesSelected) {
+        this.wordsToReviewFiltered = this.wordsToReview.filter(word =>
+            Object.keys(word.meanings).filter(type => typesSelected.includes(type)).length > 0)
+
+        this.wordsNewFiltered = this.wordsNew.filter(word => {
+            return true
+        })
+    }
+
+    selectType(type) {
+        let typesSelected;
+        if (this.state.typesSelected.includes(type)) {
+            if (this.state.typesSelected.length === 1) {
+                //if you want to deselect the last one selected, select all instead
+                typesSelected = this.types.slice(0)
+            }
+            else
+                typesSelected = this.state.typesSelected.filter(type2 => type2 !== type)
+        }
+        else
+            typesSelected = [...this.state.typesSelected, type]
+
+        this.setWordsFiltered(typesSelected)
+        this.setState({ typesSelected })
     }
 
     shuffle() {
         //state WORD defines if the user is reviewing or not
         this.setState({ showAnswer: false });
         if (this.wordsReviewing.length)
-            this.setState({ word: this.wordsReviewing[Math.floor(Math.random() * this.wordsNew.length)] });
+            this.setState({ word: this.wordsReviewing[Math.floor(Math.random() * this.wordsReviewing.length)] });
         else {
             this.setState({ word: undefined });
             this.PrepareData();
@@ -110,7 +145,7 @@ class Review extends React.Component {
         }
         else {
             const stat = Globals.$stats.score.find(stat => stat.word === this.state.word.word);
-            stat.score = stat.score > 0 ? stat.score - 1 : 0;
+            stat.score = stat.score > 1 ? stat.score - 2 : 0;//consider: -3
             //consider: should i remove from list now or set next?
             //consider: each review session could have an ID, here i could remove the word and set a timeout for a few minutes, if the review session is the same, add the word again
         }
@@ -157,9 +192,9 @@ class Review extends React.Component {
         this.shuffleNewWordsOnly = shuffleNewWordsOnly;
 
         if (shuffleNewWordsOnly)
-            this.wordsReviewing = this.wordsNew.slice(0, this.state.reviewCountLimit);
+            this.wordsReviewing = this.wordsNewFiltered.slice(0, this.state.reviewCountLimit);
         else
-            this.wordsReviewing = this.wordsToReview.slice(0, this.state.reviewCountLimit);
+            this.wordsReviewing = this.wordsToReviewFiltered.slice(0, this.state.reviewCountLimit);
 
         this.shuffle();
     }
@@ -176,7 +211,9 @@ class Review extends React.Component {
                         <button onClick={() => this.setState({ reviewCountLimit: this.state.reviewCountLimit + 10 })}>{'>'}</button>
                     </div>
                     <p>{this.wordsToReview.length} words to review</p>
+                    <p>{this.wordsToReviewFiltered.length} words to review after filters</p>
                     <p>{this.wordsNew.length} new words</p>
+                    <p>{this.wordsNewFiltered.length} new words after filters</p>
                 </>
             }
             {
@@ -184,12 +221,14 @@ class Review extends React.Component {
                 <p>{this.wordsReviewing.length} words left on this session</p>
             }
             {
-                this.state?.word === undefined &&
+                this.state.word === undefined &&
                 <>
                     <div className='review-options-typebuttons'>
                         {
                             this.types.map(type =>
-                                <button className='review-options-typebuttons-button' key={type}>{type}</button>
+                                <button className={this.state.typesSelected.includes(type) ? 'review-options-typebuttons-button' : 'review-options-typebuttons-button-deselected'}
+                                    onClick={() => { this.selectType(type) }}
+                                    key={type} >{type}</button>
                             )
                         }
                     </div>
@@ -202,9 +241,9 @@ class Review extends React.Component {
                     <br />
 
                     <div className='review-options-startbuttons'>
-                        <button className='review-options-startbuttons-button' onClick={() => this.startReview(true)} disabled={!this.wordsNew.length}>Learn new words</button>
+                        <button className='review-options-startbuttons-button' onClick={() => this.startReview(true)} disabled={!this.wordsNewFiltered.length}>Learn new words</button>
 
-                        <button className='review-options-startbuttons-button' onClick={() => this.startReview(false)} disabled={!this.wordsToReview.length}>Review known words</button>
+                        <button className='review-options-startbuttons-button' onClick={() => this.startReview(false)} disabled={!this.wordsToReviewFiltered.length}>Review known words</button>
                     </div>
                 </>
             }
