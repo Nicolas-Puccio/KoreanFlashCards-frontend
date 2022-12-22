@@ -13,14 +13,19 @@ import Globals from './Global';
 
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   DataLoaded = () => {
-    this.setState({ data: true })
+    this.setState({ data: true });
   }
 
   render() {
     //consider: fix App rendering 4 times because of setState, should only be 3? or 2?
     Globals.fetchData(this);
-    if (this.state?.data)
+    if (this.state.data)
       return <Routes>
         <Route path='/' element={
           <>

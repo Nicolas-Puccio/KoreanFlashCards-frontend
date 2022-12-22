@@ -3,6 +3,12 @@ import { Globals } from '../Global';
 
 //fix: all the file
 class TestPage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
     render() {
         const missingWords = [];
         const incompleteWords = [];
@@ -30,8 +36,8 @@ class TestPage extends React.Component {
                 }
             </ul>
 
-            <input placeholder={this.state?.word.word} disabled></input>
-            <button disabled={!this.state?.word} onClick={() => {
+            <input placeholder={this.state.word.word} disabled></input>
+            <button disabled={!this.state.word} onClick={() => {
 
                 const request = new XMLHttpRequest();
                 request.onreadystatechange = (event) => {

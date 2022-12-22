@@ -248,16 +248,16 @@ class Review extends React.Component {
                 </>
             }
             {
-                this.state?.word !== undefined &&
+                this.state.word !== undefined &&
                 <>
-                    <h1>{this.state?.word?.word}</h1>
+                    <h1>{this.state.word?.word}</h1>
                     {
                         //consider: add references/examples to this word from songs
                         Globals.$stats.score.find(stat => stat.word === this.state.word.word) !== undefined &&
                         <>
                             <button onClick={() => this.setState({ showAnswer: true })}>show answer</button>
                             {
-                                this.state?.showAnswer &&
+                                this.state.showAnswer &&
                                 <>
                                     <br />
                                     <button onClick={() => this.answer(false)}>fail</button>
