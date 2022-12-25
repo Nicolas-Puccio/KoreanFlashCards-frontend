@@ -1,6 +1,6 @@
 import React from 'react';
 import SongDetail from './songDetail';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Globals } from '../Global';
 
 class SongList extends React.Component {
@@ -43,7 +43,7 @@ class SongList extends React.Component {
                 return <div key={song.title} className='song-container'>
                     <div style={{ width: '100%' }}>
                         {
-                            //<Link to='/review' className='song-container-review-button'>Review</Link>
+                            <Link to='/review' state={{ song }} className='song-container-review-button'>Review</Link>
                         }
                         <h2 className='song-container-h2' onClick={() => { this.setState({ song: song }); Globals.SongList = this }}>{song.title}</h2>
 

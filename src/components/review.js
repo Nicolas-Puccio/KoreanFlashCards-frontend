@@ -1,5 +1,6 @@
 import React from 'react';
 import { Globals } from '../Global';
+import { useLocation } from "react-router-dom";
 
 class Review extends React.Component {
 
@@ -24,11 +25,13 @@ class Review extends React.Component {
 
     nexts = [];//array of how many words will become available for review in each day
     types = [];//verb, noun, etc
+    selectedSong = undefined;
 
 
     constructor(props) {//sets wordsToReview, wordsNew, nexts, types
         super(props);
-        this.state = { reviewCountLimit: 10, typesSelected: [] };
+        this.selectedSong = props.location.state ? props.location.state.song : undefined;
+        this.state = { reviewCountLimit: 10, typesSelected: [], advancedSettings: false };
     }
 
     componentDidMount() {
@@ -73,20 +76,40 @@ class Review extends React.Component {
         })
         this.types = [...new Set(this.types)];//removes duplicates from array //consider: could i simply use a set from the start?
         this.setState({ typesSelected: this.types.slice(0) })//copy values instead of array reference
-        console.log(this.types.slice(0))
-        console.log(this.types);
-        console.log(this.nexts);
         this.setWordsFiltered(this.types);//consider: store filters on localStorage or config
         //check: sort arrays of words so splice always takes the oldest or most used ones
-        //consider: sort this.nexts by date, and this.types alphabetically
+        //consider: sort this.types alphabetically
+        this.nexts.sort((a, b) => a.next - b.next);
     }
 
     setWordsFiltered(typesSelected) {
-        this.wordsToReviewFiltered = this.wordsToReview.filter(word =>
-            Object.keys(word.meanings).filter(type => typesSelected.includes(type)).length > 0)
+        //consider: should i also filter this.nexts?
+        console.log(typesSelected)
+        this.wordsToReviewFiltered = this.wordsToReview.filter(word => {
+            if (!this.selectedSong) {
+                if (Object.keys(word.meanings).filter(type => typesSelected.includes(type)).length > 0)
+                    return true
+            }
+
+            //there is a selected song
+            for (let i = 0; i < this.selectedSong.lines.length; i++) {
+                const line = this.selectedSong.lines[i];
+                for (let j = 0; j < line.structures?.length; j++) {
+                    const structure = line.structures[j];
+                    for (let y = 0; y < structure.words.length; y++) {
+                        const word2 = structure.words[y];
+                        if (word.word === word2.word) {
+                            return true
+                        }
+                    }
+                }
+            }
+            return false
+        })
+
 
         this.wordsNewFiltered = this.wordsNew.filter(word => {
-            return true
+            return true//fix: finish this
         })
     }
 
@@ -205,6 +228,22 @@ class Review extends React.Component {
             {
                 this.state.word === undefined &&
                 <>
+                    <select onBlur={test => {
+                        this.selectedSong = Globals.$songs.find(song => song.title === test.target.value);
+                        this.setWordsFiltered(this.state.typesSelected);
+                        this.forceUpdate();
+                    }} defaultValue={this.props.location.state?.song.title ?? 'All songs'}>
+                        <option>All songs</option>
+                        {
+                            Globals.$songs.map((song, index) =>
+                                <option key={index}>{song.title}</option>
+                            )
+                        }
+                    </select>
+
+                    <br />
+                    <br />
+
                     <div className=''>
                         <button onClick={() => this.setState({ reviewCountLimit: this.state.reviewCountLimit - 10 })} disabled={this.state.reviewCountLimit === 10}>{'<'}</button>
                         <input disabled={true} value={this.state.reviewCountLimit}></input>
@@ -245,6 +284,20 @@ class Review extends React.Component {
 
                         <button className='review-options-startbuttons-button' onClick={() => this.startReview(false)} disabled={!this.wordsToReviewFiltered.length}>Review known words</button>
                     </div>
+
+                    <br />
+                    <br />
+                    <br />
+                    <button onClick={() => this.setState({ advancedSettings: !this.state.advancedSettings })}>Advanced Settings</button>
+                    {
+                        this.state.advancedSettings &&
+                        <div>
+                            {
+                                //check: also set intervals here
+                                this.nexts.map((next, index) => <p key={index}>{next.next} - {next.amount}</p>)
+                            }
+                        </div>
+                    }
                 </>
             }
             {
@@ -299,4 +352,4 @@ class Review extends React.Component {
     }
 }
 
-export default Review
+export default () => <Review location={useLocation()} />
