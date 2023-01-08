@@ -31,7 +31,7 @@ class Review extends React.Component {
     constructor(props) {//sets wordsToReview, wordsNew, nexts, types
         super(props);
         this.selectedSong = props.location.state ? props.location.state.song : undefined;
-        this.state = { reviewCountLimit: 10, typesSelected: [], advancedSettings: false };
+        this.state = { reviewCountLimit: 10, typesSelected: [] };
     }
 
     componentDidMount() {
@@ -83,12 +83,15 @@ class Review extends React.Component {
     }
 
     setWordsFiltered(typesSelected) {
+        //check: if a word has 2 types, and it is the only one of a certain type, when you deselect this type nothing happens, as the word will still be available because of the other type, therefore the button does nothing, what should i do?
+
         //consider: should i also filter this.nexts?
         console.log(typesSelected)
         this.wordsToReviewFiltered = this.wordsToReview.filter(word => {
             if (!this.selectedSong) {
                 if (Object.keys(word.meanings).filter(type => typesSelected.includes(type)).length > 0)
                     return true
+                return false
             }
 
             //there is a selected song
@@ -228,7 +231,7 @@ class Review extends React.Component {
             {
                 this.state.word === undefined &&
                 <>
-                    <select onBlur={test => {
+                    <select onChange={test => {
                         this.selectedSong = Globals.$songs.find(song => song.title === test.target.value);
                         this.setWordsFiltered(this.state.typesSelected);
                         this.forceUpdate();
