@@ -9,7 +9,7 @@ let App;
 exports.fetchData = (App2) => {//consider: change App2 name
     //fix: function should still notify App component even if the requests to server failed (user is offline)
 
-
+    
     if (this.Globals)//data already initialized
     {
         console.log('globals already set up', this.Globals);
@@ -73,8 +73,10 @@ exports.fetchData = (App2) => {//consider: change App2 name
 const requestReceived = () => {//fix2: properly use promises for this
     requestReceivedAmount++;
     console.log(requestReceivedAmount)
-    if (requestReceivedAmount === requestRequired)
+    if (requestReceivedAmount === requestRequired) {
+        FilterUnused()
         App.DataLoaded();
+    }
 }
 
 // eslint-disable-next-line
@@ -86,4 +88,31 @@ const statsExample = {
             reviewed: ["do", "run"]
         }
     ]
+}
+
+//check comment and optimization
+const FilterUnused = () => {
+    console.log(this.Globals.$words.length)
+
+    this.Globals.$words = this.Globals.$words.filter(word => {
+        for (let x = 0; x < this.Globals.$songs.length; x++) {
+            const song = this.Globals.$songs[x];
+            for (let i = 0; i < song.lines.length; i++) {
+                const line = song.lines[i];
+                for (let j = 0; j < line.structures?.length; j++) {
+                    const structure = line.structures[j];
+                    for (let y = 0; y < structure.words.length; y++) {
+                        const word2 = structure.words[y];
+                        if (word.word === word2.word) {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+    })
+
+    console.log(this.Globals.$words.length);
+
+    localStorage.setItem('words', JSON.stringify(this.Globals.$words));
 }
