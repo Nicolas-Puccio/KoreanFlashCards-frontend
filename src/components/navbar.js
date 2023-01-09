@@ -6,17 +6,18 @@ class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { showMenu: false };
+        this.state = {};
     }
 
     render() {
         return <>
             <div className='navbar'>
                 <Link className='navbar-logo' to='/' onClick={() => { Globals.SongList?.setState({ song: undefined }) }}>Home</Link>
-                <Link to='/review' onClick={() => { Globals.Review?.setState({ word: undefined }) }}>Review</Link>
+                <Link to='/review' onClick={() => { if (Globals.setWordsToReview) Globals.setWordsToReview([]) }}>Review</Link>
                 <button onClick={() => this.setState({ showMenu: !this.state.showMenu })}>MENU</button>
             </div>
             {
+                //consider: should i close menu after clicking a Link?
                 this.state.showMenu &&
                 <div className='navbar-menu'>
                     <Link to='/stats'>Stats</Link>

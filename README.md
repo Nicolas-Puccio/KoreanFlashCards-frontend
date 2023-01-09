@@ -18,7 +18,6 @@ flashcard + dictionary while reading
 <li>allow user to set intervals</li>
 <li>consider reducing next interval time if card has been due for a while, maybe up to a certain percentage</li>
 
-<li>review button next to each song at songList should send the song as prop? or id as some kind of url param?</li>
 <li>review button at songDetail</li>
 <li>keep track of pass/fail rate of reviews</li>
 <li>consider: offer user to change review interval if pass/fail rate is outside desired range (80%-95%?)</li>

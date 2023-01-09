@@ -1,7 +1,7 @@
 import './App.css';
 import SongList from './components/songList';
 import TestPage from './components/testPage';
-import Review from './components/review';
+import ReviewPage from './pages/review-page';
 import NavBar from './components/navbar';
 import Stats from './components/stats';
 import Admin from './components/admin';
@@ -25,6 +25,7 @@ class App extends React.Component {
   render() {
     //consider: fix App rendering 4 times because of setState, should only be 3? or 2?
     Globals.fetchData(this);
+    
     if (this.state.data)
       return <Routes>
         <Route path='/' element={
@@ -39,7 +40,7 @@ class App extends React.Component {
           <>
             <NavBar />
             <div className='main-div'>
-              <Review />
+              <ReviewPage />
             </div>
           </>
         } />
