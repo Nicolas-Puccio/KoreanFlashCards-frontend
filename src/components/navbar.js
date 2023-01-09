@@ -12,7 +12,7 @@ class NavBar extends React.Component {
     render() {
         return <>
             <div className='navbar'>
-                <Link className='navbar-logo' to='/' onClick={() => { Globals.SongList?.setState({ song: undefined }) }}>Home</Link>
+                <Link className='navbar-logo' to='/' onClick={() => { if (Globals.setSelectedSong) Globals.setSelectedSong(undefined) }}>Home</Link>
                 <Link to='/review' onClick={() => { if (Globals.setWordsToReview) Globals.setWordsToReview([]) }}>Review</Link>
                 <button onClick={() => this.setState({ showMenu: !this.state.showMenu })}>MENU</button>
             </div>
