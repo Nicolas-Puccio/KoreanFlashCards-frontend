@@ -19,8 +19,6 @@ export default function ReviewOptions({ data }) {
     const [nexts, setNexts] = useState([])//array of how many words will become available for review in each day
     const [types, setTypes] = useState([])//verb, noun, etc
 
-    const [advancedSettings, setAdvancedSettings] = useState(false)
-
 
     useEffect(() => {
         console.log('useEffect: ', selectedSong)
@@ -194,22 +192,6 @@ export default function ReviewOptions({ data }) {
                 <button className='review-options-startbuttons-button' onClick={() => startReview(true)} disabled={!wordsNewFiltered.length}>Learn new words</button>
                 <button className='review-options-startbuttons-button' onClick={() => startReview(false)} disabled={!wordsToReviewFiltered.length}>Review known words</button>
             </div>
-
-
-            <br /><br /><br />
-
-
-            <button onClick={() => setAdvancedSettings(!advancedSettings)}>Advanced Settings</button>
-            {
-                advancedSettings &&
-                <div>
-                    {
-                        //check: also set intervals here
-                        nexts.map((next, index) => <p key={index}>{next.next} - {next.amount}</p>)
-                    }
-                    <p>filter of min times repeated</p>
-                </div>
-            }
         </>
     )
 }

@@ -1,6 +1,6 @@
 exports.Globals = undefined
-exports.songList = undefined//used by navbar //check: could i send this as a prop instead?//fix: delete
-
+//exports.setWordsToReview = undefined //set by review-page
+//exports.setSelectedSong = undefined //set by songs-page
 
 exports.fetchData = async (setDataInitialized) => {
 

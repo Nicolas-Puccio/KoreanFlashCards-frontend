@@ -1,13 +1,13 @@
-import './App.css';
-import TestPage from './components/testPage';
-import ReviewPage from './pages/review-page';
-import SongsPage from './pages/songs-page';
-import NavBar from './components/navbar';
-import Stats from './components/stats';
-import Admin from './components/admin';
-import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Globals from './Global';
+import './App.css'
+import TestPage from './components/testPage'
+import ReviewPage from './pages/review-page'
+import SongsPage from './pages/songs-page'
+import NavBar from './components/navbar'
+import Stats from './components/stats'
+import Admin from './components/admin'
+import React, { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Globals from './Global'
 
 
 export default function App() {

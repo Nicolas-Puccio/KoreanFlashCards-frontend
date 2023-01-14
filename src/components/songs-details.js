@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Globals } from '../Global';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { Globals } from '../Global'
 
 export default function SongsDetails({ data }) {
 
 
-    const [showStats, setShowStats] = useState(false)
     const [showTranslation, setShowTranslation] = useState(false)
     const [colorCoded, setColorCoded] = useState(true)
     const [structure, setStructure] = useState(undefined)
@@ -30,22 +28,11 @@ export default function SongsDetails({ data }) {
 
 
     return (<>
-        <button style={{ float: 'right' }} onClick={() => setShowStats(!showStats)}>Stats</button>
-
         <input type="checkbox" checked={showTranslation} onChange={() => setShowTranslation(!showTranslation)}></input>
         <label>English Translation</label>
         <br />
         <input disabled={showTranslation} type="checkbox" checked={colorCoded} onChange={() => setColorCoded(!colorCoded)}></input>
         <label>Lyrics Coloring</label>
-
-        {
-            showStats &&
-            <div>
-                {
-                    <p>test</p>
-                }
-            </div>
-        }
 
 
         <h2 className='lyrics-h2'>{data.selectedSong.title}</h2>

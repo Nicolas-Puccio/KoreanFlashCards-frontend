@@ -61,9 +61,9 @@
 .song-container-review-button {
   background: white;
   border-radius: 10px;
-  font-size: 24px;
+  font-size: 20px;
   color: black;
-  padding: 8px 12px;
+  padding: 6px 8px;
   float: right;
   text-decoration: none;
 }
