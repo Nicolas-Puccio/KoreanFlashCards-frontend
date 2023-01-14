@@ -1,16 +1,12 @@
-exports.Globals = undefined;
-exports.songList = undefined;//used by navbar //check: could i send this as a prop instead?
+exports.Globals = undefined
+exports.songList = undefined//used by navbar //check: could i send this as a prop instead?//fix: delete
 
-let requestReceivedAmount = 0;
-const requestRequired = 2;
 
-exports.fetchData = (App) => {//consider: change App2 name
+exports.fetchData = async (setDataInitialized) => {
 
     if (this.Globals)//data already initialized
-    {
-        console.log('globals already set up', this.Globals);
-        return;
-    }
+        return
+
 
     this.Globals = {}
     this.Globals.$stats = JSON.parse(localStorage.getItem('stats')) ?? { score: [], reviewed: [] };
@@ -18,56 +14,32 @@ exports.fetchData = (App) => {//consider: change App2 name
     this.Globals.$songs = JSON.parse(localStorage.getItem('songs')) ?? [];
     console.log('setting up globals', this.Globals)
 
-
     //parses all string dates into Date
     this.Globals.$stats.score.forEach(stat => {//consider: should i use .map?
         stat.next = new Date(stat.next);
     })
 
-    //fix2: use a library or something to simplify this requests, also create a function that takes URL and Object as parameters to reduce code repetition
-    const request = new XMLHttpRequest();
-    request.onreadystatechange = (event) => {
-        if (event.currentTarget.readyState === 4) {
-            if (event.currentTarget.status === 200) {
-                localStorage.setItem('songs', request.responseText);
-                this.Globals.$songs = JSON.parse(request.responseText);
-            }
-            //this will execute even if the request failed
-            requestReceived(App);
-        }
-    }
-    request.open('GET', 'http://localhost:3001/api/song/', true);
 
-    request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    request.setRequestHeader('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA');
-    request.send();
+    await Fetch('http://localhost:3001/api/song/', this.Globals.$songs)
+    await Fetch('http://localhost:3001/api/song/word', this.Globals.$words)
 
-
-    const request2 = new XMLHttpRequest();
-    request2.onreadystatechange = (event) => {
-        if (event.currentTarget.readyState === 4) {
-            if (event.currentTarget.status === 200) {
-                localStorage.setItem('words', request2.responseText);
-                this.Globals.$words = JSON.parse(request2.responseText);
-            }
-            //this will execute even if the request failed
-            requestReceived(App);
-        }
-    };
-    request2.open('GET', 'http://localhost:3001/api/song/word', true);
-
-    request2.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    request2.setRequestHeader('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA');
-    request2.send();
+    FilterUnusedWords()
+    setDataInitialized(true)
 }
 
-const requestReceived = (App) => {//fix2: properly use promises for this
-    requestReceivedAmount++;
 
-    if (requestReceivedAmount === requestRequired) {
-        FilterUnusedWords()
-        App.DataLoaded()
-    }
+const Fetch = async (url, data) => {
+    await fetch(url, {
+        headers: {
+            'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA'
+        }
+    })
+        .then(res => {
+            data = res.json()
+                .then(json => data = json)
+                .catch(err => console.log(err))//check: do i need 2 .catch?
+        })
+        .catch(err => console.log(err))
 }
 
 
