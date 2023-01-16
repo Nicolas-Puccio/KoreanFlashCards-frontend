@@ -47,9 +47,11 @@ export default function SongsDetails({ data }) {
 
                 else
                     return line.structures.map((structure, index2) => {
-                        const elements = [<span key={index + index2} className={colorCoded ? className(structure) : 'scorenocoloring'} onClick={() => details(structure)}>{structure.written}</span>];
-                        if (index !== 0)
-                            elements.unshift(index2 === 0 ? <br key={'space' + index + index2} /> : <span key={'space' + index + index2}> </span>)
+                        const elements = [
+                            index2 === 0 && index !== 0 ? <br key={'space' + index + index2} /> : <span key={'space' + index + index2}> </span>,
+                            <span key={index + index2} className={colorCoded ? className(structure) : 'scorenocoloring'} onClick={() => details(structure)}>{structure.written}</span>                              
+                        ];
+
                         return elements
                     })
             })
