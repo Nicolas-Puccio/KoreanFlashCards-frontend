@@ -3,13 +3,21 @@
 //fix: this file is a mess, and there is a lot of css on .js files
 */
 
+body {
+  margin: 0px;
+  background-color: #181818;
+  color: white;
+}
 
+.main-div {
+  padding: 10px;
+}
+
+/*#region navbar */
 .navbar {
   background-color: rgb(20, 170, 80);
   display: flex;
-  /*flex-wrap: wrap;*/
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 0px 00px 10px 10px;
   font-size: 25px;
   height: fit-content;
   padding: 5px;
@@ -23,21 +31,19 @@
   right: 0px;
   display: flex;
   gap: 15px;
-  /*flex-wrap: wrap;*/
   font-size: 20px;
   padding: 1px 5px;
   border-radius: 8px;
 }
 
-/*//fix: grow makes the button too big, maybe i should wrap the logo with a div and ahve that div grow*/
 .navbar-logo {
   flex-grow: 1;
 }
 
-.main-div {
-  padding: 10px;
-}
+/*#endregion */
 
+
+/*#region songs-page */
 .song-container {
   margin: 5%;
   padding: 10px;
@@ -68,8 +74,18 @@
   text-decoration: none;
 }
 
+/*//fix: there is something wrong here*/
+.progress-bar {
+  height: 30px;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+  border-radius: 15px;
+}
+
+/*#endregion */
 
 
+/*#region popup */
 .popup {
   background-color: rgba(50, 50, 50, 0.5);
   position: fixed;
@@ -96,7 +112,6 @@
   margin-top: 15px;
   margin-bottom: 20px;
 }
-
 
 .popup-inner-details-container {
   display: flex;
@@ -128,20 +143,10 @@
   margin-bottom: 10px;
 }
 
+/*#endregion */
 
 
-
-
-
-
-body {
-  margin: 0px;
-  background-color: #181818;
-  color: white;
-}
-
-
-
+/*#region lyrics */
 .lyrics-container {
   font-size: 5.1vw;
   text-align: center;
@@ -152,7 +157,6 @@ body {
   font-size: 7.7vw;
   margin-top: 12px;
 }
-
 
 .text {
   text-decoration: underline rgb(255, 255, 255) dotted;
@@ -191,13 +195,15 @@ body {
   color: yellowgreen;
 }
 
+/*#endregion */
 
+
+/*#region review */
 .review-options-startbuttons-button {
   width: 50%;
   font-size: large;
   padding: 6px 0px;
 }
-
 
 .review-options-typebuttons-button {
   width: 33%;
@@ -206,7 +212,6 @@ body {
   background: lightgreen;
 }
 
-
 .review-options-typebuttons-button-deselected {
   width: 33%;
   font-size: 16px;
@@ -214,10 +219,8 @@ body {
   background: lightcoral;
 }
 
-/*//fix: there is something wrong here*/
-.progress-bar {
-  height: 30px;
-  width: 100%;
-  background-color: rgb(240, 240, 240);
-  border-radius: 15px;
-}
+/*#endregion */
+
+
+
+@media only screen and (min-width: 700px) {}

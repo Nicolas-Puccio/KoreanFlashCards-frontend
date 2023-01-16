@@ -10,6 +10,8 @@ flashcard + dictionary while reading
 
 # Tasks
 <ul>
+<li>separate css into 2 files</li>
+<li>remove testPage.js</li>
 <li>fix all key properties of lists</li>
 <li>store token at login on cookies httponly</li>
 <li>keep track of pass/fail rate of reviews</li>
