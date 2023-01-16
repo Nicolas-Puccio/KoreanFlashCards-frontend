@@ -20,23 +20,24 @@ exports.fetchData = async (setDataInitialized) => {
     })
 
 
-    await Fetch('http://localhost:3001/api/song/', this.Globals.$songs)
-    await Fetch('http://localhost:3001/api/song/word', this.Globals.$words)
+    await Fetch('http://localhost:3001/api/song/', '$songs')
+    await Fetch('http://localhost:3001/api/song/word', '$words')
+    console.log(this.Globals.$songs)
 
     FilterUnusedWords()
     setDataInitialized(true)
 }
 
 
-const Fetch = async (url, data) => {
+const Fetch = async (url, property) => {
     await fetch(url, {
         headers: {
             'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA'
         }
     })
         .then(res => {
-            data = res.json()
-                .then(json => data = json)
+            res.json()
+                .then(json => this.Globals[property] = json)
                 .catch(err => console.log(err))//check: do i need 2 .catch?
         })
         .catch(err => console.log(err))
