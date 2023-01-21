@@ -42,7 +42,6 @@ export default function Admin() {
         setLine(Object.assign({}, line))
     }
 
-    //i don't think this is the right way to do it
     function addEmptyWordToStructure(structure) {
         structure.words.push({
             written: '',
@@ -50,12 +49,11 @@ export default function Admin() {
             word: ''
         })
 
+
         if (structure.words.length === structure.written.length) {
             const split = structure.written.split('')
-
-            for (let i = 0; i < structure.words.length; i++) {
+            for (let i = 0; i < structure.words.length; i++)
                 structure.words[i].written = split[i]
-            }
         }
 
         setLine(Object.assign({}, line))
@@ -88,7 +86,7 @@ export default function Admin() {
             }
         </select>
         <br /><br />
-        <input placeholder='line' onBlur={e => splitLine(e)} />
+        <input placeholder='line' onBlur={splitLine} />
         <input placeholder='line translation' onBlur={e => setLine({ ...line, translation: e.target.value })} />
 
         {

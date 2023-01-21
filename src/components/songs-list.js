@@ -42,23 +42,16 @@ export default function SongsList({ data }) {
 
         return <div key={song.title} className='song-container'>
             <div style={{ width: '100%' }}>
-                {
-                    <Link to='/review' state={{ song }} className='song-container-review-button'>Review</Link>
-                }
-                <h2 className='song-container-h2' onClick={() => { data.setSelectedSong(song) }}>{song.title}</h2>
-
+                <Link to='/review' state={{ song }} className='song-container-review-button'>Review</Link>
+                <h2 className='song-container-h3' onClick={() => data.setSelectedSong(song)}>{song.title}</h2>
             </div>
             <p className='song-container-p'>{song.known + ' / ' + song.total}</p>
             {
                 song.known > 0 &&
                 <div className='progress-bar'>
-                    <div style={
-                        { height: '100%', width: `${song.known / song.total * 100}%`, backgroundColor: 'green', borderRadius: '15px' }
-                    } className='progress-bar-progress'></div>
-
+                    <div style={{ width: `${song.known / song.total * 100}%` }} className='progress-bar-progress'></div>
                 </div>
             }
-
         </div >
     })
 }

@@ -49,7 +49,7 @@ export default function SongsDetails({ data }) {
                     return line.structures.map((structure, index2) => {
                         const elements = [
                             index2 === 0 && index !== 0 ? <br key={'space' + index + index2} /> : <span key={'space' + index + index2}> </span>,
-                            <span key={index + index2} className={colorCoded ? className(structure) : 'scorenocoloring'} onClick={() => details(structure)}>{structure.written}</span>                              
+                            <span key={index + index2} className={colorCoded ? className(structure) : 'scorenocoloring'} onClick={() => details(structure)}>{structure.written}</span>
                         ];
 
                         return elements
@@ -70,7 +70,7 @@ export default function SongsDetails({ data }) {
                                 structure.words.map((word, index) =>
                                     <div key={index} className='popup-inner-details'>
                                         <h2 className={Globals.$words.find(word2 => word2.word === word.word) ? 'popup-inner-details-clickable' : null} onClick={() => setSelectedWord(Globals.$words.find(word2 => word2.word === word.word))}>{word.written}</h2>
-                                        <p>{word.meaning.split('-')[0]}</p>
+                                        <p>{word.meaning.split('-').length > 1 ? word.meaning.split('-')[0] : '???'/*i am using split twice here, could optimize*/}</p>
                                         <p>{word.meaning.slice(word.meaning.indexOf('-') + 1)/** //check: i should be using regex here */}</p>
                                     </div>
                                 )
