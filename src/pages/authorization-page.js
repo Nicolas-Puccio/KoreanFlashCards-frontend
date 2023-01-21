@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 export default function AuthorizationPage({ data }) {
@@ -28,11 +28,18 @@ export default function AuthorizationPage({ data }) {
             res.json().then(json => {
                 if (res.status === 400)
                     alert(json.message)
-                else data.SetUser(json)
+                else data.SetUser(json.username)
             })
                 .catch(err => console.error(err))
         })
     }
+
+    useEffect(() => {
+        const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0]
+        console.log(cookie)
+        if (cookie)
+            data.SetUser(cookie)
+    }, [])
 
     return (
         <div className='form'>

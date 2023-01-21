@@ -16,7 +16,7 @@ export default function App() {
 
 
   const [dataInitialized, setDataInitialized] = useState(false)
-  const [user, setUser] = useState(undefined)
+  const [user, setUser] = useState(undefined)//stores username
 
 
   function SetUser(user) {//i need to set user and also request data

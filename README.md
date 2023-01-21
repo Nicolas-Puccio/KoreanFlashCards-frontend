@@ -12,6 +12,7 @@ flashcard + dictionary while reading
 <ul>
 <li>redirect user to login screen if token expires?</li>
 <li>add logout</li>
+<li>finish login</li>
 <li>remove testPage.js</li>
 <li>fix all key properties of lists</li>
 <li>keep track of pass/fail rate of reviews</li>
