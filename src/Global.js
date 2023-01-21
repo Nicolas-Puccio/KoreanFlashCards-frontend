@@ -9,9 +9,9 @@ exports.fetchData = async (setDataInitialized) => {
 
 
     this.Globals = {}
-    this.Globals.$stats = JSON.parse(localStorage.getItem('stats')) ?? { score: [], reviewed: [] };
-    this.Globals.$words = JSON.parse(localStorage.getItem('words')) ?? [];
-    this.Globals.$songs = JSON.parse(localStorage.getItem('songs')) ?? [];
+    this.Globals.$stats = JSON.parse(localStorage.getItem('stats')) ?? { score: [], reviewed: [] }
+    this.Globals.$words = JSON.parse(localStorage.getItem('words')) ?? []
+    this.Globals.$songs = JSON.parse(localStorage.getItem('songs')) ?? []
     console.log('setting up globals', this.Globals)
 
     //parses all string dates into Date
@@ -22,23 +22,22 @@ exports.fetchData = async (setDataInitialized) => {
 
     await Fetch('http://localhost:3001/api/song/', '$songs')
     await Fetch('http://localhost:3001/api/song/word', '$words')
-    console.log(this.Globals.$songs)
+    localStorage.setItem('songs', JSON.stringify(this.Globals.$songs))
 
-    FilterUnusedWords()
+    FilterUnusedWords()//also setsItem on localstorage
     setDataInitialized(true)
 }
 
 
 const Fetch = async (url, property) => {
-    await fetch(url, {
-        headers: {
-            'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ1ZjkwNGVmMDE2ZGVjOGE3MTYwMTkiLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjYxMDE0NjN9.55YtqF7GBtShk-MF6pY8DYVCMNypmXma_WEX6hK7QFA'
-        }
-    })
+    await fetch(url, { credentials: 'include' })
         .then(res => {
-            res.json()
-                .then(json => this.Globals[property] = json)
-                .catch(err => console.log(err))//check: do i need 2 .catch?
+            res.json().then(json => {
+                if (res.status !== 200)
+                    alert(json.message)
+                else
+                    this.Globals[property] = json
+            })
         })
         .catch(err => console.log(err))
 }
@@ -48,14 +47,13 @@ const Fetch = async (url, property) => {
 const FilterUnusedWords = () => {
     this.Globals.$words = this.Globals.$words.filter(word => {
         for (let x = 0; x < this.Globals.$songs.length; x++) {
-            const song = this.Globals.$songs[x];
+            const song = this.Globals.$songs[x]
             for (let i = 0; i < song.lines.length; i++) {
-                const line = song.lines[i];
+                const line = song.lines[i]
                 for (let j = 0; j < line.structures?.length; j++) {
                     const structure = line.structures[j];
                     for (let y = 0; y < structure.words.length; y++) {
-                        const word2 = structure.words[y];
-                        if (word.word === word2.word)
+                        if (word.word === structure.words[y].word)
                             return true
                     }
                 }
@@ -64,7 +62,7 @@ const FilterUnusedWords = () => {
         return false
     })
 
-    localStorage.setItem('words', JSON.stringify(this.Globals.$words));
+    localStorage.setItem('words', JSON.stringify(this.Globals.$words))
 }
 
 
