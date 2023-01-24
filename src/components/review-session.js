@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
-import { useLocation } from "react-router-dom"
 
 export default function ReviewOptions({ data }) {
 
@@ -19,8 +18,10 @@ export default function ReviewOptions({ data }) {
     ]//in minutes
 
 
+    //check: is this ok?
     useEffect(() => {
         shuffle()
+        // eslint-disable-next-line
     }, [])
 
 
@@ -73,7 +74,7 @@ export default function ReviewOptions({ data }) {
             if (!reviewed.reviewed.includes(word.word)) {
                 reviewed.reviewed.push(word.word)
 
-                //this.statsPOST(reviewed)
+                fetchStats(reviewed)
                 console.log(Globals.$stats.reviewed)
             }
         }
@@ -84,7 +85,7 @@ export default function ReviewOptions({ data }) {
             }
             Globals.$stats.reviewed.push(reviewed)
 
-            //this.statsPOST(reviewed)
+            fetchStats(reviewed)
             console.log(Globals.$stats.reviewed)
         }
 
@@ -94,16 +95,35 @@ export default function ReviewOptions({ data }) {
     }
 
 
+
+    function fetchStats(reviewed) {
+        fetch(`http://localhost:3001/api/user/stats`, {
+            method: "POST",
+            body: JSON.stringify({ reviewed: reviewed.reviewed.length }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            credentials: 'include'
+        }).then(res => {
+            res.json().then(json => {
+                if (res.status !== 200)
+                    alert(json.message)
+                else {
+                    console.log('stats good')
+                }
+            })
+        }).catch(err => console.error(err))
+    }
+
+
     return (
         <>
             <p>{data.wordsToReview.length} words left on this session</p>
-
 
             {
                 word !== undefined &&
                 <>
                     <h1>{word.word}</h1>
-
 
                     {
                         //consider: add references/examples to this word from songs
