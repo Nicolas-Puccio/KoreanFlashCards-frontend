@@ -47,8 +47,8 @@ export default function AuthorizationPage({ data }) {
         console.log(cookie)
         if (cookie) {
             data.SetUser({
-                admin: cookie[0],
-                username: cookie[1]
+                admin: cookie.split('-')[0],
+                username: cookie.split('-')[1]
             })
         }
     }, [])
