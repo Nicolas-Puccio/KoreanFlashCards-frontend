@@ -26,7 +26,7 @@ export default function SongsList({ data }) {
 
                     wordsFound.push(word.word);
                     song.total++;
-                    const stat = Globals.$stats.score?.find(stat => stat.word === word.word)
+                    const stat = Globals.$stats[Globals.$username].score?.find(stat => stat.word === word.word)
 
                     if (!stat)
                         song.new_++;

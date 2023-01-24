@@ -22,7 +22,7 @@ export default function App() {
   function SetUser(user) {//i need to set user and also request data
     console.log(user)
     setUser(user)
-    Globals.fetchData(setDataInitialized)
+    Globals.fetchData(setDataInitialized, user.username)
   }
 
   if (!user)

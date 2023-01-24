@@ -10,7 +10,6 @@ flashcard + dictionary while reading
 
 # Tasks
 <ul>
-<li>stats on localStorage should be stored with the username, to allow switching accounts offline</li>
 <li>redirect user to login screen if token expires?</li>
 <li>finish login</li>
 <li>remove testPage.js</li>

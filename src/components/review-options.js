@@ -50,7 +50,7 @@ export default function ReviewOptions({ data }) {
             }
 
 
-            const stat = Globals.$stats.score?.find(stat => stat.word === word.word)
+            const stat = Globals.$stats[Globals.$username].score?.find(stat => stat.word === word.word)
 
             if (stat) {
                 if (stat.next < new Date()) {

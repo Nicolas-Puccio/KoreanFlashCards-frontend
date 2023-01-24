@@ -40,7 +40,7 @@ export default function ReviewOptions({ data }) {
         if (pass) {
             data.wordsToReview = data.wordsToReview.filter(word2 => word2 !== word)
 
-            const stat = Globals.$stats.score.find(stat => stat.word === word.word)
+            const stat = Globals.$stats[Globals.$username].score.find(stat => stat.word === word.word)
 
             if (stat) {
                 console.log('has stat')
@@ -53,7 +53,7 @@ export default function ReviewOptions({ data }) {
                 const next = new Date()
                 next.setMinutes(next.getMinutes() + intervals[0])
 
-                Globals.$stats.score.push({
+                Globals.$stats[Globals.$username].score.push({
                     word: word.word,
                     score: 1,
                     next
@@ -61,21 +61,21 @@ export default function ReviewOptions({ data }) {
             }
         }
         else {
-            const stat = Globals.$stats.score.find(stat => stat.word === word.word)
+            const stat = Globals.$stats[Globals.$username].score.find(stat => stat.word === word.word)
             stat.score = stat.score > 1 ? stat.score - 2 : 0//consider: -3
             //consider: should i remove from list now or set next?
             //consider: each review session could have an ID, here i could remove the word and set a timeout for a few minutes, if the review session is the same, add the word again
         }
 
 
-        const reviewed = Globals.$stats.reviewed.find(reviewed => reviewed.date === new Date().toLocaleDateString())
+        const reviewed = Globals.$stats[Globals.$username].reviewed.find(reviewed => reviewed.date === new Date().toLocaleDateString())
 
         if (reviewed) {
             if (!reviewed.reviewed.includes(word.word)) {
                 reviewed.reviewed.push(word.word)
 
                 fetchStats(reviewed)
-                console.log(Globals.$stats.reviewed)
+                console.log(Globals.$stats[Globals.$username].reviewed)
             }
         }
         else {
@@ -83,10 +83,10 @@ export default function ReviewOptions({ data }) {
                 date: new Date().toLocaleDateString(),
                 reviewed: [word.word]
             }
-            Globals.$stats.reviewed.push(reviewed)
+            Globals.$stats[Globals.$username].reviewed.push(reviewed)
 
             fetchStats(reviewed)
-            console.log(Globals.$stats.reviewed)
+            console.log(Globals.$stats[Globals.$username].reviewed)
         }
 
         localStorage.setItem('stats', JSON.stringify(Globals.$stats))
@@ -127,7 +127,7 @@ export default function ReviewOptions({ data }) {
 
                     {
                         //consider: add references/examples to this word from songs
-                        Globals.$stats.score.find(stat => stat.word === word.word) !== undefined && //word has score
+                        Globals.$stats[Globals.$username].score.find(stat => stat.word === word.word) !== undefined && //word has score
                         <>
                             <button onClick={() => setShowAnswer(true)}>show answer</button>
                             {
@@ -155,7 +155,7 @@ export default function ReviewOptions({ data }) {
 
 
                     {
-                        Globals.$stats.score.find(stat => stat.word === word.word) === undefined && //no score
+                        Globals.$stats[Globals.$username].score.find(stat => stat.word === word.word) === undefined && //no score
                         <>
                             <button onClick={() => answer(true)}>ok</button>
 

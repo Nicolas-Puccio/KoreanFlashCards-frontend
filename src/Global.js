@@ -2,20 +2,21 @@ exports.Globals = undefined
 //exports.setWordsToReview = undefined //set by review-page
 //exports.setSelectedSong = undefined //set by songs-page
 
-exports.fetchData = async (setDataInitialized) => {
+exports.fetchData = async (setDataInitialized, username) => {
 
     if (this.Globals)//data already initialized
         return
 
 
     this.Globals = {}
-    this.Globals.$stats = JSON.parse(localStorage.getItem('stats')) ?? { score: [], reviewed: [] }
+    this.Globals.$stats = JSON.parse(localStorage.getItem('stats')) ?? { [username]: { score: [], reviewed: [] } }
     this.Globals.$words = JSON.parse(localStorage.getItem('words')) ?? []
     this.Globals.$songs = JSON.parse(localStorage.getItem('songs')) ?? []
+    this.Globals.$username = username
     console.log('setting up globals', this.Globals)
 
     //parses all string dates into Date
-    this.Globals.$stats.score.forEach(stat => {//consider: should i use .map?
+    this.Globals.$stats[username].score.forEach(stat => {//consider: should i use .map?
         stat.next = new Date(stat.next);
     })
 

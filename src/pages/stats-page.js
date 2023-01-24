@@ -24,7 +24,7 @@ export default function StatsPage() {
     return <>
         <h2>My reviews</h2>
         {
-            Globals.$stats.reviewed.map((reviewed, index) =>
+            Globals.$stats[Globals.$username].reviewed.map((reviewed, index) =>
                 <p key={index}>{reviewed.date} - {reviewed.reviewed.length}</p>
             )
         }
