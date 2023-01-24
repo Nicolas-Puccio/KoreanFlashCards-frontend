@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Globals } from '../Global'
 
 
-export default function NavBar() {
+export default function NavBar({ data }) {
 
     const [showMenu, setShowMenu] = useState(false)
 
@@ -17,8 +17,14 @@ export default function NavBar() {
             showMenu &&//consider: should i close menu after clicking a Link?
             <div className='navbar-menu'>
                 <Link to='/stats'>Stats</Link>
-                <Link to='/admin'>Admin</Link>
-                <Link to='/'>Logout</Link>
+                {
+                    data.user.admin === 'true' &&
+                    <Link to='/admin'>Admin</Link>
+                }
+                <Link to='/' onClick={() => {
+                    document.cookie = 'token=;'//path=/; //check:other browsers might need path?
+                    data.setUser(undefined)
+                }}>Logout</Link>
             </div>
         }
     </>)

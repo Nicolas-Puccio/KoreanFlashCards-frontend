@@ -7,7 +7,7 @@ import NavBar from './components/navbar'
 import StatsPage from './pages/stats-page'
 import AuthorizationPage from './pages/authorization-page'
 import Admin from './components/admin'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Globals from './Global'
 
@@ -34,7 +34,7 @@ export default function App() {
 
 
   return <Router>
-    <NavBar />
+    <NavBar data={{ user, setUser }} />{/**sends SetUser to use in logout button */}
     <div className='main-div'>
       <Routes>
         <Route path='/' element={<SongsPage />} />
