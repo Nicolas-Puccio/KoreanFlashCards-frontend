@@ -31,8 +31,8 @@ exports.fetchData = async (setDataInitialized) => {
 
 const Fetch = async (url, property) => {
     await fetch(url, { credentials: 'include' })
-        .then(res => {
-            res.json().then(json => {
+        .then(async res => {
+            await res.json().then(json => {
                 if (res.status !== 200)
                     alert(json.message)
                 else

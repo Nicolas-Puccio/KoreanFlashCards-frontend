@@ -93,11 +93,14 @@ export default function ReviewOptions({ data }) {
     }, [selectedSong])
 
     useEffect(() => {
-        console.log(types)
+        console.log(typesSelected)
         //check: if a word has 2 types, and it is the only one of a certain type, when you deselect this type nothing happens, as the word will still be available because of the other type, therefore the button does nothing, what should i do?
 
         //consider: should i also filter this.nexts?
-        setWordsToReviewFiltered(wordsToReview.filter(word => {
+        setWordsToReviewFiltered(wordsToReview.filter(filterWords))
+        setWordsNewFiltered(wordsNew.filter(filterWords))
+
+        function filterWords(word) {
             if (Object.keys(word.meanings).filter(type => typesSelected.includes(type)).length > 0) {
                 if (!selectedSong)
                     return true
@@ -111,13 +114,9 @@ export default function ReviewOptions({ data }) {
                     }
                 }
             }
-            return false//consider: can this line be removed?
-        }))
-
-        setWordsNewFiltered(wordsNew.filter(word => {
-            return true//fix: finish this
-        }))
-    }, [types, typesSelected, selectedSong, wordsNew, wordsToReview])//had to add all these dependencies to avoid error, i guess i could have just disabled
+            return false//consider: can this line be removed? 
+        }
+    }, [types, typesSelected, selectedSong, wordsNew, wordsToReview])//had to add all these dependencies to avoid warnings, i guess i could have just disabled
 
 
 
@@ -168,10 +167,8 @@ export default function ReviewOptions({ data }) {
             </div>
 
 
-            <p>{wordsToReview.length} words to review</p>
-            <p>{wordsToReviewFiltered.length} words to review after filters</p>
-            <p>{wordsNew.length} new words</p>
-            <p>{wordsNewFiltered.length} new words after filters</p>
+            <p>{wordsToReviewFiltered.length} words to review</p>
+            <p>{wordsNewFiltered.length} new words</p>
 
 
             <div className='review-options-typebuttons'>
