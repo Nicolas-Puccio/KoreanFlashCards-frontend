@@ -28,17 +28,29 @@ export default function AuthorizationPage({ data }) {
             res.json().then(json => {
                 if (res.status === 400)
                     alert(json.message)
-                else data.SetUser(json.username)
+                else {
+                    //cookie set by backend has format 'isAdmin-userName'
+                    const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
+                    //check: what if username has a '-'?
+
+                    data.SetUser({
+                        admin: cookie[0],
+                        username: cookie[1]
+                    })
+                }
             })
-                .catch(err => console.error(err))
-        })
+        }).catch(err => console.error(err))
     }
 
     useEffect(() => {
         const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0]
         console.log(cookie)
-        if (cookie)
-            data.SetUser(cookie)
+        if (cookie) {
+            data.SetUser({
+                admin: cookie[0],
+                username: cookie[1]
+            })
+        }
     }, [])
 
     return (
