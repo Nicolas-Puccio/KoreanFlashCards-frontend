@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 export default function AuthorizationPage({ data }) {
     console.log(data)
     const [formData, setFormData] = useState({
-        email: '',//check: unused
-        password: '',//check: unused
+        email: '',
+        password: '',
         username: ''
     })
 
@@ -17,6 +17,14 @@ export default function AuthorizationPage({ data }) {
     }
 
     const Submit = (signin) => {//true = signin, false = login
+        if (!formData.email.includes('@') || formData.email.startsWith('@') || formData.email.endsWith('@'))//fix: just testing
+        {
+            alert('email not valid')
+            return
+        }
+
+
+        //fix: add loading popup
         fetch(`http://localhost:3001/api/user/${signin ? 'signin' : 'login'}`, {
             method: "POST",
             body: JSON.stringify(formData),
@@ -51,6 +59,8 @@ export default function AuthorizationPage({ data }) {
                 username: cookie.split('-')[1]
             })
         }
+        //check: is this correct?
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -64,7 +74,6 @@ export default function AuthorizationPage({ data }) {
                         value={formData.email}
                         placeholder='email'
                         onChange={onChange}
-                        disabled={true}
                     />
                 </div>
                 <div className='form-group'>
@@ -75,7 +84,6 @@ export default function AuthorizationPage({ data }) {
                         value={formData.password}
                         placeholder='password'
                         onChange={onChange}
-                        disabled={true}
                     />
                 </div>
                 <div className='form-group'>
