@@ -16,7 +16,7 @@ exports.fetchData = async (setDataInitialized, username) => {
     console.log('setting up globals', this.Globals)
 
     //parses all string dates into Date
-    this.Globals.$stats[username].score.forEach(stat => {//consider: should i use .map?
+    this.Globals.$stats[username].score?.forEach(stat => {//consider: should i use .map?
         stat.next = new Date(stat.next);
     })
 
