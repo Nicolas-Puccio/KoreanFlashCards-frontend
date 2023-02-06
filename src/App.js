@@ -8,12 +8,12 @@ import StatsPage from './pages/stats-page'
 import Admin from './pages/admin-page'
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Globals from './Global'
+import Global from './Global'
 
 
 export default function App() {
 
-  const [dataInitialized, setDataInitialized] = useState(false) //check: if request fails and there is no localstorage, display error message
+  const [dataInitialized, setDataInitialized] = useState(false)
   const [user, setUser] = useState(undefined) // const userExample = { admin: false, username: 'test' }
 
 
@@ -31,7 +31,7 @@ export default function App() {
       })
     }
 
-    Globals.fetchData(setDataInitialized, cookie ? cookie.split('-')[1] : undefined) //check: if user is logged in, fetchData should also retrieve stats backup
+    Global.fetchData(setDataInitialized, cookie ? cookie.split('-')[1] : undefined) //check: if user is logged in, fetchData should also retrieve stats backup
   }, [])
 
 
@@ -39,6 +39,8 @@ export default function App() {
   if (!dataInitialized)
     return <h1>loading</h1> //fix: add proper loading screen
 
+  else if (Global.Globals.$songs.length === 0 || Global.Globals.$words.length === 0)
+    return <h1>server is not responding and there is no localStorage</h1> //fix:
 
 
   return <Router>

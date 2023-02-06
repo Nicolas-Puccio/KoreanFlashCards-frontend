@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Globals } from '../Global'
 
 //fix: all file, should use form
-export default function Admin() {
+//fix: comment file
+export default function AdminPage() {
 
     const [song, setSong] = useState(Globals.$songs[0]._id)
     const [line, setLine] = useState(undefined)

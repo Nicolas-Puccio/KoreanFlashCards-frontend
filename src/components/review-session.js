@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
 
-export default function ReviewOptions({ data }) {
+//fix: comment file
+export default function ReviewSession({ data }) {
 
     const [showAnswer, setShowAnswer] = useState(false)
     const [word, setWord] = useState(data.wordsToReview[0])

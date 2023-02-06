@@ -2,6 +2,7 @@ import React from 'react';
 import { Globals } from '../Global';
 
 //fix: all the file
+//fix: comment file
 class TestPage extends React.Component {
 
     constructor(props) {

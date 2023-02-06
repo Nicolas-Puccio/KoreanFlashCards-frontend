@@ -1,0 +1,160 @@
+.song-container {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #444;
+    border-width: 2px;
+}
+
+.song-container div {
+    width: 100%;
+}
+
+.song-container h2 {
+    margin: 0px;
+    width: fit-content;
+}
+
+.song-container p {
+    margin-top: 12px;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.song-container-review-button {
+    background: white;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 6px 8px;
+    float: right;
+    text-decoration: none;
+}
+
+/*//fix: there is something wrong here*/
+.progress-bar {
+    height: 30px;
+    width: 100%;
+    background-color: rgb(63, 63, 63);
+    border-radius: 15px;
+}
+
+.progress-bar div {
+    height: 100%;
+    background-color: green;
+    border-radius: 15px;
+}
+
+
+
+
+
+.lyrics-h2 {
+    text-align: center;
+    font-size: 7.7vw;
+    margin-top: 12px;
+}
+
+.lyrics-container {
+    font-size: 5.1vw;
+    text-align: center;
+}
+
+.text {
+    text-decoration: underline rgb(255, 255, 255) dotted;
+}
+
+.translation {
+    margin-top: 0px;
+    margin-bottom: 6px;
+}
+
+.scorenocoloring {
+    color: white;
+}
+
+.scoreundefined {
+    color: red;
+}
+
+.score0 {
+    color: red;
+}
+
+.score1 {
+    color: red;
+}
+
+.score2 {
+    color: orange;
+}
+
+.score3 {
+    color: yellow;
+}
+
+.score4 {
+    color: yellowgreen;
+}
+
+
+
+
+
+.popup {
+    background-color: rgba(50, 50, 50, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-inner {
+    background-color: black;
+    text-align: center;
+    border-radius: 15px;
+    max-width: 95%;
+    min-width: 90%;
+    padding: 4px;
+}
+
+.popup-inner-h1 {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.popup-inner-details-container {
+    display: flex;
+    width: 100%;
+    gap: 4px;
+}
+
+.popup-inner-details {
+    background-color: rgb(50, 50, 50);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 100%;
+    padding: 0.2px;
+}
+
+.popup-inner-details-clickable {
+    text-decoration: underline;
+}
+
+.popup-inner-word {
+    background-color: black;
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.popup-inner-details ul,
+li {
+    text-align: left;
+    margin-bottom: 10px;
+}

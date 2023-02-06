@@ -31,6 +31,7 @@ export default function SongsDetails({ data }) {
         <input type="checkbox" checked={colorCoded} disabled={showTranslation} onChange={() => setColorCoded(!colorCoded)}></input>
         <label>Lyrics Coloring</label>
 
+
         <h2 className='lyrics-h2'>{data.selectedSong.title}</h2>
 
 
@@ -71,6 +72,7 @@ export default function SongsDetails({ data }) {
                 <div className='popup-inner' onClick={(e) => e.stopPropagation()}>
                     {
                         !selectedWord &&
+                        
                         <>
                             <h1 className='popup-inner-h1'>{structure.written}</h1>
 

@@ -2,232 +2,49 @@
 //fix: this file is a mess, and there is a lot of css on .js files
 */
 
-
-@media only screen and (max-width: 700px) {
-
-  body {
-    margin: 0px;
-    background-color: #181818;
-    color: white;
-  }
-
-  .main-div {
-    padding: 10px;
-  }
-
-  /*#region navbar */
-  .navbar {
-    background-color: rgb(20, 170, 80);
-    display: flex;
-    border-radius: 0px 00px 10px 10px;
-    font-size: 25px;
-    height: fit-content;
-    padding: 5px;
-    justify-content: flex-end;
-    gap: 15px;
-  }
-
-  .navbar-menu {
-    background-color: rgb(20, 170, 80);
-    position: absolute;
-    right: 0px;
-    display: flex;
-    gap: 15px;
-    font-size: 20px;
-    padding: 1px 5px;
-    border-radius: 8px;
-  }
-
-  .navbar-logo {
-    flex-grow: 1;
-  }
-
-  /*#endregion */
-
-
-  /*#region songs-page */
-  .song-container {
-    margin: 5%;
-    padding: 10px;
-    border-radius: 20px;
-    border-style: solid;
-    border-color: #444;
-    border-width: 2px;
-  }
-
-  .song-container-h3 {
-    margin: 0px;
-    width: fit-content;
-  }
-
-  .song-container-p {
-    margin-top: 12px;
-    margin-bottom: 5px;
-    text-align: right;
-  }
-
-  .song-container-review-button {
-    background: white;
-    border-radius: 10px;
-    font-size: 20px;
-    color: black;
-    padding: 6px 8px;
-    float: right;
-    text-decoration: none;
-  }
-
-  /*//fix: there is something wrong here*/
-  .progress-bar {
-    height: 30px;
-    width: 100%;
-    background-color: rgb(240, 240, 240);
-    border-radius: 15px;
-  }
-
-  .progress-bar-progress {
-    height: 100%;
-    background-color: green;
-    border-radius: 15px;
-  }
-
-  /*#endregion */
-
-
-  /*#region popup */
-  .popup {
-    background-color: rgba(50, 50, 50, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .popup-inner {
-    background-color: black;
-    text-align: center;
-    border-radius: 15px;
-    max-width: 95%;
-    min-width: 90%;
-    padding: 4px;
-  }
-
-  .popup-inner-h1 {
-    margin-top: 15px;
-    margin-bottom: 20px;
-  }
-
-  .popup-inner-details-container {
-    display: flex;
-    width: 100%;
-    gap: 4px;
-  }
-
-  .popup-inner-details {
-    background-color: rgb(50, 50, 50);
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    width: 100%;
-    padding: 0.2px;
-  }
-
-  .popup-inner-details-clickable {
-    text-decoration: underline;
-  }
-
-  .popup-inner-word {
-    background-color: black;
-    list-style-type: none;
-    padding-left: 10px;
-  }
-
-  .popup-inner-details-ul {
-    text-align: left;
-    margin-bottom: 10px;
-  }
-
-  /*#endregion */
-
-
-  /*#region lyrics */
-  .lyrics-container {
-    font-size: 5.1vw;
-    text-align: center;
-  }
-
-  .lyrics-h2 {
-    text-align: center;
-    font-size: 7.7vw;
-    margin-top: 12px;
-  }
-
-  .text {
-    text-decoration: underline rgb(255, 255, 255) dotted;
-  }
-
-  .translation {
-    margin-top: 0px;
-    margin-bottom: 6px;
-  }
-
-  .scorenocoloring {
-    color: white;
-  }
-
-  .scoreundefined {
-    color: red;
-  }
-
-  .score0 {
-    color: red;
-  }
-
-  .score1 {
-    color: red;
-  }
-
-  .score2 {
-    color: orange;
-  }
-
-  .score3 {
-    color: yellow;
-  }
-
-  .score4 {
-    color: yellowgreen;
-  }
-
-  /*#endregion */
-
-
-  /*#region review */
-  .review-options-startbuttons-button {
-    width: 50%;
-    font-size: large;
-    padding: 6px 0px;
-  }
-
-  .review-options-typebuttons-button {
-    width: 33%;
-    font-size: 16px;
-    padding: 0px;
-    background: lightgreen;
-  }
-
-  .review-options-typebuttons-button-deselected {
-    width: 33%;
-    font-size: 16px;
-    padding: 0px;
-    background: lightcoral;
-  }
-
-  /*#endregion */
-
-
+body {
+  margin: 0px;
+  background-color: #181818;
+  color: white;
 }
+
+.main-div {
+  padding: 10px;
+}
+
+
+
+
+/*#region popup */
+/*#endregion */
+
+
+/*#region lyrics */
+
+/*#endregion */
+
+
+/*#region review */
+.review-options-startbutton {
+  width: 50%;
+  font-size: large;
+  padding: 6px;
+}
+
+.review-options-typebuttons-button {
+  width: 33%;
+  font-size: 16px;
+  padding: 0px;
+  background: lightgreen;
+}
+
+.review-options-typebuttons-button-deselected {
+  width: 33%;
+  font-size: 16px;
+  padding: 0px;
+  background: lightcoral;
+}
+
+/*#endregion */
+
+

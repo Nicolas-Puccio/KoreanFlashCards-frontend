@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Globals } from '../Global';
 
+//fix: comment file
 export default function StatsPage() {
 
     const [leaderboards, setLeaderboards] = useState([])
@@ -45,6 +46,10 @@ export default function StatsPage() {
                     <br />
                 </div>)
             })
+        }
+        {
+            leaderboards.length === 0 &&
+            <p>No leaderboard available</p>
         }
     </>
 }

@@ -1,0 +1,29 @@
+.navbar {
+    background-color: rgb(20, 170, 80);
+    display: flex;
+    border-radius: 0px 00px 10px 10px;
+    font-size: 25px;
+    height: fit-content;
+    padding: 5px;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.navbar-menu {
+    background-color: rgb(20, 170, 80);
+    position: absolute;
+    right: 0px;
+    display: flex;
+    gap: 15px;
+    font-size: 20px;
+    padding: 1px 5px;
+    border-radius: 8px;
+}
+
+.navbar-logo {
+    flex-grow: 1;
+}
+
+.navbar-no-text-decoration {
+    text-decoration: none;
+}

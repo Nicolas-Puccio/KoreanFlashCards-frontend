@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-
+//fix: comment file
 export default function AuthorizationPage({ data }) {
     console.log(data)
     const [formData, setFormData] = useState({
