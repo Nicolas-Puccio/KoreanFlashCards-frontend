@@ -1,26 +1,30 @@
-exports.Globals = undefined
-// exports.setWordsToReview = undefined // set by review-page
-// exports.setSelectedSong = undefined // set by songs-page
+export let Globals = {}
 
-exports.fetchData = async (setDataInitialized, username) => {
+//why do i have to use export instead of setting exports?
 
-    if (this.Globals) // data already initialized
+export const fetchData = async (setDataInitialized, username) => {
+
+    if (Globals.$words) // data already initialized
         return
 
 
-    console.log('setting up globals', this.Globals)
-
-    this.Globals = {
+    Globals = {
         $stats: JSON.parse(localStorage.getItem('stats')) ?? { [username]: { score: [], reviewed: [] } },
         $words: JSON.parse(localStorage.getItem('words')) ?? [],
         $songs: JSON.parse(localStorage.getItem('songs')) ?? [],
-        $username: username
+        $username: username,
+
+        setWordsToReview: undefined, // set by review-page
+        setSelectedSong: undefined // set by songs-page
     }
 
     // parses all string dates into Date
-    this.Globals.$stats[username].score?.forEach(stat => {
+    Globals.$stats[username].score?.forEach(stat => {
         stat.next = new Date(stat.next)
     })
+
+    console.log('setting up globals', Globals)
+
 
 
     // fetches songs and words
@@ -36,8 +40,8 @@ exports.fetchData = async (setDataInitialized, username) => {
                 alert(json.message)
             else {
                 //check: backend will only send the properties that are not up to date on localStorage
-                this.Globals.$words = json.words
-                this.Globals.$songs = json.songs
+                Globals.$words = json.words
+                Globals.$songs = json.songs
             }
         }
     } catch (err) {
@@ -48,12 +52,12 @@ exports.fetchData = async (setDataInitialized, username) => {
 
 
     // filters out unused words //check: refactor
-    this.Globals.$words = this.Globals.$words.filter(word => {
-        for (let x = 0; x < this.Globals.$songs.length; x++) {
-            for (let i = 0; i < this.Globals.$songs[x].lines.length; i++) {
-                for (let j = 0; j < this.Globals.$songs[x].lines[i].structures?.length; j++) {
-                    for (let y = 0; y < this.Globals.$songs[x].lines[i].structures[j].words.length; y++) {
-                        if (word.word === this.Globals.$songs[x].lines[i].structures[j].words[y].word)
+    Globals.$words = Globals.$words.filter(word => {
+        for (let x = 0; x < Globals.$songs.length; x++) {
+            for (let i = 0; i < Globals.$songs[x].lines.length; i++) {
+                for (let j = 0; j < Globals.$songs[x].lines[i].structures?.length; j++) {
+                    for (let y = 0; y < Globals.$songs[x].lines[i].structures[j].words.length; y++) {
+                        if (word.word === Globals.$songs[x].lines[i].structures[j].words[y].word)
                             return true
                     }
                 }
@@ -64,8 +68,8 @@ exports.fetchData = async (setDataInitialized, username) => {
 
 
 
-    localStorage.setItem('songs', JSON.stringify(this.Globals.$songs))
-    localStorage.setItem('words', JSON.stringify(this.Globals.$words))
+    localStorage.setItem('songs', JSON.stringify(Globals.$songs))
+    localStorage.setItem('words', JSON.stringify(Globals.$words))
 
 
     setDataInitialized(true)

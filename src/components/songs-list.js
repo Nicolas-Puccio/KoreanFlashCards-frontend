@@ -7,7 +7,7 @@ export default function SongsList({ data: { setSelectedSong } }) {
 
 
     // iterates each song, and sets 'song.knownWords', 'song.wordsToReview', 'song.newWords', and 'song.totalWords'
-    return Globals.$songs.map((song) => {
+    return Globals.$songs.map(song => {
         song.knownWords = song.wordsToReview = song.newWords = song.totalWords = 0
         const wordsFound = []
         const date = new Date()

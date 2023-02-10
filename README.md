@@ -14,7 +14,6 @@ some words are also stored as flashcards which the user can later review through
 
 # Tasks
 <ul>
-<li>remove login requirement</li>
 <li>login will allow to see and participate in leaderboard</li>
 <li>login eventually allow user to store stats on db</li>
 
@@ -26,7 +25,6 @@ some words are also stored as flashcards which the user can later review through
 <li>keep track of pass/fail rate of reviews</li>
 <li>set favorite song</li>
 <li>review favorite songs' cards only</li>
-<li>add leaderboard page</li>
 <li>review button at songDetail</li>
 <li>consider: reuse the same app menu to include specific component's options, this way i don't have to add another menu to each component</li>
 

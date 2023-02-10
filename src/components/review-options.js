@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
 import { useLocation } from 'react-router-dom'
 
-export default function ReviewOptions({ data }) {
+export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
     // SongsList review button sends the song to review inside location.state
     // this is used for the default value of the song <select>
@@ -30,12 +30,14 @@ export default function ReviewOptions({ data }) {
 
     // array of how many words will become available for review each day
     //check: currently not used, could make a graph
+    // eslint-disable-next-line
     const [nexts, setNexts] = useState([])
 
 
     /**
      * Initializes data
-     * //fix: comment more
+     * 
+     * types, nexts, wordsToReview, wordsNew
      */
     useEffect(() => {
 
@@ -126,7 +128,9 @@ export default function ReviewOptions({ data }) {
 
 
     /**
-     * fix: comment
+     * Applies filters if types or selectedSong changes
+     * 
+     * sets wordsToReviewFiltered, and wordsNewFiltered
      */
     useEffect(() => {
         //check: if a word has 2 types, and it is the only one of a certain type, when you deselect this type nothing happens, as the word will still be available because of the other type, therefore the button does nothing, what should i do?
@@ -203,11 +207,12 @@ export default function ReviewOptions({ data }) {
 
     /**
      * Called by start buttons
+     * sets state of parent component which will remove this component and replace with review-session
      * 
      * @param {*} newWords true if review new words, false if review already reviewed words
      */
     function startReview(newWords) {
-        data.setWordsToReview(newWords ? wordsNewFiltered.slice(0, reviewCountLimit) : wordsToReviewFiltered.slice(0, reviewCountLimit))
+        setWordsReviewing(newWords ? wordsNewFiltered.slice(0, reviewCountLimit) : wordsToReviewFiltered.slice(0, reviewCountLimit))
     }
 
 

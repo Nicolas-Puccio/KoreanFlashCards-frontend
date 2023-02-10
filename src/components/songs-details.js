@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Globals } from '../Global'
 
-export default function SongsDetails({ data }) {
+export default function SongsDetails({ data: { selectedSong } }) {
 
     const [showTranslation, setShowTranslation] = useState(false)
     const [colorCoded, setColorCoded] = useState(true)
@@ -32,14 +32,14 @@ export default function SongsDetails({ data }) {
         <label>Lyrics Coloring</label>
 
 
-        <h2 className='lyrics-h2'>{data.selectedSong.title}</h2>
+        <h2 className='lyrics-h2'>{selectedSong.title}</h2>
 
 
 
         <div className='lyrics-container'>{
 
             // song lyrics
-            data.selectedSong.lines.map((line, index) => {
+            selectedSong.lines.map((line, index) => {
 
                 // empty line in db represents a line break
                 if (!line.structures)
@@ -72,7 +72,7 @@ export default function SongsDetails({ data }) {
                 <div className='popup-inner' onClick={(e) => e.stopPropagation()}>
                     {
                         !selectedWord &&
-                        
+
                         <>
                             <h1 className='popup-inner-h1'>{structure.written}</h1>
 
