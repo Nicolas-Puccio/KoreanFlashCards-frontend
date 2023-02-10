@@ -48,11 +48,11 @@ export default function App() {
     <div className='main-div'>
       <Routes>
         <Route path='/' element={<SongsPage />} />
-        <Route path='/review' element={<ReviewPage />} />
+        <Route path='/review' element={<ReviewPage data={{ user }} />} />
 
         <Route path='/admin' element={<AdminPage />} />
         <Route path='/test' element={<TestPage />} />
-        <Route path='/stats' element={<StatsPage />} />
+        <Route path='/stats' element={<StatsPage data={{ user }} />} />
       </Routes>
     </div>
   </Router>

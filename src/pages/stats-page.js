@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Globals } from '../Global';
 
 //fix: comment file
-export default function StatsPage() {
+export default function StatsPage({ data: { user } }) {
 
     const [leaderboards, setLeaderboards] = useState([])
 
@@ -23,6 +23,11 @@ export default function StatsPage() {
     }, [])
 
     return <>
+        {
+            !user &&
+            <p>log in to appear on the leaderboard</p>
+        }
+
         <h2>My reviews</h2>
         {
             Globals.$stats[Globals.$username].reviewed.map((reviewed, index) =>

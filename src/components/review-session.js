@@ -3,7 +3,7 @@ import { Globals } from '../Global'
 
 
 //fix: comment file
-export default function ReviewSession({ data: { wordsReviewing, setWordsReviewing } }) {
+export default function ReviewSession({ data: { wordsReviewing, setWordsReviewing, user } }) {
 
     // shows the word definition when clicking the show button or automatially if the word is new
     const [showAnswer, setShowAnswer] = useState(false)
@@ -83,7 +83,6 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
                 reviewed.reviewed.push(word.word)
 
                 fetchStats(reviewed)
-                console.log(Globals.$stats[Globals.$username].reviewed)
             }
         }
         else {
@@ -94,7 +93,6 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
             Globals.$stats[Globals.$username].reviewed.push(reviewed)
 
             fetchStats(reviewed)
-            console.log(Globals.$stats[Globals.$username].reviewed)
         }
 
         localStorage.setItem('stats', JSON.stringify(Globals.$stats))
@@ -105,7 +103,11 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
 
 
     function fetchStats(reviewed) {
-        //check: should only do so if user is logged in
+        //should only do so if user is logged in
+        if (!user)
+            return
+
+
         fetch(`http://localhost:3001/api/user/stats`, {
             method: "POST",
             body: JSON.stringify({ reviewed: reviewed.reviewed.length }),

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
 
 
-export default function ReviewPage() {
+export default function ReviewPage({ data: { user } }) {
 
     // array of words that are being reviewed in the current session, if empty display ReviewOptions
     const [wordsReviewing, setWordsReviewing] = useState([])
@@ -23,7 +23,7 @@ export default function ReviewPage() {
                 wordsReviewing.length === 0 && <ReviewOptions data={{ setWordsReviewing }} />
             }
             {
-                wordsReviewing.length > 0 && <ReviewSession data={{ wordsReviewing, setWordsReviewing }} />
+                wordsReviewing.length > 0 && <ReviewSession data={{ wordsReviewing, setWordsReviewing, user }} />
             }
         </>
     )
