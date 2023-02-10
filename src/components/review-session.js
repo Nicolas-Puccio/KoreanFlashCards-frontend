@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
 
 
@@ -41,23 +41,23 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
     }
 
 
+    // shuffle is called automatically every time wordsReviewing changes, meaning it is called after a word is removed from the array by answer(true)
+    useEffect(() => { shuffle() }, [wordsReviewing])
+
+
 
     function answer(pass) {
         if (pass) {
-            //check:
-            wordsReviewing = wordsReviewing.filter(word2 => word2 !== word)
-            //check:
+            setWordsReviewing(wordsReviewing.filter(word2 => word2 !== word))
 
             const stat = Globals.$stats[Globals.$username].score.find(stat => stat.word === word.word)
 
             if (stat) {
-                console.log('has stat')
                 stat.next = new Date()
                 stat.next.setMinutes(stat.next.getMinutes() + intervals[stat.score])
                 stat.score++
             }
             else {
-                console.log('does not has stat')
                 const next = new Date()
                 next.setMinutes(next.getMinutes() + intervals[0])
 
@@ -69,6 +69,9 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
             }
         }
         else {
+            // shuffle is called manually here because wordsReviewing did not change
+            shuffle()
+
             const stat = Globals.$stats[Globals.$username].score.find(stat => stat.word === word.word)
             stat.score = stat.score > 1 ? stat.score - 2 : 0//consider: -3
             //consider: should i remove from list now or set next?
@@ -96,8 +99,6 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
         }
 
         localStorage.setItem('stats', JSON.stringify(Globals.$stats))
-
-        shuffle()
     }
 
 
@@ -118,7 +119,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
         }).then(res => {
             res.json().then(json => {
                 if (res.status !== 200)
-                    alert(json.message)
+                    console.log(json)
             })
         }).catch(err => console.error(err))
     }
