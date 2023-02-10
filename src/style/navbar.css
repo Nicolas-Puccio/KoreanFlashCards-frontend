@@ -25,5 +25,6 @@
 }
 
 .navbar-no-text-decoration {
+    color: blue;
     text-decoration: none;
 }

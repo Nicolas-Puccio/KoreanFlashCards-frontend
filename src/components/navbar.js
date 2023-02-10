@@ -37,6 +37,14 @@ export default function Navbar({ data: { user, setUser } }) {
                     <Link className='navbar-no-text-decoration' to='/admin' onClick={() => setShowMenu(false)}>Admin</Link>
                 }
 
+
+                {
+                    // login button only visible if not logged in
+                    !user &&
+                    <Link className='navbar-no-text-decoration' to='/login' onClick={() => setShowMenu(false)}>Login</Link>
+                }
+
+
                 {
                     // logout button only visible if logged in
                     user &&

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //fix: comment file
-export default function AuthorizationPage({ data }) {
-    console.log(data)
+export default function AuthorizationPage({ data: { setUser } }) {
+    const navigate = useNavigate()
+
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -41,27 +44,16 @@ export default function AuthorizationPage({ data }) {
                     const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
                     //check: what if username has a '-'?
 
-                    data.SetUser({
+                    setUser({
                         admin: cookie[0],
                         username: cookie[1]
                     })
+                    navigate('/')
                 }
             })
         }).catch(err => console.error(err))
     }
 
-    useEffect(() => {
-        const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0]
-        console.log(cookie)
-        if (cookie) {
-            data.SetUser({
-                admin: cookie.split('-')[0],
-                username: cookie.split('-')[1]
-            })
-        }
-        //check: is this correct?
-        // eslint-disable-next-line
-    }, [])
 
     return (
         <div className='form'>

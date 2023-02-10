@@ -6,6 +6,7 @@ import ReviewPage from './pages/review-page'
 import SongsPage from './pages/songs-page'
 import StatsPage from './pages/stats-page'
 import AdminPage from './pages/admin-page'
+import AuthorizationPage from './pages/authorization-page'
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Globals, fetchData } from './Global'
@@ -53,6 +54,7 @@ export default function App() {
         <Route path='/admin' element={<AdminPage />} />
         <Route path='/test' element={<TestPage />} />
         <Route path='/stats' element={<StatsPage data={{ user }} />} />
+        <Route path='/login' element={<AuthorizationPage data={{ setUser }} />} />
       </Routes>
     </div>
   </Router>
