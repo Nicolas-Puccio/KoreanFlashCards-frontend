@@ -3,23 +3,34 @@ import { useNavigate } from 'react-router-dom'
 
 //fix: comment file
 export default function AuthorizationPage({ data: { setUser } }) {
+
+    // used to redirect after login
     const navigate = useNavigate()
 
 
+    // login and register form
     const [formData, setFormData] = useState({
         email: '',
         password: '',
         username: ''
     })
 
-    const onChange = (e) => {
+
+    // called after each key press
+    const onChange = e => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         })
     }
 
-    const Submit = (signin) => {//true = signin, false = login
+
+    /**
+     * 
+     * @param {boolean} signin true = signin, false = login
+     */
+    const Submit = (signin) => {
+        // basic email check
         if (!formData.email.includes('@') || formData.email.startsWith('@') || formData.email.endsWith('@'))//fix: just testing
         {
             alert('email not valid')
@@ -55,7 +66,7 @@ export default function AuthorizationPage({ data: { setUser } }) {
     }
 
 
-    return (
+    return <>
         <div className='form'>
             <form onSubmit={e => e.preventDefault()}>
                 <div className='form-group'>
@@ -95,8 +106,8 @@ export default function AuthorizationPage({ data: { setUser } }) {
                 </div>
             </form>
         </div>
+    </>
 
-    )
 
 
 }

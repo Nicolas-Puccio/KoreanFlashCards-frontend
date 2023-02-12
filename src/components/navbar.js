@@ -19,7 +19,7 @@ export default function Navbar({ data: { user, setUser } }) {
             <Link className='navbar-no-text-decoration' to='/review' onClick={() => { if (Globals.setWordsToReview) Globals.setWordsToReview([]) }}>Review</Link>
 
             {/* displays a small popup menu with options*/}
-            <button onClick={() => setShowMenu(!showMenu)}>MENU</button>
+            <button className='navbar-menu-button' onClick={() => setShowMenu(!showMenu)}>MENU</button>
         </div>
 
 

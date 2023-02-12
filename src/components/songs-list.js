@@ -31,7 +31,7 @@ export default function SongsList({ data: { setSelectedSong } }) {
                     if (!stat)
                         song.newWords++ // word has no stat therefore it was never reviewed before
                     else {
-                        if (stat.score > 4) //check: this value should be accesible to change on settings page
+                        if (stat.score > 3) //check: this value should be accesible to change on settings page
                             song.knownWords++
                         if (new Date(stat.next) < date)
                             song.wordsToReview++

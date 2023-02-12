@@ -1,5 +1,8 @@
 import './App-mobile.css'
 import './App.css'
+import './style/navbar.css'
+import './style/songs-page.css'
+import './style/stats-page.css'
 import NavBar from './components/navbar'
 import TestPage from './components/testPage'
 import ReviewPage from './pages/review-page'

@@ -9,26 +9,19 @@ body {
 }
 
 .main-div {
-  padding: 10px;
+  padding: 50px 10px 10px;
 }
 
 
 
-
-/*#region popup */
-/*#endregion */
-
-
-/*#region lyrics */
-
-/*#endregion */
-
-
 /*#region review */
 .review-options-startbutton {
-  width: 50%;
-  font-size: large;
+  font-size: 20px;
   padding: 6px;
+}
+
+.float-right {
+  float:right
 }
 
 .review-options-typebuttons-button {

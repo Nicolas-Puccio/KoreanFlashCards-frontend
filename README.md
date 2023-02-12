@@ -14,7 +14,6 @@ some words are also stored as flashcards which the user can later review through
 
 # Tasks
 <ul>
-<li>login will allow to see and participate in leaderboard</li>
 <li>login eventually allow user to store stats on db</li>
 
 

@@ -267,7 +267,8 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
         {/* start buttons, disabled if no word passes the filters */}
         <div >
             <button className='review-options-startbutton' disabled={!wordsNewFiltered.length} onClick={() => startReview(true)}>Learn new words</button>
-            <button className='review-options-startbutton' disabled={!wordsToReviewFiltered.length} onClick={() => startReview(false)}>Review known words</button>
+
+            <button className='review-options-startbutton float-right' disabled={!wordsToReviewFiltered.length} onClick={() => startReview(false)}>Review known words</button>
         </div>
     </>
 

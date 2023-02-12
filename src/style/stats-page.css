@@ -1,0 +1,22 @@
+.leaderboard-container {
+    margin: 5px 5px 10px;
+    padding: 10px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #444;
+    border-width: 2px;
+}
+
+.leaderboard-container h3 {
+    margin-top: 0px;
+}
+
+
+.leaderboard-container p {
+    margin-bottom: 0px;
+}
+
+.leaderboard-you {
+    color: aqua;
+    white-space: pre;
+}

@@ -1,23 +1,30 @@
 .navbar {
     background-color: rgb(20, 170, 80);
     display: flex;
-    border-radius: 0px 00px 10px 10px;
+    border-radius: 0px 0px 10px 10px;
     font-size: 25px;
-    height: fit-content;
+    height: 30px;
     padding: 5px;
     justify-content: flex-end;
     gap: 15px;
+    position: fixed;
+    width: 100%;
 }
 
 .navbar-menu {
     background-color: rgb(20, 170, 80);
-    position: absolute;
+    position: fixed;
     right: 0px;
+    top: 40px;
     display: flex;
     gap: 15px;
     font-size: 20px;
     padding: 1px 5px;
     border-radius: 8px;
+}
+
+.navbar-menu-button {
+    margin-right: 10px;
 }
 
 .navbar-logo {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
 
 
-//fix: comment file
 export default function ReviewSession({ data: { wordsReviewing, setWordsReviewing, user } }) {
 
     // shows the word definition when clicking the show button or automatially if the word is new
@@ -35,39 +34,64 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
 
         if (wordsReviewing.length)
             setWord(wordsReviewing[Math.floor(Math.random() * wordsReviewing.length)])
-        else {
+        else
             setWordsReviewing([])
-        }
     }
 
 
+
     // shuffle is called automatically every time wordsReviewing changes, meaning it is called after a word is removed from the array by answer(true)
-    useEffect(() => { shuffle() }, [wordsReviewing])
+    useEffect(() => {
+        shuffle()
+        // eslint-disable-next-line
+    }, [wordsReviewing])
 
 
 
-    function answer(pass) {
+    /**
+     * sets word stats and reviewed object
+     * 
+     * sends post request to backend to update leaderboard
+     * 
+     * stores stats on localStorage
+     * 
+     * called by the 'ok', 'pass', and 'fail' buttons
+     * 
+     * @param {boolean} pass did the user get the word correctly
+     */
+    function answer(pass, alreadyKnow) {
+        // user got the word right
         if (pass) {
+            // removes the current word from the list of words to review
             setWordsReviewing(wordsReviewing.filter(word2 => word2 !== word))
 
+
+            // gets the stats of this word if it exists
             const stat = Globals.$stats[Globals.$username].score.find(stat => stat.word === word.word)
 
+            // sets 'stat.next' and 'stat.score'
             if (stat) {
                 stat.next = new Date()
                 stat.next.setMinutes(stat.next.getMinutes() + intervals[stat.score])
                 stat.score++
             }
+
+            // creates stat for this word
             else {
                 const next = new Date()
-                next.setMinutes(next.getMinutes() + intervals[0])
+                next.setMinutes(next.getMinutes() + (alreadyKnow ? intervals[3] : intervals[0]))// if the user already knows the word add interval at [1], if not, add [0]
 
                 Globals.$stats[Globals.$username].score.push({
                     word: word.word,
-                    score: 1,
+                    score: alreadyKnow ? 4 : 1, // if the user already knows the word add an extra score
                     next
                 })
+
+                //fix: this triggers the showAnswer part of the review for a few ms until the state is updated, causing a slight but noticeable flickering in text
             }
         }
+
+        // user did not get the word right
         else {
             // shuffle is called manually here because wordsReviewing did not change
             shuffle()
@@ -79,8 +103,10 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
         }
 
 
+        // gets today's reviewed object if it exists
         const reviewed = Globals.$stats[Globals.$username].reviewed.find(reviewed => reviewed.date === new Date().toLocaleDateString())
 
+        // adds current word to reviewed array
         if (reviewed) {
             if (!reviewed.reviewed.includes(word.word)) {
                 reviewed.reviewed.push(word.word)
@@ -88,16 +114,18 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
                 fetchStats(reviewed)
             }
         }
+
+        // creates a new reviewed array for the current date
         else {
-            const reviewed = {
+            Globals.$stats[Globals.$username].reviewed.push({
                 date: new Date().toLocaleDateString(),
                 reviewed: [word.word]
-            }
-            Globals.$stats[Globals.$username].reviewed.push(reviewed)
+            })
 
             fetchStats(reviewed)
         }
 
+        // stores stats on localStorage
         localStorage.setItem('stats', JSON.stringify(Globals.$stats))
     }
 
@@ -107,8 +135,9 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
         //should only do so if user is logged in
         if (!user)
             return
+        console.log(reviewed)
 
-
+        //check:
         fetch(`http://localhost:3001/api/user/stats`, {
             method: "POST",
             body: JSON.stringify({ reviewed: reviewed.reviewed.length }),
@@ -139,6 +168,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
 
             <>
                 <button onClick={() => answer(true)}>ok</button>
+                <button onClick={() => answer(true, true)}>I already know this word</button>
 
 
                 <ul>
@@ -165,7 +195,6 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
                         <button onClick={() => answer(true)}>pass</button>
 
 
-                        <p>{word.type}</p>
                         <ul>
                             {
                                 Object.keys(word.meanings).map(key =>
