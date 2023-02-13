@@ -31,7 +31,7 @@ export default function StatsPage({ data: { user } }) {
         <h2>My reviews</h2>
         {
             //check: should be a graph rather than a list
-            Globals.$stats[Globals.$username].reviewed.map((reviewed, index) =>
+            Globals.$stats.reviewed.map((reviewed, index) =>
                 <p key={index}>{reviewed.date} - {reviewed.reviewed.length}</p>
             )
         }

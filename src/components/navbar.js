@@ -28,14 +28,22 @@ export default function Navbar({ data: { user, setUser } }) {
             // popup menu
             showMenu &&
             <div className='navbar-menu'>
-                <Link className='navbar-no-text-decoration' to='/stats'>Stats</Link>
-                <Link className='navbar-no-text-decoration' to='/settings'>Settings</Link>
-
                 {
                     // '/admin' page only visible by admin users
                     user?.admin === 'true' &&
                     <Link className='navbar-no-text-decoration' to='/admin' onClick={() => setShowMenu(false)}>Admin</Link>
                 }
+
+
+                {
+                    // '/test' page only visible by admin users
+                    user?.admin === 'true' &&
+                    <Link className='navbar-no-text-decoration' to='/test' onClick={() => setShowMenu(false)}>Test</Link>
+                }
+
+
+                <Link className='navbar-no-text-decoration' to='/stats'>Stats</Link>
+                <Link className='navbar-no-text-decoration' to='/settings'>Settings</Link>
 
 
                 {

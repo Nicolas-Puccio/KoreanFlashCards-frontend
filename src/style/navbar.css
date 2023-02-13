@@ -4,7 +4,7 @@
     border-radius: 0px 0px 10px 10px;
     font-size: 25px;
     height: 30px;
-    padding: 5px;
+    padding: 5px 0px;
     justify-content: flex-end;
     gap: 15px;
     position: fixed;
@@ -29,6 +29,7 @@
 
 .navbar-logo {
     flex-grow: 1;
+    margin-left: 10px;
 }
 
 .navbar-no-text-decoration {

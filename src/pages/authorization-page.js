@@ -55,6 +55,8 @@ export default function AuthorizationPage({ data: { setUser } }) {
                     const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
                     //check: what if username has a '-'?
 
+                    //check: send a leaderboard request here in case there were reviews done offline
+
                     setUser({
                         admin: cookie[0],
                         username: cookie[1]

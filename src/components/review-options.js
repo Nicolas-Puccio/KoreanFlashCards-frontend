@@ -71,7 +71,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
 
             // get word stat
-            const stat = Globals.$stats[Globals.$username].score?.find(stat => stat.word === word.word)
+            const stat = Globals.$stats.score?.find(stat => stat.word === word.word)
 
             // word has been reviewed in the past
             if (stat) {
@@ -117,6 +117,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
         auxNexts.sort((a, b) => a.next - b.next)
         setNexts(auxNexts)
+        console.log(auxNexts[0])
 
         setWordsNew(auxWordsNew)
         setWordsToReview(auxWordsToReview)
@@ -270,6 +271,13 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
             <button className='review-options-startbutton float-right' disabled={!wordsToReviewFiltered.length} onClick={() => startReview(false)}>Review known words</button>
         </div>
-    </>
 
+
+        <br />
+
+        {
+            nexts.length &&
+            <p>{nexts[0].amount} words will become available to review on the {nexts[0].next}</p>
+        }
+    </>
 }

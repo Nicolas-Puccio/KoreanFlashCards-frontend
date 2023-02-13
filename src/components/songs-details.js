@@ -17,7 +17,7 @@ export default function SongsDetails({ data: { selectedSong } }) {
     function className(structure) {
         //check: get the lowest score from all the words, currently just gets the first, will this ever be needed?
         const temp = structure.words.find(word => word.word)
-        return temp ? 'score' + Globals.$stats[Globals.$username].score?.find(stat => stat.word === temp.word)?.score : ''
+        return temp ? 'score' + Globals.$stats.score?.find(stat => stat.word === temp.word)?.score : ''
     }
 
 

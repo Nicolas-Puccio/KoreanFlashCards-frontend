@@ -2,39 +2,34 @@ export let Globals = {}
 
 //why do i have to use export instead of setting exports?
 
-export const fetchData = async (setDataInitialized, username) => {
+export const fetchData = async (setDataInitialized) => {
 
     if (Globals.$words) // data already initialized
         return
 
 
     Globals = {
-        $stats: JSON.parse(localStorage.getItem('stats')) ?? { [username]: { score: [], reviewed: [] } },
+        $stats: JSON.parse(localStorage.getItem('stats')) ?? { score: [], reviewed: []  },
         $words: JSON.parse(localStorage.getItem('words')) ?? [],
         $songs: JSON.parse(localStorage.getItem('songs')) ?? [],
-        $username: username,
 
         setWordsToReview: undefined, // set by review-page
         setSelectedSong: undefined // set by songs-page
     }
 
     // parses all string dates into Date
-    Globals.$stats[username].score?.forEach(stat => {
+    Globals.$stats.score?.forEach(stat => {
         stat.next = new Date(stat.next)
     })
-
-    console.log('setting up globals', Globals)
 
 
 
     // fetches songs and words
     try {
         const res = await fetch('http://localhost:3001/api/song/')
-        console.log(res)
 
         if (res) {
             const json = await res.json()
-            console.log(json)
 
             if (res.status !== 200)
                 alert(json.message)
