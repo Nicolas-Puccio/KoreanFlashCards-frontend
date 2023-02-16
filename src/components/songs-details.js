@@ -15,7 +15,7 @@ export default function SongsDetails({ data: { selectedSong } }) {
      * @returns className of each structure based on the score
      */
     function className(structure) {
-        //check: get the lowest score from all the words, currently just gets the first, will this ever be needed?
+        //consider: if a structure had 2 words then should get the one with the lowest score, but i tihnk that is not the case yet
         const temp = structure.words.find(word => word.word)
         return temp ? 'score' + Globals.$stats.score?.find(stat => stat.word === temp.word)?.score : ''
     }
@@ -54,7 +54,10 @@ export default function SongsDetails({ data: { selectedSong } }) {
                         // returns either a BR or a SPAN with a space, and the structure span 
                         [
                             index2 === 0 && index !== 0 ? <br key={'space' + index + index2} /> : <span key={'space' + index + index2}> </span>,
-                            <span key={index + index2} className={colorCoded ? className(structure) : 'scorenocoloring'} onClick={() => setStructure(structure)}>{structure.written}</span>
+                            <span key={index + index2}
+                                className={colorCoded ? className(structure) : 'scorenocoloring'}
+                                onClick={() => setStructure(structure)}
+                            >{structure.written}</span>
                         ]
                     )
             })
@@ -84,7 +87,8 @@ export default function SongsDetails({ data: { selectedSong } }) {
 
                                         {/* if the words is in db it will have clickable style*/}
                                         <h2 className={Globals.$words.find(word2 => word2.word === word.word) ? 'popup-inner-details-clickable' : null}
-                                            onClick={() => setSelectedWord(Globals.$words.find(word2 => word2.word === word.word))}>{word.written}</h2>
+                                            onClick={() => setSelectedWord(Globals.$words.find(word2 => word2.word === word.word))}
+                                        >{word.written}</h2>
 
 
                                         <p>{word.meaning.split('-').length > 1 ? word.meaning.split('-')[0] : '???'}</p>
@@ -103,8 +107,7 @@ export default function SongsDetails({ data: { selectedSong } }) {
 
                             <ul>{
                                 Object.keys(selectedWord.meanings).map(key =>
-                                    <li key={key}>{key}: {selectedWord.meanings[key]}</li>
-                                )
+                                    <li key={key}>{key}: {selectedWord.meanings[key]}</li>)
                             }</ul>
                         </div>
                     }

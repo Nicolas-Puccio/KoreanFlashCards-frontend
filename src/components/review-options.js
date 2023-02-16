@@ -124,7 +124,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
         //FIX:
         //consider: store filters on localStorage or config
-        //check: sort arrays of words so splice always takes the oldest or most used ones
+        //consider: sort arrays of words so splice always takes the oldest or most used ones
     }, [selectedSong])
 
 
@@ -134,7 +134,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
      * sets wordsToReviewFiltered, and wordsNewFiltered
      */
     useEffect(() => {
-        //check: if a word has 2 types, and it is the only one of a certain type, when you deselect this type nothing happens, as the word will still be available because of the other type, therefore the button does nothing, what should i do?
+        //consider: if a word has 2 types, and it is the only one of a certain type, when you deselect this type nothing happens, as the word will still be available because of the other type, therefore the button does nothing, what should i do?
 
 
         // sets words that pass the filters

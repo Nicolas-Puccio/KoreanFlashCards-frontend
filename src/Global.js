@@ -9,7 +9,7 @@ export const fetchData = async (setDataInitialized) => {
 
 
     Globals = {
-        $stats: JSON.parse(localStorage.getItem('stats')) ?? { score: [], reviewed: []  },
+        $stats: JSON.parse(localStorage.getItem('stats')) ?? { score: [], reviewed: [] },
         $words: JSON.parse(localStorage.getItem('words')) ?? [],
         $songs: JSON.parse(localStorage.getItem('songs')) ?? [],
 
@@ -31,22 +31,16 @@ export const fetchData = async (setDataInitialized) => {
         if (res) {
             const json = await res.json()
 
-            if (res.status !== 200)
-                alert(json.message)
-            else {
-                //check: backend will only send the properties that are not up to date on localStorage
-                Globals.$words = json.words
-                Globals.$songs = json.songs
-            }
+            Globals.$words = json.words
+            Globals.$songs = json.songs
         }
     } catch (err) {
-        console.log(err)
-        //check: i think this is fine the way it is, error display should be handled by App.js
+        console.error(err)
     }
 
 
 
-    // filters out unused words //check: refactor
+    // filters out unused words //consider: optimize
     Globals.$words = Globals.$words.filter(word => {
         for (let x = 0; x < Globals.$songs.length; x++) {
             for (let i = 0; i < Globals.$songs[x].lines.length; i++) {

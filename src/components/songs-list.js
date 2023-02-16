@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 export default function SongsList({ data: { setSelectedSong } }) {
 
 
-
     // iterates each song, and sets 'song.knownWords', 'song.wordsToReview', 'song.newWords', and 'song.totalWords'
     return Globals.$songs.map(song => {
         song.knownWords = song.wordsToReview = song.newWords = song.totalWords = 0
@@ -31,7 +30,7 @@ export default function SongsList({ data: { setSelectedSong } }) {
                     if (!stat)
                         song.newWords++ // word has no stat therefore it was never reviewed before
                     else {
-                        if (stat.score > 3) //check: this value should be accesible to change on settings page
+                        if (stat.score > 3)
                             song.knownWords++
                         if (new Date(stat.next) < date)
                             song.wordsToReview++

@@ -135,7 +135,6 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
         //should only do so if user is logged in
         if (!user)
             return
-        console.log(reviewed)
 
         //check:
         fetch(`http://localhost:3001/api/user/stats`, {
@@ -145,11 +144,6 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
                 'Content-type': 'application/json; charset=UTF-8'
             },
             credentials: 'include'
-        }).then(res => {
-            res.json().then(json => {
-                if (res.status !== 200)
-                    console.log(json)
-            })
         }).catch(err => console.error(err))
     }
 

@@ -25,7 +25,7 @@ export default function SongsPage() {
                 selectedSong === undefined && <SongsList data={{ setSelectedSong }} />
             }
             {
-                selectedSong !== undefined && <SongsDetails data={{ selectedSong }} />//check: add setter too? for back button or something
+                selectedSong !== undefined && <SongsDetails data={{ selectedSong }} />
             }
         </>
     )

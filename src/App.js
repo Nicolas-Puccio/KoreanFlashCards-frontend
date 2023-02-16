@@ -4,11 +4,9 @@ import './style/navbar.css'
 import './style/songs-page.css'
 import './style/stats-page.css'
 import NavBar from './components/navbar'
-import TestPage from './components/testPage'
 import ReviewPage from './pages/review-page'
 import SongsPage from './pages/songs-page'
 import StatsPage from './pages/stats-page'
-import AdminPage from './pages/admin-page'
 import AuthorizationPage from './pages/authorization-page'
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
@@ -35,7 +33,7 @@ export default function App() {
       })
     }
 
-    fetchData(setDataInitialized, cookie ? cookie.split('-')[1] : undefined) //check: if user is logged in, fetchData should also retrieve stats backup
+    fetchData(setDataInitialized, cookie ? cookie.split('-')[1] : undefined)
   }, [])
 
 
@@ -54,8 +52,6 @@ export default function App() {
         <Route path='/' element={<SongsPage />} />
         <Route path='/review' element={<ReviewPage data={{ user }} />} />
 
-        <Route path='/admin' element={<AdminPage />} />
-        <Route path='/test' element={<TestPage />} />
         <Route path='/stats' element={<StatsPage data={{ user }} />} />
         <Route path='/login' element={<AuthorizationPage data={{ setUser }} />} />
       </Routes>

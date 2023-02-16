@@ -31,9 +31,15 @@ export default function AuthorizationPage({ data: { setUser } }) {
      */
     const Submit = (signin) => {
         // basic email check
-        if (!formData.email.includes('@') || formData.email.startsWith('@') || formData.email.endsWith('@'))//fix: just testing
+        if (!formData.email.includes('@') || formData.email.startsWith('@') || formData.email.endsWith('@'))
         {
             alert('email not valid')
+            return
+        }
+
+        if(formData.username.includes('-'))
+        {
+            alert('username can not contain the character "-"')
             return
         }
 
@@ -51,9 +57,9 @@ export default function AuthorizationPage({ data: { setUser } }) {
                 if (res.status === 400)
                     alert(json.message)
                 else {
-                    //cookie set by backend has format 'isAdmin-userName'
+                    // cookie set by backend has format 'isAdmin-userName'
                     const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
-                    //check: what if username has a '-'?
+
 
                     //check: send a leaderboard request here in case there were reviews done offline
 
