@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/KoreanFlashCards-frontend/static/css/main.20402bde.css",
+    "main.js": "/KoreanFlashCards-frontend/static/js/main.9ce28581.js",
+    "index.html": "/KoreanFlashCards-frontend/index.html",
+    "main.20402bde.css.map": "/KoreanFlashCards-frontend/static/css/main.20402bde.css.map",
+    "main.9ce28581.js.map": "/KoreanFlashCards-frontend/static/js/main.9ce28581.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.20402bde.css",
+    "static/js/main.9ce28581.js"
+  ]
+}
