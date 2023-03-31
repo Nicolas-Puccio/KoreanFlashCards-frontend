@@ -22,6 +22,25 @@ export default function StatsPage({ data: { user } }) {
             .catch(err => console.log(err))
     }, [])
 
+
+    function randomizeStats() { // only sets score, not reviewed, used for testing
+        Globals.$stats = { score: [], reviewed: [] }
+
+        Globals.$words.forEach(word => {
+            const next = new Date()
+            next.setDate(next.getDate() + Math.floor(Math.random() * 4))
+
+            Globals.$stats.score.push({
+                score: Math.floor(Math.random() * 5) + 1,
+                word: word.word,
+                next
+            })
+        })
+
+        localStorage.setItem('stats', JSON.stringify(Globals.$stats))
+    }
+
+
     return <>
         {
             !user &&
@@ -54,5 +73,11 @@ export default function StatsPage({ data: { user } }) {
             leaderboards.length === 0 &&
             <p>No leaderboard available</p>
         }
+
+        <br />
+        <br />
+        <br />
+
+        <button onClick={randomizeStats}>Randomize stats</button>
     </>
 }
