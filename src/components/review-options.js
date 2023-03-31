@@ -87,7 +87,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
                 else {
 
                     // gets the next for the date the word becomes available for review
-                    const next = auxNexts.find(next => next.next === stat.next.toLocaleDateString().split('T')[0])
+                    const next = auxNexts.find(next => next.next.toLocaleDateString().split('T')[0] === stat.next.toLocaleDateString().split('T')[0])
 
                     // if such date already has words to review, simply add 1
                     if (next) {
@@ -97,7 +97,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
                     // this is the first word to be reviewed in this date, further words will be caught in the previous IF
                     else {
                         auxNexts.push({
-                            next: stat.next.toLocaleDateString().split('T')[0],
+                            next: stat.next,
                             amount: 1
                         })
                     }
@@ -117,7 +117,6 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
         auxNexts.sort((a, b) => a.next - b.next)
         setNexts(auxNexts)
-        console.log(auxNexts[0])
 
         setWordsNew(auxWordsNew)
         setWordsToReview(auxWordsToReview)
@@ -277,7 +276,11 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
         {
             nexts.length &&
-            <p>{nexts[0].amount} words will become available to review on the {nexts[0].next}</p>
+            <>
+                <p>{nexts[0].amount} words will become available to review on the {nexts[0].next.toLocaleDateString().split('T')[0]}</p>
+                <p>{nexts[1].amount} words will become available to review on the {nexts[1].next.toLocaleDateString().split('T')[0]}</p>
+                <p>{nexts[2].amount} words will become available to review on the {nexts[2].next.toLocaleDateString().split('T')[0]}</p>
+            </>
         }
     </>
 }
