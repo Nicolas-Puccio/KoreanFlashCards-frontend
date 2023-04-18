@@ -31,20 +31,18 @@ export default function AuthorizationPage({ data: { setUser } }) {
      */
     const Submit = (signin) => {
         // basic email check
-        if (!formData.email.includes('@') || formData.email.startsWith('@') || formData.email.endsWith('@'))
-        {
+        if (!formData.email.includes('@') || formData.email.startsWith('@') || formData.email.endsWith('@')) {
             alert('email not valid')
             return
         }
 
-        if(formData.username.includes('-'))
-        {
+        if (formData.username.includes('-')) {
             alert('username can not contain the character "-"')
             return
         }
 
 
-        //fix: add loading popup
+        //fix: add loading popup, use https
         fetch(`http://localhost:3001/api/user/${signin ? 'signin' : 'login'}`, {
             method: "POST",
             body: JSON.stringify(formData),
@@ -70,7 +68,10 @@ export default function AuthorizationPage({ data: { setUser } }) {
                     navigate('/')
                 }
             })
-        }).catch(err => console.error(err))
+        }).catch(err => {
+            console.error(err) //check:
+            alert('server is not responding, try again later')
+        })
     }
 
 
