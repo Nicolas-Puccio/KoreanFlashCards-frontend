@@ -14,7 +14,7 @@
 .song-container h2 {
     margin: 0px;
     width: fit-content;
-    font-size: 22px;
+    font-size: 5.5vw;
 }
 
 .song-container p {
@@ -57,7 +57,7 @@
 }
 
 .lyrics-container {
-    font-size: 5.1vw;
+    font-size: 5vw;
     text-align: center;
 }
 
@@ -94,6 +94,9 @@
     color: yellowgreen;
 }
 
+.score5 {
+    color: yellowgreen;
+}
 
 
 

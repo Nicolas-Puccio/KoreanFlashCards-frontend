@@ -20,7 +20,7 @@ export default function SongsList({ data: { setSelectedSong } }) {
 
                     // if the word has no ID (meaning it is not in the dictionary), or it was already added to list
                     if (!word.word || wordsFound.includes(word.word))
-                        return;
+                        return
 
                     wordsFound.push(word.word)
 

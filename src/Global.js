@@ -1,6 +1,5 @@
 export let Globals = {}
-
-//why do i have to use export instead of setting exports?
+//why do i have to use export instead of setting exports.Globals?
 
 export const fetchData = async (setDataInitialized) => {
 
@@ -17,7 +16,8 @@ export const fetchData = async (setDataInitialized) => {
         setSelectedSong: undefined // set by songs-page
     }
 
-    // parses all string dates into Date
+
+    // parses all string dates from localStorage into Date
     Globals.$stats.score?.forEach(stat => {
         stat.next = new Date(stat.next)
     })
