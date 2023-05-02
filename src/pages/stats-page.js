@@ -30,7 +30,7 @@ export default function StatsPage({ data: { user } }) {
             const next = new Date()
             next.setDate(next.getDate() + Math.floor(Math.random() * 4))
 
-            Globals.$stats.score.push({
+            Globals.$stats.push({
                 score: Math.floor(Math.random() * 5) + 1,
                 word: word.word,
                 next

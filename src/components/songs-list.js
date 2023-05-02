@@ -25,7 +25,7 @@ export default function SongsList({ data: { setSelectedSong } }) {
                     wordsFound.push(word.word)
 
                     // tries to gets the localStorage stat of this word
-                    const stat = Globals.$stats.score?.find(stat => stat.word === word.word)
+                    const stat = Globals.$stats.find(stat => stat.word === word.word)
 
                     if (!stat)
                         song.newWords++ // word has no stat therefore it was never reviewed before

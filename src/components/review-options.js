@@ -71,7 +71,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
 
             // get word stat
-            const stat = Globals.$stats.score?.find(stat => stat.word === word.word)
+            const stat = Globals.$stats.find(stat => stat.word === word.word)
 
             // word has been reviewed in the past
             if (stat) {

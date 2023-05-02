@@ -9,7 +9,7 @@ export const fetchData = async (setDataInitialized) => {
 
 
     Globals = {
-        $stats: JSON.parse(localStorage.getItem('stats')) ?? { score: [], reviewed: [] },
+        $stats: JSON.parse(localStorage.getItem('stats')) ?? [],
         $words: JSON.parse(localStorage.getItem('words')) ?? [],
         $songs: JSON.parse(localStorage.getItem('songs')) ?? [],
 
@@ -19,7 +19,7 @@ export const fetchData = async (setDataInitialized) => {
 
 
     // parses all string dates from localStorage into Date
-    Globals.$stats.score?.forEach(stat => {
+    Globals.$stats.forEach(stat => {
         stat.next = new Date(stat.next)
     })
 

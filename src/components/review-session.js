@@ -67,7 +67,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
 
 
             // gets the stats of this word if it exists
-            const stat = Globals.$stats.score.find(stat => stat.word === word.word)
+            const stat = Globals.$stats.find(stat => stat.word === word.word)
 
             // sets 'stat.next' and 'stat.score'
             if (stat) {
@@ -81,7 +81,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
                 const next = new Date()
                 next.setMinutes(next.getMinutes() + (alreadyKnow ? intervals[3] : intervals[0]))// if the user already knows the word add interval at [1], if not, add [0]
 
-                Globals.$stats.score.push({
+                Globals.$stats.push({
                     word: word.word,
                     score: alreadyKnow ? 4 : 1, // if the user already knows the word add an extra score
                     next
@@ -96,7 +96,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
             // shuffle is called manually here because wordsReviewing did not change
             shuffle()
 
-            const stat = Globals.$stats.score.find(stat => stat.word === word.word)
+            const stat = Globals.$stats.find(stat => stat.word === word.word)
             stat.score = stat.score > 1 ? stat.score - 2 : 0//consider: -3
             //consider: should i remove from list now or set next?
             //consider: each review session could have an ID, here i could remove the word and set a timeout for a few minutes, if the review session is the same, add the word again
@@ -158,7 +158,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
 
         {
             // word has no score
-            Globals.$stats.score.find(stat => stat.word === word.word) === undefined &&
+            Globals.$stats.find(stat => stat.word === word.word) === undefined &&
 
             <>
                 <button onClick={() => answer(true)}>ok</button>
@@ -176,7 +176,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
         }
         {
             //word has score
-            Globals.$stats.score.find(stat => stat.word === word.word) !== undefined &&
+            Globals.$stats.find(stat => stat.word === word.word) !== undefined &&
 
             <>
                 <button onClick={() => setShowAnswer(true)}>show answer</button>

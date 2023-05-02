@@ -17,7 +17,7 @@ export default function SongsDetails({ data: { selectedSong } }) {
     function className(structure) {
         //consider: if a structure had 2 words then should get the one with the lowest score, but i tihnk that is not the case yet
         const temp = structure.words.find(word => word.word)
-        return temp ? 'score' + Globals.$stats.score?.find(stat => stat.word === temp.word)?.score : ''
+        return temp ? 'score' + Globals.$stats.find(stat => stat.word === temp.word)?.score : ''
     }
 
 
