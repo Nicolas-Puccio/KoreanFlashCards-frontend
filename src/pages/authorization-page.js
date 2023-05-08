@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { login } from '../services/api'
 
 //fix: comment file
 export default function AuthorizationPage({ data: { setUser } }) {
@@ -29,55 +30,40 @@ export default function AuthorizationPage({ data: { setUser } }) {
      * 
      * @param {boolean} signin true = signin, false = login
      */
-    const Submit = (signin) => {
-        // basic email check
+    const Submit = async signin => {
+
+        /* basic email check
         if (!formData.email.includes('@') || formData.email.startsWith('@') || formData.email.endsWith('@')) {
             alert('email not valid')
             return
         }
+        */
 
-        if (formData.username.includes('-')) {
+        if (formData.username.includes('-')) { // includes backend check
             alert('username can not contain the character "-"')
             return
         }
 
+        const data = await login(signin ? 'signin' : 'login', JSON.stringify(formData))
+        if (data) {
 
-        //fix: add loading popup, use https
-        fetch(`http://localhost:3001/api/user/${signin ? 'signin' : 'login'}`, {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            },
-            credentials: 'include'
-        }).then(res => {
-            res.json().then(json => {
-                if (res.status === 400)
-                    alert(json.message)
-                else {
-                    // cookie set by backend has format 'isAdmin-userName'
-                    const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
+            // cookie set by backend has format 'isAdmin-userName'
+            const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
 
-
-                    //check: send a leaderboard request here in case there were reviews done offline
-
-                    setUser({
-                        admin: cookie[0],
-                        username: cookie[1]
-                    })
-                    navigate('/')
-                }
+            setUser({
+                admin: cookie[0],
+                username: cookie[1]
             })
-        }).catch(err => {
-            console.error(err) //check:
-            alert('server is not responding, try again later')
-        })
+            navigate('/')
+        }
+
     }
 
 
     return <>
         <div className='form'>
             <form onSubmit={e => e.preventDefault()}>
+
                 <div className='form-group'>
                     <input
                         type='email'
@@ -86,18 +72,10 @@ export default function AuthorizationPage({ data: { setUser } }) {
                         value={formData.email}
                         placeholder='email'
                         onChange={onChange}
+                        disabled
                     />
                 </div>
-                <div className='form-group'>
-                    <input
-                        type='password'
-                        className='form-control'
-                        name='password'
-                        value={formData.password}
-                        placeholder='password'
-                        onChange={onChange}
-                    />
-                </div>
+
                 <div className='form-group'>
                     <input
                         type='text'
@@ -105,6 +83,17 @@ export default function AuthorizationPage({ data: { setUser } }) {
                         name='username'
                         value={formData.username}
                         placeholder='username'
+                        onChange={onChange}
+                    />
+                </div>
+
+                <div className='form-group'>
+                    <input
+                        type='password'
+                        className='form-control'
+                        name='password'
+                        value={formData.password}
+                        placeholder='password'
                         onChange={onChange}
                     />
                 </div>
