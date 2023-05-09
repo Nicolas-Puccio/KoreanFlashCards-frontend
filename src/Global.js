@@ -28,16 +28,22 @@ export const fetchData = async (setDataInitialized) => {
     if (data) {
         Globals.$words = data.words
         Globals.$songs = data.songs
+
+
+        localStorage.setItem('songs', JSON.stringify(Globals.$songs))
+        localStorage.setItem('words', JSON.stringify(Globals.$words))
+
+
+        setDataInitialized(true)
     }
     else {
-        alert('whooops')
+        Globals.$stats = JSON.parse(localStorage.getItem('stats')) ?? []
+        Globals.$words = JSON.parse(localStorage.getItem('words')) ?? []
+        Globals.$songs = JSON.parse(localStorage.getItem('songs')) ?? []
+
+        if (Globals.$words.length) {
+            alert('backend is down but a copy of the data has been loaded from localStorage')
+            setDataInitialized(true)
+        }
     }
-
-
-
-    localStorage.setItem('songs', JSON.stringify(Globals.$songs))
-    localStorage.setItem('words', JSON.stringify(Globals.$words))
-
-
-    setDataInitialized(true)
 }
