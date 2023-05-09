@@ -50,6 +50,7 @@ todo
 
 # Tasks
 <ul>
+<li>fix useEffect [] being called twice on stats-page</li>
 <li>current css is meant for mobile, should adapt a little bit to desktop, spliting the screen in 2/3 sections</li>
 <li>add graphs</li>
 <li>redirect user to login screen if token expires?</li>

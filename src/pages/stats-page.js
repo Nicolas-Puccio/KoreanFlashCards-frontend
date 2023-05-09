@@ -8,6 +8,7 @@ export default function StatsPage({ data: { user } }) {
     const [leaderboards, setLeaderboards] = useState([])
 
     useEffect(() => {
+        //-this is being called twice
         fetch('http://localhost:3001/api/user/leaderboard')
             .then(async res => {
                 await res.json().then(json => {
