@@ -8,7 +8,7 @@ export default function StatsPage({ data: { user } }) {
     const [leaderboards, setLeaderboards] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/user/stats')
+        fetch('http://localhost:3001/api/user/leaderboard')
             .then(async res => {
                 await res.json().then(json => {
                     if (res.status !== 200)
@@ -24,7 +24,7 @@ export default function StatsPage({ data: { user } }) {
 
 
     function randomizeStats() { // only sets score, not reviewed, used for testing
-        Globals.$stats = { score: [], reviewed: [] }
+        Globals.$stats =  []
 
         Globals.$words.forEach(word => {
             const next = new Date()
@@ -50,9 +50,8 @@ export default function StatsPage({ data: { user } }) {
         <h2>My reviews</h2>
         {
             //check: should be a graph rather than a list
-            Globals.$stats.reviewed.map((reviewed, index) =>
-                <p key={index}>{reviewed.date} - {reviewed.reviewed.length}</p>
-            )
+            //-this will be received in a fetch call
+            
         }
 
         <br />
