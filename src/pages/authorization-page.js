@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../services/api'
+import { Globals } from '../Global'
 
 //fix: comment file
 export default function AuthorizationPage({ data: { setUser } }) {
@@ -50,10 +51,14 @@ export default function AuthorizationPage({ data: { setUser } }) {
             // cookie set by backend has format 'isAdmin-userName'
             const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
 
+            
+            Globals.$stats = data
+
             setUser({
                 admin: cookie[0],
                 username: cookie[1]
             })
+
             navigate('/')
         }
 
