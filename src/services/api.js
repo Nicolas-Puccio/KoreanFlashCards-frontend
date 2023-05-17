@@ -21,9 +21,37 @@ export const getData = async () => {
   }
 }
 
+
+
 export const login = async (action, body) => {
   try {
     const res = await fetch(`http://localhost:3001/api/user/${action}`, {
+      method: "POST",
+      body,
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      },
+      credentials: 'include'
+    })
+
+    const data = await res.json()
+    if (!res.ok)
+      throw new Error(data.message)
+
+    return data
+
+  } catch (error) {
+    console.error(error)
+
+    alert(error.message)
+  }
+}
+
+
+
+export const review = async (body) => {
+  try {
+    const res = await fetch(`http://localhost:3001/api/song/review`, {
       method: "POST",
       body,
       headers: {
