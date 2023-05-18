@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
+import { review } from '../services/api'
 
 
 export default function ReviewSession({ data: { wordsReviewing, setWordsReviewing, user } }) {
@@ -59,15 +60,15 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
      * 
      * @param {boolean} pass did the user get the word correctly
      */
-    function answer(pass, alreadyKnow) {
+    async function answer(pass, alreadyKnow) {
         // user got the word right
+
+        let stat = Globals.$stats.find(stat => stat.word === word.word)
+
+
         if (pass) {
             // removes the current word from the list of words to review
             setWordsReviewing(wordsReviewing.filter(word2 => word2 !== word))
-
-
-            // gets the stats of this word if it exists
-            const stat = Globals.$stats.find(stat => stat.word === word.word)
 
             // sets 'stat.next' and 'stat.score'
             if (stat) {
@@ -79,13 +80,15 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
             // creates stat for this word
             else {
                 const next = new Date()
-                next.setMinutes(next.getMinutes() + (alreadyKnow ? intervals[3] : intervals[0]))// if the user already knows the word add interval at [1], if not, add [0]
+                next.setMinutes(next.getMinutes() + (alreadyKnow ? intervals[3] : intervals[0]))// if the user already knows the word add interval at [3], if not, add [0]
 
-                Globals.$stats.push({
+                stat = {
                     word: word.word,
                     score: alreadyKnow ? 4 : 1, // if the user already knows the word add an extra score
                     next
-                })
+                }
+
+                Globals.$stats.push(stat)
 
                 //fix: this triggers the showAnswer part of the review for a few ms until the state is updated, causing a slight but noticeable flickering in text
             }
@@ -96,56 +99,26 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
             // shuffle is called manually here because wordsReviewing did not change
             shuffle()
 
-            const stat = Globals.$stats.find(stat => stat.word === word.word)
             stat.score = stat.score > 1 ? stat.score - 2 : 0//consider: -3
             //consider: should i remove from list now or set next?
             //consider: each review session could have an ID, here i could remove the word and set a timeout for a few minutes, if the review session is the same, add the word again
         }
 
 
-        // gets today's reviewed object if it exists
-        const reviewed = Globals.$stats.reviewed.find(reviewed => reviewed.date === new Date().toLocaleDateString())
 
-        // adds current word to reviewed array
-        if (reviewed) {
-            if (!reviewed.reviewed.includes(word.word)) {
-                reviewed.reviewed.push(word.word)
 
-                fetchStats(reviewed)
-            }
-        }
+        review(JSON.stringify({
+            word: stat.word,
+            score: stat.score,
+            next: stat.next
+        }))
 
-        // creates a new reviewed array for the current date
-        else {
-            Globals.$stats.reviewed.push({
-                date: new Date().toLocaleDateString(),
-                reviewed: [word.word]
-            })
-
-            fetchStats(reviewed)
-        }
 
         // stores stats on localStorage
         localStorage.setItem('stats', JSON.stringify(Globals.$stats))
     }
 
 
-
-    function fetchStats(reviewed) {
-        //should only do so if user is logged in
-        if (!user)
-            return
-
-        //check:
-        fetch(`http://localhost:3001/api/user/stats`, {
-            method: "POST",
-            body: JSON.stringify({ reviewed: reviewed.reviewed.length }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            },
-            credentials: 'include'
-        }).catch(err => console.error(err))
-    }
 
 
     //consider: add references/examples to this word from songs
