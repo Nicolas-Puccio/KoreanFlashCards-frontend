@@ -32,8 +32,6 @@ export default function App() {
    * Checks if the user has an active cookie
    */
   useEffect(() => {
-    fetchData(setDataInitialized)
-
     const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0]
 
     if (cookie) {
@@ -42,6 +40,9 @@ export default function App() {
         username: cookie.split('-')[1]
       })
     }
+
+    // sends the cookie just to tell the fetchData if the user is logged in
+    fetchData(setDataInitialized, cookie)
   }, [])
 
 

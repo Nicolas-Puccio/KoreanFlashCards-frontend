@@ -2,7 +2,7 @@ import { getData } from './services/api'
 export let Globals = {}
 //why do i have to use export instead of setting exports.Globals?
 
-export const fetchData = async (setDataInitialized) => {
+export const fetchData = async (setDataInitialized, cookie) => {
 
     if (Globals.$words) // data already initialized
         return
@@ -18,20 +18,19 @@ export const fetchData = async (setDataInitialized) => {
     }
 
 
-    // parses all string dates from localStorage into Date
-    Globals.$stats.forEach(stat => {
-        stat.next = new Date(stat.next)
-    })
 
 
-    const data = await getData()
+
+    const data = await getData(cookie)
     if (data) {
         Globals.$words = data.words
         Globals.$songs = data.songs
+        Globals.$stats = data.stats
 
 
         localStorage.setItem('songs', JSON.stringify(Globals.$songs))
         localStorage.setItem('words', JSON.stringify(Globals.$words))
+        localStorage.setItem('stats', JSON.stringify(Globals.$stats))
 
 
         setDataInitialized(true)
@@ -46,4 +45,10 @@ export const fetchData = async (setDataInitialized) => {
             setDataInitialized(true)
         }
     }
+
+
+    // parses all string dates from localStorage into Date
+    Globals.$stats.forEach(stat => {
+        stat.next = new Date(stat.next)
+    })
 }
