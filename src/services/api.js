@@ -21,6 +21,23 @@ export const getData = async () => {
   }
 }
 
+export const getStats = async () => {
+  try {
+    const res = await fetch(URL + 'user/stats', {
+      credentials: 'include'
+    })
+
+    const data = await res.json()
+    if (!res.ok)
+      throw new Error(data.message)
+
+    return data
+  } catch (error) {
+    console.error(error)
+
+    alert(error.message)
+  }
+}
 
 
 export const login = async (action, body) => {
