@@ -2,10 +2,12 @@ const URL = 'http://localhost:3001/api/' //'https://kfc-backend-eb38.onrender.co
 //-change url
 
 //gets songs and words
-export const getData = async (cookie) => {
+export const getData = async () => {
   try {
     //sends the username as a query param, not safe at all but it is not critical or private information anyway
-    const res = await fetch(URL + 'song/' + (cookie ? cookie.split('-')[1] : ''))
+    const res = await fetch(URL + 'song/', {
+      credentials: 'include'
+    })
 
     const data = await res.json()
     if (!res.ok)

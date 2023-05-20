@@ -2,7 +2,7 @@ import { getData } from './services/api'
 export let Globals = {}
 //why do i have to use export instead of setting exports.Globals?
 
-export const fetchData = async (setDataInitialized, cookie) => {
+export const fetchData = async (setDataInitialized) => {
 
     if (Globals.$words) // data already initialized
         return
@@ -21,7 +21,7 @@ export const fetchData = async (setDataInitialized, cookie) => {
 
 
 
-    const data = await getData(cookie)
+    const data = await getData()
     if (data) {
         Globals.$words = data.words
         Globals.$songs = data.songs
