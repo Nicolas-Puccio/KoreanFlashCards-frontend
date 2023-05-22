@@ -7,6 +7,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
 
     // shows the word definition when clicking the show button or automatially if the word is new
     const [showAnswer, setShowAnswer] = useState(false)
+    const [disableInput, setDisableInput] = useState(true)
 
     // word currently being reviewed, defaults to the 1st word of the array
     const [word, setWord] = useState(wordsReviewing[0])
@@ -32,6 +33,8 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
      */
     function shuffle() {
         setShowAnswer(false)
+
+        setTimeout(() => setDisableInput(false), 1000)
 
         if (wordsReviewing.length)
             setWord(wordsReviewing[Math.floor(Math.random() * wordsReviewing.length)])
@@ -61,6 +64,8 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
      * @param {boolean} pass did the user get the word correctly
      */
     async function answer(pass, alreadyKnow) {
+
+        setDisableInput(true)
         // user got the word right
 
         let stat = Globals.$stats.find(stat => stat.word === word.word)
@@ -134,8 +139,8 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
             Globals.$stats.find(stat => stat.word === word.word) === undefined &&
 
             <>
-                <button onClick={() => answer(true)}>ok</button>
-                <button onClick={() => answer(true, true)}>I already know this word</button>
+                <button disabled={disableInput} onClick={() => answer(true)}>ok</button>
+                <button disabled={disableInput} onClick={() => answer(true, true)}>I already know this word</button>
 
 
                 <ul>
