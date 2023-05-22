@@ -52,7 +52,7 @@ todo
 <ul>
 <li>fix useEffect [] being called twice on stats-page</li>
 <li>current css is meant for mobile, should adapt a little bit to desktop, spliting the screen in 2/3 sections</li>
-<li>add graphs</li>
+<li>add bar graph that displays amount of words per level</li>
 <li>redirect user to login screen if token expires?</li>
 <li>finish login</li>
 <li>fix all key properties of lists</li>

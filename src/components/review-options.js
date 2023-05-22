@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
 import { useLocation } from 'react-router-dom'
 
+
+import NextsChart from '../components/nexts-chart'
+
 export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
     // SongsList review button sends the song to review inside location.state
@@ -276,11 +279,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
 
         {
             nexts.length &&
-            <>
-                <p>{nexts[0].amount} words will become available to review on the {nexts[0].next.toLocaleDateString().split('T')[0]}</p>
-                <p>{nexts[1].amount} words will become available to review on the {nexts[1].next.toLocaleDateString().split('T')[0]}</p>
-                <p>{nexts[2].amount} words will become available to review on the {nexts[2].next.toLocaleDateString().split('T')[0]}</p>
-            </>
+            <NextsChart data={{ nexts }} />
         }
     </>
 }
