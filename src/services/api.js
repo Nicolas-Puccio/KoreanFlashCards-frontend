@@ -1,5 +1,4 @@
-const URL = 'http://localhost:3001/api/' //'https://kfc-backend-eb38.onrender.com/api/'
-//-change url
+const URL = 'https://kfc-backend-eb38.onrender.com/api/'
 
 //gets songs and words
 export const getData = async () => {
@@ -45,7 +44,7 @@ export const getStats = async () => {
 
 export const login = async (action, body) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/user/${action}`, {
+    const res = await fetch(URL + 'user/' + action, {
       method: "POST",
       body,
       headers: {
@@ -71,7 +70,7 @@ export const login = async (action, body) => {
 
 export const review = async (body) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/song/review`, {
+    const res = await fetch(URL + 'song/review', {
       method: "POST",
       body,
       headers: {
