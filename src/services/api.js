@@ -1,12 +1,23 @@
-const URL = 'https://kfc-backend-eb38.onrender.com/api/'
+const URL = 'http://localhost:3001/api/'
 
-//gets songs and words
-export const getData = async () => {
+//if undefined is then set by login, used in authenticated routes
+export let token = undefined
+export const setToken = _token => {
+  token = token
+}
+
+
+/**
+ * gets songs and words
+ * sends username if user is logged in to also retrieve stats
+ * @param {*} username 
+ * @returns 
+ */
+export const getData = async (username = undefined) => {
   try {
     //sends the username as a query param, not safe at all but it is not critical or private information anyway
-    const res = await fetch(URL + 'song/', {
-      credentials: 'include'
-    })
+    const res = await fetch(URL + 'song/' + username ?? '')
+
 
     const data = await res.json()
     if (!res.ok)
@@ -57,6 +68,7 @@ export const login = async (action, body) => {
     if (!res.ok)
       throw new Error(data.message)
 
+    token = data.token
     return data
 
   } catch (error) {

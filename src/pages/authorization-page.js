@@ -48,16 +48,19 @@ export default function AuthorizationPage({ data: { setUser } }) {
         const data = await login(signin ? 'signin' : 'login', JSON.stringify(formData))
         if (data) {
 
+            //-cross site cookies do not work on github-render.com so i just store the token in localstorage as it does not contain any unknown or critical information
             // cookie set by backend has format 'isAdmin-userName'
-            const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
+            //const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0].split('-')
 
-            
-            Globals.$stats = data
+
+            Globals.$stats = data.stats
 
             setUser({
-                admin: cookie[0],
-                username: cookie[1]
+                username: formData.username
             })
+
+            localStorage.setItem('token', data.token)//-should i parse this into JSON? i don't think so as it is just text
+
 
             navigate('/')
         }
