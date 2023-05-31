@@ -11,7 +11,9 @@ import SongsPage from './pages/songs-page'
 import StatsPage from './pages/stats-page'
 import AuthorizationPage from './pages/authorization-page'
 
-import { fetchData } from './Global'
+import { getData, setToken } from './services/api'
+
+import { setGlobals } from './Global'
 
 import { MemoryRouter } from 'react-router'
 import React, { useState, useEffect } from 'react'
@@ -20,29 +22,41 @@ import React, { useState, useEffect } from 'react'
 // eslint-disable-next-line
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
+import jwt_decode from 'jwt-decode'
+
 
 export default function App() {
 
   const [dataInitialized, setDataInitialized] = useState(false)
-  const [user, setUser] = useState(undefined) // const userExample = { admin: false, username: 'test' } // admin property not used for now
+  const [user, setUser] = useState(undefined) // const userExample = {Dusername: 'test' } // admin property not used for now,
+  //user object could also store the role of the user
 
 
 
   /**
    * Checks if the user has an active cookie
+   * //-this code is now messy, how should i organize it?
    */
   useEffect(() => {
-    const cookie = document.cookie.split('; ').filter(row => row.startsWith('token=')).map(c => c.split('=')[1])[0]
+    async function fetchData() {
+      const token = localStorage.getItem('token')
+      const decodedToken = token ? jwt_decode(token) : undefined
 
-    if (cookie) {
-      setUser({
-        admin: cookie.split('-')[0],
-        username: cookie.split('-')[1]
-      })
+      if (decodedToken) {
+        setToken(token)
+
+        setUser({
+          username: decodedToken.username
+        })
+      }
+
+      const data = await getData(decodedToken.username)
+
+      setGlobals(data)
+      setDataInitialized(true)
     }
 
-    // sends the cookie just to tell the fetchData if the user is logged in
-    fetchData(setDataInitialized, cookie)
+    fetchData()
   }, [])
 
 
