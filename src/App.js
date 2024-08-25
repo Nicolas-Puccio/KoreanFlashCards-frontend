@@ -9,9 +9,7 @@ import NavBar from './components/navbar'
 import ReviewPage from './pages/review-page'
 import SongsPage from './pages/songs-page'
 import StatsPage from './pages/stats-page'
-import AuthorizationPage from './pages/authorization-page'
 
-import { getData, setToken } from './services/api'
 
 import { setGlobals } from './Global'
 
@@ -22,15 +20,11 @@ import React, { useState, useEffect } from 'react'
 // eslint-disable-next-line
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
-import jwt_decode from 'jwt-decode'
 
 
 export default function App() {
 
   const [dataInitialized, setDataInitialized] = useState(false)
-  const [user, setUser] = useState(undefined) // const userExample = {Dusername: 'test' } // admin property not used for now,
-  //user object could also store the role of the user
-
 
 
   /**
@@ -38,25 +32,8 @@ export default function App() {
    * //-this code is now messy, how should i organize it?
    */
   useEffect(() => {
-    async function fetchData() {
-      const token = localStorage.getItem('token')
-      const decodedToken = token ? jwt_decode(token) : undefined
-
-      if (decodedToken) {
-        setToken(token)
-
-        setUser({
-          username: decodedToken.username
-        })
-      }
-
-      const data = await getData(decodedToken.username)
-
-      setGlobals(data)
-      setDataInitialized(true)
-    }
-
-    fetchData()
+    setGlobals()
+    setDataInitialized(true)
   }, [])
 
 
@@ -65,14 +42,13 @@ export default function App() {
     return <h1>loading</h1> //fix: add proper loading screen
 
   return <MemoryRouter>
-    <NavBar data={{ user, setUser }} />
+    <NavBar />
     <div className='main-div'>
       <Routes>
         <Route path='/' element={<SongsPage />} />
-        <Route path='/review' element={<ReviewPage data={{ user }} />} />
+        <Route path='/review' element={<ReviewPage />} />
 
-        <Route path='/stats' element={<StatsPage data={{ user }} />} />
-        <Route path='/login' element={<AuthorizationPage data={{ setUser }} />} />
+        <Route path='/stats' element={<StatsPage />} />
       </Routes>
     </div>
   </MemoryRouter>

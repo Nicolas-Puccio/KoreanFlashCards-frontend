@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Globals } from '../Global'
-import { review } from '../services/api'
 
 
-export default function ReviewSession({ data: { wordsReviewing, setWordsReviewing, user } }) {
+export default function ReviewSession({ data: { wordsReviewing, setWordsReviewing } }) {
 
     // shows the word definition when clicking the show button or automatially if the word is new
     const [showAnswer, setShowAnswer] = useState(false)
@@ -112,11 +111,7 @@ export default function ReviewSession({ data: { wordsReviewing, setWordsReviewin
 
 
 
-        review(JSON.stringify({
-            word: stat.word,
-            score: stat.score,
-            next: stat.next
-        }))
+        
 
 
         // stores stats on localStorage

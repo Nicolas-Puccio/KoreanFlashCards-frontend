@@ -4,7 +4,7 @@ import { Globals } from '../Global'
 import '../style/navbar.css'
 
 
-export default function Navbar({ data: { user, setUser } }) {
+export default function Navbar() {
 
     const [showMenu, setShowMenu] = useState(false)
 
@@ -16,15 +16,11 @@ export default function Navbar({ data: { user, setUser } }) {
 
             {
                 // if there is a review session in progress it will stop it
-                user &&
+              
                 <Link className='navbar-no-text-decoration' to='/review' onClick={() => { if (Globals.setWordsToReview) Globals.setWordsToReview([]) }}>Review</Link>
             }
 
-            {
-                // login button only visible if not logged in
-                !user &&
-                <Link className='navbar-no-text-decoration' to='/login' onClick={() => setShowMenu(false)}>Login</Link>
-            }
+           
 
             {/* displays a small popup menu with options*/}
             <button className='navbar-menu-button' onClick={() => setShowMenu(!showMenu)}>MENU</button>
@@ -40,15 +36,7 @@ export default function Navbar({ data: { user, setUser } }) {
 
                 <Link className='navbar-no-text-decoration' to='/stats'>Stats</Link>
 
-                {
-                    // logout button only visible if logged in
-                    user &&
-                    <Link className='navbar-no-text-decoration' to='/' onClick={() => {
-                        document.cookie = 'token=;'
-                        setUser(undefined)
-                        setShowMenu(false)
-                    }}>Logout</Link>
-                }
+                
             </div>
         }
     </>)

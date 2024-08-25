@@ -12,7 +12,6 @@ export default function SongsList({ data: { setSelectedSong } }) {
         const date = new Date()
 
 
-
         // sets some basic statistics about each song to display the progress bar and data
         song.lines.forEach(line => {
             line.structures?.forEach(structure => {

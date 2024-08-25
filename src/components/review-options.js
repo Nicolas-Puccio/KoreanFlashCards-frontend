@@ -90,6 +90,7 @@ export default function ReviewOptions({ data: { setWordsReviewing } }) {
                 else {
 
                     // gets the next for the date the word becomes available for review
+                    console.log(auxNexts)
                     const next = auxNexts.find(next => next.next.toLocaleDateString().split('T')[0] === stat.next.toLocaleDateString().split('T')[0])
 
                     // if such date already has words to review, simply add 1
