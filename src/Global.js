@@ -17,11 +17,7 @@ export const setGlobals = async (data) => {
     },
     {
       word: '가다',
-      meanings: { 'Action Verb': 'go' }
-    },
-    {
-      word: '둘',
-      meanings: { Number: 'two' }
+      meanings: { Verb: 'go' }
     },
     {
       word: '바다',
@@ -29,7 +25,7 @@ export const setGlobals = async (data) => {
     },
     {
       word: '둘러싸이다',
-      meanings: { 'Action Verb': 'be surrounded' }
+      meanings: { Verb: 'be surrounded' }
     },
     {
       word: '우리',
@@ -41,7 +37,7 @@ export const setGlobals = async (data) => {
     },
     {
       word: '멈추다',
-      meanings: { 'Action Verb': 'stop,halt' }
+      meanings: { Verb: 'stop,halt' }
     },
     {
       word: '곳',
@@ -50,8 +46,7 @@ export const setGlobals = async (data) => {
     {
       word: '되다',
       meanings: {
-        'Action Verb': 'become,reach,come',
-        Affix: 'makes the word an adjective'
+        Verb: 'become,reach,come'
       }
     },
     {
@@ -60,7 +55,7 @@ export const setGlobals = async (data) => {
     },
     {
       word: '없다',
-      meanings: { 'Descriptive Verb': 'non-existent,lacking' }
+      meanings: { Adjective: 'non-existent,lacking' }
     },
     {
       word: '걱정',
@@ -68,19 +63,19 @@ export const setGlobals = async (data) => {
     },
     {
       word: '아무',
-      meanings: { Determiner: 'any,no', Pronoun: 'anybody,anyone' }
+      meanings: { Pronoun: 'anybody,anyone' }
     },
     {
       word: '준비하다',
-      meanings: { 'Action Verb': 'prepare' }
+      meanings: { Verb: 'prepare' }
     },
     {
       word: '것',
-      meanings: { 'Bound Noun': 'something' }
+      meanings: { Noun: 'something' }
     },
     {
       word: '별',
-      meanings: { Determiner: 'particular,specific', Noun: 'star' }
+      meanings: { Noun: 'star' }
     },
     {
       word: '손',
@@ -89,7 +84,7 @@ export const setGlobals = async (data) => {
     },
     {
       word: '놓다',
-      meanings: { 'Action Verb': 'let go' },
+      meanings: { Verb: 'let go' },
       __v: 0
     },
     {
@@ -99,12 +94,12 @@ export const setGlobals = async (data) => {
     },
     {
       word: '하다',
-      meanings: { 'Action Verb': 'do,make' },
+      meanings: { Verb: 'do,make' },
       __v: 0
     },
     {
       word: '무섭다',
-      meanings: { 'Descriptive Verb': 'fearful,scared of' },
+      meanings: { Adjective: 'fearful,scared of' },
       __v: 0
     },
     {
@@ -119,7 +114,7 @@ export const setGlobals = async (data) => {
     },
     {
       word: '남다',
-      meanings: { 'Action Verb': 'remain,be left' },
+      meanings: { Verb: 'remain,be left' },
       __v: 0
     },
     {
@@ -139,7 +134,7 @@ export const setGlobals = async (data) => {
     },
     {
       word: '희미하다',
-      meanings: { 'Descriptive Verb': 'dim,blurred' },
+      meanings: { Adjective: 'dim,blurred' },
       __v: 0
     },
     {
@@ -149,12 +144,12 @@ export const setGlobals = async (data) => {
     },
     {
       word: '사라지다',
-      meanings: { 'Action Verb': 'disappear,vanish,go out of sight' },
+      meanings: { Verb: 'disappear,vanish,go out of sight' },
       __v: 0
     },
     {
       word: '말하다',
-      meanings: { 'Action Verb': 'say,tell,speak,talk' },
+      meanings: { Verb: 'say,tell,speak,talk' },
       __v: 0
     },
     {
@@ -174,12 +169,12 @@ export const setGlobals = async (data) => {
     },
     {
       word: '닿다',
-      meanings: { 'Action Verb': 'touch,reach' },
+      meanings: { Verb: 'touch,reach' },
       __v: 0
     },
     {
       word: '뜨겁다',
-      meanings: { 'Descriptive Verb': 'hot,warm' },
+      meanings: { Adjective: 'hot,warm' },
       __v: 0
     },
     {
@@ -199,12 +194,12 @@ export const setGlobals = async (data) => {
     },
     {
       word: '헤매다',
-      meanings: { 'Action Verb': 'wander,roam,linger' },
+      meanings: { Verb: 'wander,roam,linger' },
       __v: 0
     },
     {
       word: '쉬다',
-      meanings: { 'Action Verb': 'breathe,rest' }
+      meanings: { Verb: 'breathe,rest' }
     },
     {
       word: '서로',
@@ -212,7 +207,108 @@ export const setGlobals = async (data) => {
     },
     {
       word: '듯하다',
-      meanings: { 'Descriptive Verb': 'to appear to be' }
+      meanings: { Adjective: 'to appear to be' }
+    }
+    //adding
+    ,
+    {
+      word: '네모나다',
+      meanings: { Adjective: 'squared,rectangular' }
+    },
+    {
+      word: '화면',
+      meanings: { Noun: 'picture,image,screen,monitor' }
+    },
+    {
+      word: '헤치다',
+      meanings: { Verb: 'disperse,push aside' }
+    },
+    {
+      "word": "살며시",
+      "meanings": {
+        "Adverb": "gently, quietly"
+      }
+    },
+    {
+      "word": "다가오다",
+      "meanings": { Verb: "approach, come closer" }
+    },
+    {
+      "word": "은빛",
+      "meanings": {
+        "Noun": "silver, silvery"
+      }
+    },
+    {
+      "word": "환상",
+      "meanings": {
+        "Noun": "fantasy, illusion, hallucination"
+      }
+    },
+    {
+      "word": "심어주다",
+      "meanings": {
+        Verb: "plant, instill (a feeling), implant"
+      }
+    },
+    {
+      "word": "그녀",
+      "meanings": {
+        "Pronoun": "she, her"
+      }
+    },
+    {
+      "word": "나만",
+      "meanings": {
+        "Pronoun": "only me, just me"
+      }
+    },
+    {
+      "word": "작다",
+      "meanings": {
+        "Adjective": "small, little, tiny"
+      }
+    },
+    {
+      "word": "요정",
+      "meanings": {
+        "Noun": "fairy, elf"
+      }
+    }, {
+      "word": "이르다",
+      "meanings": { "Adjective": "early" }
+    },
+    {
+      "word": "안개",
+      "meanings": { "Noun": "fog, mist" }
+    },
+    {
+      "word": "내게",
+      "meanings": { "Adverb": "to me" }
+    },
+    {
+      "word": "너울거리다",
+      "meanings": { "Adjective": "fluttering, wavering" }
+    },
+    {
+      "word": "길다",
+      "meanings": { "Adjective": "long" }
+    },
+    {
+      "word": "머리",
+      "meanings": { "Noun": "hair, head" }
+    },
+    {
+      "word": "부드럽다",
+      "meanings": { "Adjective": "soft, gentle" }
+    },
+    {
+      "word": "미소",
+      "meanings": { "Noun": "smile" }
+    },
+    {
+      "word": "속삭이다",
+      "meanings": { Verb: "whisper" }
     }
   ]
 
@@ -241,7 +337,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "가",
-                  "meaning": "Action Verb-go",
+                  "meaning": "Verb-go",
                   "word": "가다"
                 },
                 {
@@ -288,7 +384,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "둘러싸이",
-                  "meaning": "Action Verb-be surrounded",
+                  "meaning": "Verb-be surrounded",
                   "word": "둘러싸이다"
                 },
                 {
@@ -335,7 +431,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "멈추",
-                  "meaning": "Action Verb-stop",
+                  "meaning": "Verb-stop",
                   "word": "멈추다"
                 },
                 {
@@ -367,7 +463,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "가",
-                  "meaning": "Action Verb-go",
+                  "meaning": "Verb-go",
                   "word": "가다"
                 },
                 {
@@ -397,7 +493,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "것",
-                  "meaning": "Bound noun-something",
+                  "meaning": "Noun-something",
                   "word": "것"
                 }
               ],
@@ -430,7 +526,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "준비하",
-                  "meaning": "Action verb-get ready",
+                  "meaning": "Verb-get ready",
                   "word": "준비하다"
                 },
                 {
@@ -501,7 +597,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "되",
-                  "meaning": "Action Verb-become",
+                  "meaning": "Verb-become",
                   "word": "되다"
                 },
                 {
@@ -535,7 +631,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "가",
-                  "meaning": "Action Verb-go",
+                  "meaning": "Verb-go",
                   "word": "가다"
                 },
                 {
@@ -591,7 +687,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "놓",
-                  "meaning": "Action Verb-let go",
+                  "meaning": "Verb-let go",
                   "word": "놓다"
                 },
                 {
@@ -623,7 +719,7 @@ export const setGlobals = async (data) => {
               "words": [
                 {
                   "written": "하",
-                  "meaning": "Action Verb-do",
+                  "meaning": "Verb-do",
                   "word": "하다"
                 },
                 {
@@ -639,8 +735,7 @@ export const setGlobals = async (data) => {
             }
           ]
         }
-      ],
-      "__v": 1
+      ]
     },
     {
       "title": "바이바이배드맨 - 너의 파도",
@@ -663,7 +758,7 @@ export const setGlobals = async (data) => {
                 {
                   "word": "남다",
                   "written": "남",
-                  "meaning": "Action Verb-remain"
+                  "meaning": "Verb-remain"
                 },
                 {
                   "word": "",
@@ -773,7 +868,7 @@ export const setGlobals = async (data) => {
                 {
                   "word": "사라지다",
                   "written": "사라지",
-                  "meaning": "Action Verb-dissapear"
+                  "meaning": "Verb-dissapear"
                 },
                 {
                   "word": "",
@@ -904,7 +999,7 @@ export const setGlobals = async (data) => {
                 {
                   "word": "헤매다",
                   "written": "헤매",
-                  "meaning": "Action Verb-wander"
+                  "meaning": "Verb-wander"
                 },
                 {
                   "word": "",
@@ -939,7 +1034,7 @@ export const setGlobals = async (data) => {
                 {
                   "word": "쉬다",
                   "written": "쉬",
-                  "meaning": "Action Verb-breathe"
+                  "meaning": "Verb-breathe"
                 },
                 {
                   "word": "",
@@ -974,7 +1069,7 @@ export const setGlobals = async (data) => {
                 {
                   "word": "닿다",
                   "written": "닿",
-                  "meaning": "Action Verb-reach,touch"
+                  "meaning": "Verb-reach,touch"
                 },
                 {
                   "word": "",
@@ -1039,7 +1134,7 @@ export const setGlobals = async (data) => {
                 {
                   "word": "말하다",
                   "written": "말하",
-                  "meaning": "Action Verb-tell"
+                  "meaning": "Verb-tell"
                 },
                 {
                   "word": "",
@@ -1057,7 +1152,281 @@ export const setGlobals = async (data) => {
           ]
         }
       ]
+    },
+    //adding
+    {
+      "title": "샴푸의 요정",
+      "lines": [
+        {
+          "translation": "breaking through the square screen",
+          "structures": [
+            {
+              "words": [
+                {
+                  "written": "네모난",
+                  "meaning": "Adjective-square",
+                  "word": "네모나다"
+                }
+              ],
+              "written": "네모난"
+            },
+            {
+              "words": [
+                {
+                  "written": "화면",
+                  "meaning": "Noun-screen",
+                  "word": "화면"
+                }
+              ],
+              "written": "화면"
+            },
+            {
+              "words": [
+                {
+                  "written": "헤치",
+                  "meaning": "Verb-push through",
+                  "word": "헤치다"
+                },
+                {
+                  "written": "며",
+                  "meaning": "Connector-While doing"
+                }
+              ],
+              "written": "헤치며"
+            }
+          ]
+        },
+        {
+          "translation": "she gently approaches",
+          "structures": [
+            {
+              "words": [
+                {
+                  "written": "살며시",
+                  "meaning": "Adverb-gently/quietly",
+                  "word": "살며시"
+                }
+              ],
+              "written": "살며시"
+            },
+            {
+              "words": [
+                {
+                  "written": "다가와",
+                  "meaning": "Verb-approach",
+                  "word": "다가오다"
+                }
+              ],
+              "written": "다가와"
+            }
+          ]
+        },
+        {
+          "translation": "planting a silver fantasy",
+          "structures": [
+            {
+              "words": [
+                {
+                  "written": "은빛",
+                  "meaning": "Noun-silver",
+                  "word": "은빛"
+                },
+                {
+                  "written": "의",
+                  "meaning": "Particle-Possessive particle"
+                }
+              ],
+              "written": "은빛의"
+            },
+            {
+              "words": [
+                {
+                  "written": "환상",
+                  "meaning": "Noun-fantasy",
+                  "word": "환상"
+                }
+              ],
+              "written": "환상"
+            },
+            {
+              "words": [
+                {
+                  "written": "심어준",
+                  "meaning": "Verb-plant",
+                  "word": "심어주다"
+                }
+              ],
+              "written": "심어준"
+            }
+          ]
+        },
+        {
+          "translation": "she is my own, little fairy",
+          "structures": [
+            {
+              "words": [
+                {
+                  "written": "그녀",
+                  "meaning": "Pronoun-she",
+                  "word": "그녀"
+                }
+              ],
+              "written": "그녀는"
+            },
+            {
+              "words": [
+                {
+                  "written": "나만",
+                  "meaning": "Pronoun-only me",
+                  "word": "나만"
+                },
+                {
+                  "written": "의",
+                  "meaning": "Particle-Possessive particle"
+                }
+              ],
+              "written": "나만의"
+            },
+            {
+              "words": [
+                {
+                  "written": "작은",
+                  "meaning": "Adjective-small",
+                  "word": "작다"
+                }
+              ],
+              "written": "작은"
+            },
+            {
+              "words": [
+                {
+                  "written": "요정",
+                  "meaning": "Noun-fairy",
+                  "word": "요정"
+                }
+              ],
+              "written": "요정"
+            }
+          ]
+        },
+        {},
+        {
+          "translation": "like morning mist",
+          "structures": [
+            {
+              "words": [
+                {
+                  "written": "이른",
+                  "meaning": "Adjective-early",
+                  "word": "이르다"
+                },
+                {
+                  "written": "아침",
+                  "meaning": "Noun-morning"
+                }
+              ],
+              "written": "이른 아침"
+            },
+            {
+              "words": [
+                {
+                  "written": "안개",
+                  "meaning": "Noun-fog, mist",
+                  "word": "안개"
+                }
+              ],
+              "written": "안개처럼"
+            }
+          ]
+        },
+        {
+          "translation": "she approaches me",
+          "structures": [
+            {
+              "words": [
+                {
+                  "written": "내게로",
+                  "meaning": "Adverb-to me",
+                  "word": "내게"
+                },
+                {
+                  "written": "다가와",
+                  "meaning": "Verb-approach",
+                  "word": "다가오다"
+                }
+              ],
+              "written": "내게로 다가와"
+            }
+          ]
+        },
+        {
+          "translation": "her fluttering long hair",
+          "structures": [
+            {
+              "words": [
+                {
+                  "written": "너울거리는",
+                  "meaning": "Adjective-fluttering, wavering",
+                  "word": "너울거리다"
+                },
+                {
+                  "written": "긴",
+                  "meaning": "Adjective-long",
+                  "word": "길다"
+                }
+              ],
+              "written": "너울거리는 긴"
+            },
+            {
+              "words": [
+                {
+                  "written": "머리",
+                  "meaning": "Noun-hair, head",
+                  "word": "머리"
+                }
+              ],
+              "written": "머리"
+            }
+          ]
+        },
+        {
+          "translation": "softly whispers with a gentle smile",
+          "structures": [
+            {
+              "words": [
+                {
+                  "written": "부드런",
+                  "meaning": "Adjective-soft, gentle",
+                  "word": "부드럽다"
+                }
+              ],
+              "written": "부드런"
+            },
+            {
+              "words": [
+                {
+                  "written": "미소",
+                  "meaning": "Noun-smile",
+                  "word": "미소"
+                }
+              ],
+              "written": "미소로"
+            },
+            {
+              "words": [
+                {
+                  "written": "속삭이네",
+                  "meaning": "Verb-whisper",
+                  "word": "속삭이다"
+                }
+              ],
+              "written": "속삭이네"
+            }
+          ]
+        }
+      ]
     }
+
   ]
 
   Globals.$stats = JSON.parse(localStorage.getItem('stats')) ?? []
@@ -1066,6 +1435,39 @@ export const setGlobals = async (data) => {
   Globals.$stats.forEach(stat => {
     stat.next = new Date(stat.next)
   })
+
+
+
+  //#region test for db words
+  const missingWords = [];
+
+  // Iterate through each song
+  Globals.$songs.forEach(song => {
+    // Iterate through each line in the song
+    song.lines.forEach(line => {
+      // Iterate through each structure in the line
+      line.structures?.forEach(structure => {
+        // Iterate through each word in the structure
+        structure.words.forEach(wordObj => {
+          // Check if the word exists in the $words dictionary
+          const wordExists = Globals.$words.find(word2 => word2.word === wordObj.word);
+
+          // If the word is not found, add it to the missingWords array
+          if (!wordExists && wordObj.word) {
+            missingWords.push({
+              word: wordObj.word,
+              meaning: wordObj.meaning
+            });
+          }
+        });
+      });
+    });
+  });
+
+  // Return the list of missing words
+  console.log(missingWords)
+  //#endregion
+
 
   //testing for backend disabled
   return
