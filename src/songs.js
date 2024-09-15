@@ -84,8 +84,7 @@ export const songs = [
             "words": [
               {
                 "written": "우리",
-                "meaning": "Pronoun-we",
-                "word": "우리"
+                "meaning": "Pronoun-we"
               },
               {
                 "written": "의",
@@ -335,7 +334,7 @@ export const songs = [
             "words": [
               {
                 "written": "무섭",
-                "meaning": "Descriptive Verb-scared",
+                "meaning": "Verb-scared",
                 "word": "무섭다"
               },
               {
@@ -405,7 +404,7 @@ export const songs = [
               },
               {
                 "written": "줘",
-                "meaning": "Auxiliary verb-Do a favor for someone"
+                "meaning": "Auxiliary verb-Do a favor for someone"//-
               },
               {
                 "written": "요",
@@ -433,7 +432,7 @@ export const songs = [
             "words": [
               {
                 "written": "싶어요",
-                "meaning": "Auxiliary verb-want to",
+                "meaning": "Verb-want to",
                 "word": "싶다"
               }
             ],
@@ -595,12 +594,10 @@ export const songs = [
                 "meaning": "Verb-remain"
               },
               {
-                "word": "",
                 "written": "아있",
                 "meaning": "Auxiliary verb-Remain (in a certain state)"
               },
               {
-                "word": "",
                 "written": "을까",
                 "meaning": "Sentence end-Tentative guessing or suggestion"
               }
@@ -615,12 +612,10 @@ export const songs = [
           {
             "words": [
               {
-                "word": "너",
                 "written": "너",
                 "meaning": "Pronoun-you"
               },
               {
-                "word": "",
                 "written": "의",
                 "meaning": "Particle-Possesive particle"
               }
@@ -645,7 +640,6 @@ export const songs = [
                 "meaning": "Noun-inside"
               },
               {
-                "word": "",
                 "written": "의",
                 "meaning": "Particle-Possesive particle"
               }
@@ -660,12 +654,10 @@ export const songs = [
                 "meaning": "Descriptive verb-faded"
               },
               {
-                "word": "",
-                "written": "여지",
+                "written": "여지",//-
                 "meaning": "Verb-forming auxiliary-Become"
               },
               {
-                "word": "",
                 "written": "ㄴ",
                 "meaning": "Suffix-Adjective-forming particle"
               }
@@ -675,7 +667,6 @@ export const songs = [
           {
             "words": [
               {
-                "word": "나",
                 "written": "나",
                 "meaning": "Pronoun-I, Me"
               }
@@ -705,12 +696,10 @@ export const songs = [
                 "meaning": "Verb-dissapear"
               },
               {
-                "word": "",
                 "written": "ㄹ 뿐이",
                 "meaning": "Auxiliary verb-Just"
               },
               {
-                "word": "",
                 "written": "야",
                 "meaning": "Sentence end-Intimate style sentence ending"
               }
@@ -725,7 +714,6 @@ export const songs = [
           {
             "words": [
               {
-                "word": "우리",
                 "written": "우리",
                 "meaning": "Pronoun-our"
               }
@@ -750,7 +738,6 @@ export const songs = [
                 "meaning": "Noun-inside"
               },
               {
-                "word": "",
                 "written": "의",
                 "meaning": "Particle-Possesive particle"
               }
@@ -765,7 +752,6 @@ export const songs = [
                 "meaning": "Descriptive Verb-hot"
               },
               {
-                "word": "",
                 "written": "었던",
                 "meaning": "Modifier-that one did/was (but not now)"
               }
@@ -791,12 +777,10 @@ export const songs = [
           {
             "words": [
               {
-                "word": "너",
                 "written": "너",
                 "meaning": "Pronoun-you"
               },
               {
-                "word": "",
                 "written": "의",
                 "meaning": "Particle-Possesive particle"
               }
@@ -821,7 +805,6 @@ export const songs = [
                 "meaning": "Noun-inside"
               },
               {
-                "word": "",
                 "written": "을",
                 "meaning": "Particle-object-marking particle"
               }
@@ -836,7 +819,6 @@ export const songs = [
                 "meaning": "Verb-wander"
               },
               {
-                "word": "",
                 "written": "듯",
                 "meaning": ""
               }
@@ -856,7 +838,6 @@ export const songs = [
                 "meaning": "Noun-breath"
               },
               {
-                "word": "",
                 "written": "을",
                 "meaning": "Particle-object-marking particle"
               }
@@ -871,12 +852,10 @@ export const songs = [
                 "meaning": "Verb-breathe"
               },
               {
-                "word": "",
                 "written": "ㄹ 수가 없",
                 "meaning": "Auxiliary verb-Cannot"
               },
               {
-                "word": "",
                 "written": "어",
                 "meaning": "Sentence end-Casual Speech"
               }
@@ -1101,8 +1080,7 @@ export const songs = [
             "words": [
               {
                 "written": "그녀",
-                "meaning": "Pronoun-she",
-                "word": "그녀"
+                "meaning": "Pronoun-she"
               }
             ],
             "written": "그녀는"
@@ -1110,9 +1088,14 @@ export const songs = [
           {
             "words": [
               {
-                "written": "나만",
-                "meaning": "Pronoun-only me",
-                "word": "나만"
+                "written": "나",
+                "meaning": "Pronoun-me",
+                "word": "나"
+              },
+              {
+                "written": "만",
+                "meaning": "only",//-
+                "word": "만"
               },
               {
                 "written": "의",
