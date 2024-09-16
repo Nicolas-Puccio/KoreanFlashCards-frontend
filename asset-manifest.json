@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/KoreanFlashCards-frontend/static/css/main.0711d4e1.css",
-    "main.js": "/KoreanFlashCards-frontend/static/js/main.26608353.js",
+    "main.js": "/KoreanFlashCards-frontend/static/js/main.ec7e115b.js",
     "index.html": "/KoreanFlashCards-frontend/index.html",
     "main.0711d4e1.css.map": "/KoreanFlashCards-frontend/static/css/main.0711d4e1.css.map",
-    "main.26608353.js.map": "/KoreanFlashCards-frontend/static/js/main.26608353.js.map"
+    "main.ec7e115b.js.map": "/KoreanFlashCards-frontend/static/js/main.ec7e115b.js.map"
   },
   "entrypoints": [
     "static/css/main.0711d4e1.css",
-    "static/js/main.26608353.js"
+    "static/js/main.ec7e115b.js"
   ]
 }
